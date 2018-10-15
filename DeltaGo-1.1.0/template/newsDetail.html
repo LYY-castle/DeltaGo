@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img find" src="../images/back.png" alt="">
+			<!-- <p class="back-title-text">风控保障</p> -->
+		</div>
+	</div>
+	<div class="newsDetail" style="background:#fff"></div>
+
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var nid = Request["nid"];
+
+			var url = 'app/news/getInformationDetail';
+			deltaGoAjax(url,{informationId: nid},getInformationDetail);
+			function getInformationDetail(data){
+				$('.newsDetail').html(data.data);
+			}
+
+		})
+	</script>
+</body>
+</html>

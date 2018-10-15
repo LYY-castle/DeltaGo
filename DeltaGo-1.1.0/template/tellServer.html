@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<!-- <link rel="stylesheet" href="../css/recharge_quick.css"> -->
+	<style>
+	.remind{
+		font-size: 0.55rem;
+		color: rgba(255,255,255,0.3);
+		padding: 1rem;
+	}
+	.remind p:nth-child(2){
+		color: rgba(255,255,255,0.8);
+		margin-top: 0.5rem;
+	}
+	.recharge{
+
+		font-size: 0.65rem;
+		color: rgba(49,195,239,1);
+		margin-bottom: 1rem;
+	}
+	.rechargeTitle{
+		padding: 1rem;
+		line-height: 1rem;
+	}
+	.mbt{
+		line-height: 0;
+	}
+	.seclectBank{
+		position: relative;
+		border: 0.025rem solid rgba(49,195,239,0.51);
+		border-radius: 0.5rem;
+		width: 80%;
+		margin: 0 1rem;
+		padding: 0 0.8rem;
+	}
+	.seclectBank p{
+		line-height: 2rem;
+	}
+	.icon_pullDown,.select_pullDown{
+		position: absolute;
+		left: 15rem;
+		top: 0.85rem;
+	}
+	
+	input{
+		width: 80%;
+		background-color: rgba(255,255,255,0);
+		border: 0.025rem solid rgba(49,195,239,0.5);
+		border-radius: 0.5rem;
+		padding:0 0 0 1.7rem;  
+		line-height: 2.2rem;
+		margin: 0 0 1rem 1rem;
+		font-size: 0.75rem;
+	}
+	.mbt{
+		position: relative;
+	}
+	.dollar{
+		position: absolute;
+		left: 1.9rem;
+		top: 2.98rem;
+		line-height: 2.25rem;
+		font-size: 0.75rem;
+		color: rgba(49,195,239,1);
+	}
+
+
+	.next{
+		width: 80%;
+		display: block;
+		margin: 4rem 1.925rem 3.9rem 1.925rem;
+		text-align: center; 
+		background-color: rgba(49,195,239,1);
+		border-radius: 0.5rem;
+
+	}
+	.next span{
+		font-size: 0.85rem;
+		color: rgba(255,255,255,1);
+		text-align: center;
+		line-height: 2rem;
+	}
+	.enterPri{
+		margin-top: 0;
+		font-size: 0.55rem;
+	}
+	.bg>p{
+		font-size: 0.55rem;
+		color: rgba(255,255,255,0.3);
+		line-height: 0.75rem;
+		text-align: center;
+	}
+	.seclectBankT{
+		display: none;
+	}
+	.clickz{
+		width:100%;
+		height:2rem;
+		position: absolute;
+		top:0;
+		left:0rem;
+		/*display: none;*/
+	}
+	.actImg{
+		transform: rotate(180deg);
+	}
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">通知客服已汇款</p>
+			</div>
+		</div>
+		<div class="remind bg2">
+			<p>完成转账充值后，请您耐心等待系统消息提醒<br>网银或支付宝转账一般需要1-2个工作日</p>
+			<p>您可以在线通知客服您已汇款，请回打以下两个问题</p>
+		</div>
+		<div class="recharge bg">	
+			<div class="rechargeTitle">您是通过哪种途径完成的汇款？</div>
+			<div class="seclectBank seclectBankF">
+				<p data-id="1">香港银行</p>
+				<img src="../images/notice_icon_down@2x.png" alt="" class="icon_pullDown selectF_pullDown">
+				<div class="clickz clickF"></div>
+			</div>
+			<br>
+			<div class="seclectBank seclectBankT">
+				<img src="../images/notice_icon_down@2x.png" alt="" class="icon_pullDown selectT_pullDown">
+				<div class="clickz clickT"></div>
+			</div>
+		</div>
+		<div class="recharge bg1 mbt">	
+			<div class="rechargeTitle">您的汇款金额是？</div>
+			<input type="number" class="enterPri" placeholder="请输入您的汇款金额">
+			<span class="dollar">$</span>
+		</div>
+		<p>* 相同信息提交一次即可，请勿重复提交。</p>
+		<a href="#" class="next">
+			<span>提交汇款信息</span>
+		</a>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var icon_flag = true;
+			var select_flag = true;
+			var data;
+			deltaGoAjax('app/recharge/getRechargeType', {}, getBankType);
+			function getBankType(result){
+				data = result.data;
+				selectbanks();
+			}
+			function selectbanks(){
+				$.each(data,function(k,val){
+					if(val.rechargeType == $('.seclectBankF p').eq(0).text()){
+						if(!val.childrens){
+							$('.seclectBankT').hide().find('p').remove();
+							return;
+						}
+						$('.seclectBankT').show();
+						$('.selectT_pullDown').addClass('actImg');
+						var str = '';
+						$.each(val.childrens,function(i,value){
+							str += '<p data-id="'+value.id+'">'+value.rechargeType+'</p>';
+						})
+						$('.seclectBankT p').remove();
+						$('.seclectBankT').append(str);
+					}
+				})
+			}
+
+			$('.selectF_pullDown').click(function(){
+				$('.clickF').show();
+				// if(icon_flag){
+					
+				// }else{
+				// 	icon_flag = !icon_flag;
+					var str = '<p data-id="'+$('.seclectBankF p').eq(0).attr('data-id')+'">'+$('.seclectBankF p').eq(0).text()+'</p>';
+					$('.seclectBankF p').remove();
+					$('.seclectBankF').prepend(str);
+				// }
+			})
+
+			$('.selectT_pullDown').click(function(){
+				$('.clickT').show();
+				// if(select_flag){
+				// 	select_flag = !select_flag;
+					
+				// }else{
+				// 	select_flag = !select_flag;
+					var str = '<p>'+$('.seclectBankT p').eq(0).text()+'</p>';
+					$('.seclectBankT p').remove();
+					$('.seclectBankT').prepend(str);
+				// }
+			})
+			
+			$('.clickz').click(function(){
+				$(this).hide();
+				$(this).siblings('img').addClass('actImg');
+				if($(this).hasClass('clickF')){
+
+					// icon_flag = !icon_flag;
+					var str = '';
+					$.each(data,function(k,val){
+						if(val.rechargeType == $('.seclectBankF p').eq(0).text()){
+							return true;
+						}
+						str += '<p data-id="'+val.id+'">'+val.rechargeType+'</p>';				
+					})
+					$('.seclectBankF').append(str);
+				}else{
+					selectbanks();
+				}
+			})
+
+			$('.seclectBankF').on('click','p',function(){
+				$(this).siblings('img').removeClass('actImg');
+				// icon_flag = !icon_flag;
+				$('.clickF').show();
+				var str = '<p data-id="'+$(this).attr('data-id')+'">'+$(this).text()+'</p>';
+				$('.seclectBankF p').remove();
+				$('.seclectBankF').prepend(str);
+				selectbanks();
+			})
+
+			$('.seclectBankT').on('click','p',function(){
+				$(this).siblings('img').removeClass('actImg');
+				$('.clickT').show();
+				// select_flag = !select_flag;
+				var str = '<p data-id="'+$(this).attr('data-id')+'">'+$(this).text()+'</p>';
+				// var str = '<p>'+$(this).text()+'</p>';
+				$('.seclectBankT p').remove();
+				$('.seclectBankT').prepend(str);
+				
+			})
+
+			$('.next').click(function(){
+				if($('.enterPri').val() == ''){
+					errorMsg('请输入汇款金额');
+					return;
+				}
+				var rechargeTypeId = $('.seclectBankT p').eq(0).attr('data-id') || $('.seclectBankF p').eq(0).attr('data-id');
+				var url = 'eCurrPay/doPay';
+				var data = {
+					rechargeTypeId: rechargeTypeId,
+					rechargeMoney: $('.enterPri').val(),
+				};
+				deltaGoAjax(url,data,ok);
+			})
+			function ok(data){
+				errorMsg(data.msg);
+				setTimeout(function(){
+					window.location.href = '../index.html?act=2';
+				},2000)
+			}
+		})
+	</script>
+</body>
+</html>

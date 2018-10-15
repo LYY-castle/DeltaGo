@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/mine.css">
+	<style>
+		.car_top{
+			padding-top: 0.5rem;
+		}
+		.detail{
+			margin: 0.5rem 2rem;
+			font-size: 0.65rem;
+			color: rgba(255,255,255,1);
+
+		}
+		.detail>div{
+			line-height: 2rem;
+		}
+		.detail>div>span:nth-child(2){
+			float: right;
+		}
+		.p1{
+			border-bottom: 0.025rem solid rgba(49,195,239,0.5);
+
+		}
+		.p1>span:nth-child(2){
+			color: rgba(255,137,76,1);
+			font-size: 0.85rem;
+		}
+		.p2>span:nth-child(2){
+			color: rgba(49,195,239,1);
+			font-size: 0.85rem;
+		}
+		.p2{
+			margin-bottom: 1.5rem;
+		}
+		.p3{
+			border-bottom: 0.025rem solid rgba(255,255,255,0.1);
+		}
+		.income_card{
+			background:#FF9E4C;
+			width:84%;
+			margin:0 auto;
+			border-radius: 0.625rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="back-title-box">
+			<div class="back-title bg2">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">佣金卡</p>
+			</div>
+		</div>
+		<div class="income_card">
+			<div class="car_top">
+				<img class="car_logo" src="../images/mine_card_logo@2x.png">
+				<span class="car_income">COMMISSION&nbsp;&nbsp;佣金</span>
+			</div>
+			<div class="car_center">
+				<div class="car_money">请充值购买后获取收益</div>
+				<div class="car_id"><span class="card-first">3</span>***&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;<span class="card-last">5863</span></div>
+			</div>
+			<div class="car_bottom">
+				<span class="en">DeltaGo</span>
+				<span class="date">11/22</span>
+			</div>
+		</div>	
+		<div class="detail">
+			<div class="p3">
+				<span>佣金获取时间</span>
+				<span>金额</span>
+			</div>
+			<!-- <hr> -->
+			<!-- <div class="p4">
+				<span>美元指数7D</span>
+				<span>$00.00</span>
+			</div> -->
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+        Request = GetRequest();
+        // var pname = Request["pname"];
+    	var cardDetail=decodeURI(Request["cardDetail"]); 
+    	cardDetail = JSON.parse(cardDetail);
+    	var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    	var pname = userInfo.userNickname;
+    	var CNumber = cardDetail.brokerageCardNumber;  //卡号
+    	console.log(cardDetail)
+
+    	$('.car_money').text(moneyToFloat(cardDetail.assetBrokerageMoney));
+    	$('.income_card .card-first').text(CNumber.substr(0,1));
+		$('.income_card .card-last').text(CNumber.substr(CNumber.length-4));
+    	$('.en').text(pname);
+    	$('.date').text(cardDetail.brokerageExpireTime);
+
+    	$.each(cardDetail.brokeragelist,function(k,val){
+    		var str = '<div class="p4">'+
+							'<span>'+val.creat_time+'</span>'+
+							'<span>$'+moneyToFloat(val.brokerage_money)+'</span>'+
+						'</div>';
+			$('.detail').append(str);
+    	})
+	</script>
+</body>
+</html>

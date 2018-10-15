@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	.title{
+		font-size: 0.8rem;
+		color: rgba(255,255,255,0.5);
+		line-height: 1.125rem;
+		padding: 0.65rem;
+	}
+	.title table{
+		width: 100%;
+	}
+	.title td:nth-child(1){
+		float: left;
+	}
+	.title td:nth-child(2){
+		float: right;
+		color: rgba(255,137,76,0.9);
+		font-size: 1rem;
+	}
+	.single_sort{
+		position: relative;
+	}
+	.sort table{
+		padding: 0.65rem 0.75rem;
+		font-size: 0.7rem;
+		line-height: 1rem;
+		width: 100%;	
+	}
+	td:nth-child(1){
+		color: rgba(255,255,255,0.5);
+		text-align: left;
+	}
+	td:nth-child(2){
+		color: rgba(255,255,255,0.9);
+		text-align: right;
+	}
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">交易明细</p>
+			</div>
+		</div>
+		<div class="title bg2">
+			<table>
+				<tr class="money">
+					<td>充值金额：</td>
+					<td><span>$</span>100,000,000</span></td>
+				</tr>
+			</table>
+		</div>
+		<div class="sort">
+			<div class="single_sort bg1">
+				<div class="detail">
+					<table class="table2">
+						
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+
+	<script>
+		var Request = new Object();
+        Request = GetRequest();
+        var type = Request["type"];
+    	var cardDetail=decodeURI(Request["cardDetail"]); 
+    	cardDetail = JSON.parse(cardDetail);
+    	switch(type){
+    		// case '0': massage_0();break;
+    		case '1': $('.back-title-text').text('充值明细');massage_1();break;
+    		case '2': $('.back-title-text').text('提现明细');massage_2();break;
+    		case '3': $('.back-title-text').text('佣金收入明细');massage_3();break;
+    		case '4': $('.back-title-text').text('转入余额明细');massage_4();break;
+    		// case '5': $('.back-title-text').text('系统公告');massage_5();break;
+    	}
+    	function massage_1(){
+    		$('.money td').eq(0).text('充值金额:');
+    		$('.money td').eq(1).text('$'+moneyToFloat(cardDetail.recharge_money));
+    		var recharge_status_arr = ['','提交申请','已到账','驳回申请'];
+    		var handel_time = (cardDetail.recharge_status == 2) ? (formDate(cardDetail.handel_time)) : '';
+    		var recharge_type = ['官网充值','微信充值','快捷支付','网银转账充值'];
+    		var str = '<tr>'+
+							'<td>当前状态:</td>'+
+							'<td>'+recharge_status_arr[cardDetail.recharge_status]+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>充值方式:</td>'+
+							'<td>'+recharge_type[cardDetail.type]+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>充值申请时间:</td>'+
+							'<td>'+(formDate(cardDetail.time))+'</td>'+
+						'</tr>'+
+						'<tr class="handelTime">'+
+							'<td>充值到账时间:</td>'+
+							'<td>'+handel_time+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>交易单号:</td>'+
+							'<td>'+cardDetail.order_number+'</td>'+
+						'</tr>';
+			$('.table2').append(str);
+			if(cardDetail.recharge_status != 2){
+				$('.handelTime').hide();
+			}
+			
+    	}
+    	function massage_2(){
+    		$('.money td').eq(0).text('出账金额:');
+    		$('.money td').eq(1).text('$'+moneyToFloat(cardDetail.withdrawMoney));
+    		var bankType = ['','香港银行卡','中国内地银行卡','其他国家/地区银行','支付宝'];
+    		var recharge_status_arr = ['','提交申请','完成审核','驳回申请'];
+    		var str = '<tr>'+
+							'<td>提现方式:</td>'+
+							'<td>提现到'+bankType[cardDetail.bankType]+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>提现金额:</td>'+
+							'<td>$'+moneyToFloat(cardDetail.withdrawMoney)+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>手续费:</td>'+
+							'<td>$'+moneyToFloat(cardDetail.serviceFee)+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>提现申请时间:</td>'+
+							'<td>'+(formDate(cardDetail.time))+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>交易单号:</td>'+
+							'<td>'+cardDetail.orderNumber+'</td>'+
+						'</tr>';
+			$('.table2').append(str);
+    	}
+    	function massage_3(){
+    		$('.money td').eq(0).text('收入金额:');
+    		$('.money td').eq(1).text('$'+moneyToFloat(cardDetail.brokerageMoney));
+    		var str = '<tr>'+
+							'<td>下级代理:</td>'+
+							'<td>'+cardDetail.fromUser+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>收入时间:</td>'+
+							'<td>'+(formDate(cardDetail.createTime))+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>交易单号:</td>'+
+							'<td>'+cardDetail.orderNumber+'</td>'+
+						'</tr>';
+			$('.table2').append(str);
+    	}
+
+    	function massage_4(){
+    		$('.money td').eq(0).text('出账金额:');
+    		$('.money td').eq(1).text('$'+moneyToFloat(cardDetail.money));
+    		var str = '<tr>'+
+							'<td>转入金额:</td>'+
+							'<td>$'+moneyToFloat(cardDetail.money)+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>手续费:</td>'+
+							'<td>$'+moneyToFloat(cardDetail.poundage)+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>转入时间:</td>'+
+							'<td>'+(formDate(cardDetail.time))+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td>交易单号:</td>'+
+							'<td>'+cardDetail.orderNumber+'</td>'+
+						'</tr>';
+			$('.table2').append(str);
+    	}
+
+
+
+
+    	function formDate(num){
+			// var date = new Date();
+			// var   year=date.getYear(); 
+			// console.log(year)    
+			// var   month=date.getMonth()+1;     
+			// var   day=date.getDate();
+			// return year+'-'+month+'-'+day;
+			 return new Date(parseInt(num)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " "); 
+		}
+	</script>
+</body>
+</html>

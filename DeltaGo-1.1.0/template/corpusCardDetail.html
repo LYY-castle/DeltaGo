@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<style>
+	.back-title-box{
+		height:3.5rem;
+	}
+	.back-title{
+		width:100%;
+		height:3.5rem;
+		position: fixed;
+		top:0;
+		z-index: 9999;
+		line-height:3.5rem; 
+		text-align: center;
+		color:rgba(255,255,255,0.8);
+		font-size: 2rem;
+	}
+	.back-title .back-title-img{
+		width:0.9rem;
+		height:1.8rem;
+		position: absolute;
+		top:50%;
+		left:1.7rem;
+		transform: translate(0,-50%);
+	}
+	.box{
+		width:92%;
+		margin:1rem 4%;
+		background:#4C97FF;
+		border:1px solid rgba(255,255,255,0.2);
+		position:relative;
+		border-radius: 1.56rem ;
+		padding-bottom: 1.5rem;
+	}
+	.logo{
+		width:22.9%;
+		margin-left:1.88rem;
+		margin-top: 1.8rem;
+	}
+	.typeMsg{
+		position:absolute;
+		right:3.5rem;
+		top:2.5rem;
+		color:rgba(255,255,255,1);
+		opacity: 0.5;
+	}
+	.pri{
+		font-size:3rem;
+		line-height: 4.19rem;
+		text-align: center;
+		margin:1rem 0 0.5rem 0;
+		color:#fff;
+	}
+	.card{
+		font-size: 2.25rem;
+		line-height: 3.13rem;
+		opacity: 0.8;
+		color:#fff;
+		text-align: center;
+	}
+	.line{
+		border:0.06rem solid #fff;
+		opacity: 0.2;
+	}
+	.itemT{
+		font-size: 1.38rem;
+		line-height: 1.88rem;
+		color:rgba(255,255,255,0.5);
+		/*opacity: 0.5;*/
+		margin-top: 1.5rem;
+	}
+	.itemC{
+		font-size: 1.63rem;
+		line-height: 2.31rem;
+		color:#fff;
+	}
+	.item1,.item2{
+		padding:0 4.3%;
+		display: flex;
+		justify-content:space-between;
+	}
+	.item1 p:first-child{
+		width:7.5rem;
+	}
+	.item1 p:last-child{
+		width:8.5rem;
+		text-align: right;
+	}
+	.bottom{
+		display: flex;
+	}
+	.card_btn{
+		width:92%;
+		padding:0;
+		line-height: 5rem;
+		margin:2rem auto;
+		overflow: hidden;
+		height:auto;
+		display: none;
+	}
+	.card_btn div{
+		width:48%;
+		background:none;
+		border:0.05rem solid #FF894C;
+		font-size: 1.88rem;
+		border-radius: 0.5rem;
+		float:left;
+		text-align: center;
+		color:#FF894C;
+	}
+	.card_btn .continue{
+		float:right;
+		background:#FF894C;
+		color:#fff;
+	}
+	.Buymsg{
+		color:#fff;
+		text-align: center;
+		font-size: 1.5rem;
+		line-height: 4rem;
+	}
+	.autoContinueBox{
+		text-align: center;
+		position: absolute;
+		bottom:0;
+		width:100%;
+		display: none;
+	}
+	.btn_bottom{
+		margin-top:1rem;
+		line-height: 4rem;
+		font-size: 1.88rem;
+	}
+	.todayEarnText{
+		font-size: 1.63rem;
+		line-height: 2.31rem;
+		color:rgba(255,255,255,1);
+	}
+	.continueBtn{
+		position: absolute;
+		right:1.5rem;
+		top:0rem;
+	}
+
+	.msgzz{
+		width:100%;
+		height:100%;
+		position:fixed;
+		top:0;
+		left:0;
+		background:rgba(0,0,0,0.5);
+		display: none;
+		z-index: 10000;
+	}
+	.msgBox{
+		background:#1D2C36;
+		width:70%;
+		padding-top: 1.5rem;
+		color:rgba(255,255,255,0.8);
+		text-align: center;
+		border-radius: 1rem;
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
+	.msgBox .title{
+		font-size: 1.8rem;
+		line-height: 2.6rem;
+	}
+	.msgBox .msg{
+		font-size: 1.8rem;
+		line-height: 2.06rem;
+		margin-top:0.88rem;
+		padding-bottom:1.9rem;
+		border-bottom:0.06rem solid rgba(45,179,219,0.1);
+	}
+	.msgBtn div{
+		width:49.5%;
+		float:left;
+		line-height:4rem;
+		font-size: 1.8rem;
+	}
+	.cancel{
+		border-right:0.06rem solid rgba(45,179,219,0.1);
+	}
+	.msgzz .dealP{
+		width:80%;
+		line-height: 3rem;
+		letter-spacing: 2rem;
+		font-size: 1.5rem;
+		background:none;
+		border:0.06rem solid rgba(45,179,219,0.1);
+		border-radius: 0.5rem;
+		text-indent: 2rem;
+	}
+</style>
+<body>
+	<div class="back-title-box bg2">
+		<div class="back-title">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text"></p>
+			<span class="continueBtn xinshoubiao">收益续投</span>
+		</div>
+	</div>
+<!-- 	<div class="Buymsg">
+		<span>您已成功获得</span><span class="cardname"></span><span>本金卡！</span>
+	</div> -->
+	<div class="box">
+		<div class="logo">
+			<img src="../images/share_logo_deltago@2x.png" alt="">
+		</div>
+		<div class="typeMsg">
+			<span class="type1">PRINCIPAL </span>
+			<span class="type2"> 本金</span>
+		</div>
+		<p class="pri">$<span class="productBuyMoney">0</span></p>
+		<p class="card"><span class="cardNumF">1</span>***&nbsp;&nbsp;&nbsp; ****&nbsp;&nbsp;&nbsp; ****&nbsp;&nbsp;&nbsp; <span class="cardNumL">0000</span></p>
+		<div class="line"></div>
+		<div class="item1 itemT">
+			<p class="Left">产品名称</p>
+			<p class="Center">周期</p>
+			<p class="Right">投资时间</p>
+		</div>
+		<div class="item1 itemC">
+			<p class="Left pname">爱智鑫</p>
+			<p class="Center cycle">6月</p>
+			<p class="Right itime">2017-10-18</p>
+		</div>
+		<div class="item2 itemT">
+			<p class="Left">金额</p>
+			<p class="Left">到期时间</p>
+		</div>
+		<div class="item2 itemC">
+			<p class="Right prevenue">$<span class="productBuyMoney"></span></p>
+			<p class="Right etime">2020-10-18</p>
+		</div>
+		<div class="item1 itemT">
+			<p class="Left todayEarnT">今日收益</p>
+			<p class="Center">累计收益</p>
+			<p class="Right">浮动分红收益</p>
+		</div>
+		<div class="item1 itemC">
+			<p class="Left todayProductEarn"></p>
+			<p class="Center productEarnTotal">$0</p>
+			<p class="Right productFloatProfit">$0</p>
+		</div>
+		<div class="item1 itemT bottom xinshoubiao">
+			<p class="Left">自动续投</p>
+			<p></p>
+		</div>
+		<div class="item1 itemC bottom xinshoubiao">
+			<p class="Left" style="width:100%;text-align:left">$<span class="productCteInveMoney"></span> <span class="productCteInveTime"> </span></p>
+		</div>
+	</div>
+	<div class="card_btn">
+		<div class="finish">完成</div>
+		<div class="continue">续投</div>
+	</div>
+
+	<div class="autoContinueBox xinshoubiao">
+		<div>*查看<a href="incomeContinueExplain.html">《收益自动续投说明》</a></div>
+		<div class="btn_bottom autoContinueBtn">收益自动续投</div>
+	</div>
+
+	<div class="msgzz">
+		<div class="msgBox">
+			<div class="title">请输入交易密码</div>
+			<div class="msg">
+				<input type="password" class="dealP" oninput="if(value.length>6) value=value.slice(0,6)">
+			</div>
+			<div class="msgBtn">
+				<div class="cancel">取消</div>
+				<div class="ok">确认</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+<script>	
+    $(function(){
+    	var fontSize = $(window).width()/46.875;//屏幕的宽
+    	$("html").css("font-size",fontSize +"px");
+
+        var Request = new Object();
+        Request = GetRequest();
+        var productBuyId=decodeURI(Request["productBuyId"]); 
+        var mine = Request['mine'];
+        if(mine == 1){
+        	$('.back-title-img').addClass('mine');
+        }
+        var cteInveStatus;
+        deltaGoAjax('app/asset/getCorpusCardDetail',{productBuyId:productBuyId},getCardDetail);   
+
+        function getCardDetail(data){
+        	cardDetail = data.data;
+        	var CNumber = cardDetail.productCardNumber;  //卡号
+        	$('.productBuyMoney').text(moneyToFloat(cardDetail.productBuyMoney));
+        	$('.cardNumF').text(CNumber.substr(0,1));
+        	$('.cardNumL').text(CNumber.substr(CNumber.length-4));
+        	$('.pname').text(cardDetail.productName);
+        	$('.cycle').text(cardDetail.productCycleName);
+        	$('.itime').text(cardDetail.productBuyTime);
+        	$('.etime').text(cardDetail.productExpireTime);
+        	$('.todayProductEarn').text(moneyToFloat(cardDetail.todayProductEarn));
+    		$('.productEarnTotal').text(moneyToFloat(cardDetail.productEarnTotal));
+    		$('.productFloatProfit').text(moneyToFloat(cardDetail.productFloatProfit));
+    		var gradientColor1 = cardDetail.productColor.split(',')[0];
+			var gradientColor2 = cardDetail.productColor.split(',')[1];
+    		$('.box').css('background','linear-gradient(to right top, '+gradientColor1+' , '+(gradientColor2 || gradientColor1));
+    		$('.cardname,.back-title-text').text(cardDetail.productName);
+    		$('.productCteInveMoney').text(cardDetail.productCteInveMoney);
+    		$('.productCteInveTime').text(cardDetail.productCteInveTime);
+    		if(cardDetail.productValid == 0){
+    			$('.autoContinueBox').hide();
+    			$('.card_btn').show();
+    			$('.todayEarnT').text('此产品已到期').addClass('todayEarnText');
+    			$('.todayProductEarn').text('请选择完成或续投');
+    		}
+    		if(cardDetail.productDetailId == 1){
+    			$('.xinshoubiao').hide();
+    		}
+    		cteInveStatus = cardDetail.cteInveStatus;
+    		if(cardDetail.cteInveStatus == 0){
+    			$('.autoContinueBox').show();
+    		}
+        }  
+    	
+    	
+
+    	/******完成******/
+    	$('.finish').click(function(){
+    		var url = 'app/asset/productExpire';
+    		var data = {
+    			productCardNumber: CNumber
+    		};
+    		deltaGoAjax(url,data,finish);
+    	})
+    	function finish(data){
+    		errorMsg(data.msg);
+    		setTimeout(function(){
+    			window.history.back(-1);
+    		},2000)
+    	}
+
+    	/********收益续投********/
+    	$('.autoContinueBtn').click(function(){
+    		var data = {
+    			operation:'addition',
+    			productBuyId:productBuyId
+    		}
+    		deltaGoAjax('app/asset/updateCorpusCteInveStatus',data,continueOk);
+    	})
+
+    	function continueOk(data){
+    		errorMsg('自动续投成功');
+    		$('.autoContinueBox').hide();
+    		setTimeout(function(){
+    			location.reload();
+    		},2000)
+    	}
+
+    	$('.continueBtn').click(function(){
+    		window.location.href = 'inComeContinue.html?productBuyId='+productBuyId+'&cteInveStatus='+cteInveStatus;
+    	})
+
+    	/******续投******/
+    	$('.continue').click(function(){
+    		$('.msgzz').show();
+    	})
+
+    	$('.cancel').click(function(){
+    		$('.msgzz').hide();
+    		$('.dealP').val('');
+    	})
+    	$('.ok').click(function(){
+    		var data = {
+    			operation:'verify',
+    			dealPwd: $('.dealP').val()
+    		};
+    		deltaGoAjax('app/user/deal',data,buyGlodCard);
+    	})
+    	function buyGlodCard(){
+    		var data = {
+    			productId:cardDetail.productId,
+    			money: cardDetail.productBuyMoney
+    		};
+    		deltaGoAjax('app/product/productBuy',data,BuyOk);
+    	}
+
+    	function BuyOk(data){
+    		var url = 'app/asset/productExpire';
+    		var data = {
+    			productCardNumber: CNumber
+    		};
+    		deltaGoAjax(url,data,continueBuy);
+    	}
+    	function continueBuy(data){
+    		var cardDetail = encodeURI(encodeURI(JSON.stringify(data.data)));
+			window.location.href = '../template/corpusCardDetail.html?act=1&cardDetail='+cardDetail;
+    	}
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+html,body{
+	min-height: 500px;
+	position: relative;
+}
+.current_exchange_box{
+	color:#65E157;
+	font-size: 0.6rem;
+	line-height: 1.525rem;
+	padding-left: 4%;
+}
+.blue{
+	color:#31C3EF;
+}
+.f-8{
+	color:rgba(255,255,255,0.8);
+}
+.FF894C{
+	color:#FF894C;
+}
+.productInfos{
+	padding:0.5rem 4%;
+	text-align: center;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content:space-around;
+}
+.line{
+	width:0.05rem;
+	background:rgba(255,255,255,0.1);
+	height:2.75rem;
+}
+.productInfos div p:first-child{
+	font-size:0.9rem;
+	line-height: 1.225rem;
+}
+.productInfos div p:last-child{
+	font-size:0.6rem;
+	line-height: 0.825rem;
+	color:#fff;
+}
+.yChange .annual{
+	/*font-size:1.6rem;*/
+}
+
+.priMsg{
+	overflow: hidden;
+	height:auto;
+}
+.payPri{
+	padding:0.5rem 4%;
+}
+.payPri_title{
+	font-size:0.75rem;
+	line-height: 1.05rem;
+	float:left;
+}
+.rmbMsg{
+	color:rgba(255,255,255,0.5);
+	font-size:0.5rem;
+	line-height: 1.05rem;
+	float:right;
+
+}
+.inPri{
+	position: relative;
+	line-height: 0;
+	margin:0.5rem 0;
+}
+input{
+	width:100%;
+	line-height: 2.25rem;
+	outline: none;
+	border:0.05rem solid rgba(49,195,239,0.5);
+	border-radius: 0.5rem;
+	/*margin:0.5rem 0;*/
+	font-size: 0.65rem;
+	background:none;
+	text-indent: 1rem;
+}
+.priImg{
+	font-size: 0.65rem;
+	position: absolute;
+	top:0rem;
+	left:0.5rem;
+	line-height: 2.36rem;
+}
+.balance{
+	font-size:0.55rem;
+	line-height: 0.75rem;
+}
+
+.income{
+	padding:0.5rem 4%;
+	overflow: hidden;
+	height:auto;
+}
+.income_left{
+	float:left;
+}
+.incomeMsg{
+	font-size: 0.75rem;
+	line-height: 1.05rem;
+}
+.endTbox{
+	line-height: 0.825rem;
+	margin-top: 0.2rem;
+	font-size: 0.6rem;
+}
+.income_right{
+	float:right;
+	color:#FF894C;
+	font-size: 1rem;
+	line-height: 2.075rem;
+}
+
+.floatIncome{
+	padding:0.75rem 4%;
+	display: none;
+}
+.float_title{
+	font-size: 0.75rem;
+	line-height: 1.05rem;
+}
+.floatMsg{
+	font-size: 0.6rem;
+	line-height: 1.05rem;
+	color:rgba(255,255,255,0.8);
+}
+.predetemine{
+	float:right;
+}
+.predetemineRmb{
+	font-size: 0.5rem;
+	line-height: 1.05rem;
+	color:rgba(255,255,255,0.5);
+}
+.predetemineDollar{
+	font-size:1rem;
+	line-height: 1.5rem;
+	color:#FF894C;
+}
+
+
+
+.ps{
+	font-size: 0.4rem;
+	line-height: 1.75rem;
+	color:rgba(255,255,255,0.3);
+	text-align: center;
+}
+.buyOk{
+	width:100%;
+	position: absolute;
+	bottom:0;
+}
+.Agreement{
+	font-size: 0.5rem;
+	line-height: 0.7rem;
+	color:#31C3EF;
+	text-align: center;
+	margin-bottom: 0.7rem;
+}
+.agree{
+	display: inline-block;
+	width:0.8rem;
+	height:0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.4rem;
+	text-align: center;
+	border:1px solid #31C3EF;
+	border-radius: 0.4rem;
+	color:rgba(49,195,239,0)
+}
+.agreeAct{
+	color:rgba(49,195,239,1);
+}
+.agreeBtn{
+	color:rgba(255,255,255,0.3);
+}
+.Agreement a{
+	text-decoration: underline;
+	color:#31C3EF;
+}
+
+.msgzz{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	background:rgba(0,0,0,0.5);
+	display: none;
+	z-index: 10000;
+}
+.msgBox{
+	background:#1D2C36;
+	width:13.5rem;
+	padding-top: 0.775rem;
+	color:rgba(255,255,255,0.8);
+	text-align: center;
+	
+	border-radius: 0.5rem;
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+.msgBox .title{
+	font-size: 0.75rem;
+	line-height: 1.05rem;
+}
+.msgBox .msg{
+	font-size: 0.6rem;
+	line-height: 0.825rem;
+	margin-top:0.35rem;
+	padding-bottom:0.75rem;
+	border-bottom:0.05rem solid rgba(45,179,219,0.1);
+}
+.msgBtn div{
+	width:6.5rem;
+	float:left;
+	line-height: 2.4rem;
+}
+.cancel{
+	border-right:0.05rem solid rgba(45,179,219,0.1);
+}
+.msgzz .dealP{
+	width:80%;
+	line-height: 1.75rem;
+	letter-spacing: 1rem;
+	font-size: 1rem;
+}
+.dsp{
+	display: none;
+}
+.preT{
+	display: none;
+}
+.selectMethod{
+	padding: 0.5rem;
+}
+.selectMethod>div{
+	line-height: 1rem;
+}
+.selectMethod>div:last-child{
+	margin-top: 0.5rem;
+}
+.selectMethod span{
+	float:left;
+	margin-left: 0.3rem;
+}
+.selectMethod p{
+	float:right;
+}
+/*.selectMethod p:nth-child(2){
+	margin-top: 0.7rem;
+}*/
+.selectMethod .circle{
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	border: 0.025rem solid #FF894C;
+	border-radius: 1rem;
+	/*margin-top: 0.25rem;*/
+ 
+}
+.selectMethod .text{
+	font-size: 0.65rem;
+	color: #FF894C;
+}
+.selectMethod .explain{
+	font-size: 0.55rem;
+	color: rgba(255,255,255,0.8);
+}
+.circleColor{
+	background-color: #FF894C;
+}
+.remind{
+	font-size: 0.65rem;
+	color: #FFFFFF;
+}

@@ -1,0 +1,224 @@
+.f-8{
+	color:rgba(255,255,255,0.8);
+}
+.red{
+	color:#EC2D1D;
+}
+.FC5400{
+	color:#FC5400;
+}
+.yellow{
+	color:#F1C131;
+}
+.padding{
+	padding:0.75rem 4%;
+}
+.title{
+	font-size: 0.8rem;
+	line-height: 1.125rem;
+	color:#F1C131;
+}
+
+.area1{
+	padding:0.55rem 4% 1.075rem 4%;
+	display: flex;
+	justify-content:space-around;
+	text-align: center;
+	color:#fff;
+}
+.yearChangeNum{
+	/*color:#FF894C;*/
+	font-size: 0.9rem;
+	line-height: 3.5rem;
+	text-align: center;
+	height:3.5rem;
+}
+.yearChangeNum .num{
+	font-size: 2.5rem;
+}
+.inc{
+	font-size: 1.45rem;
+	line-height:3.5rem;
+	/*color:#31C3EF;*/
+	text-align: center;
+	height:3.5rem;
+}
+.ycLine{
+	border-left:0.05rem solid rgba(255,255,255,0.3);
+	height:4.25rem;
+	margin-top: 0.5rem;
+}
+
+.area2 .incomeType{
+	border:0.05rem solid #FC5400;
+	border-radius: 0.25rem;
+	font-size: 0.5rem;
+	line-height: 1rem;
+	padding:0 0.25rem;
+	float:right;
+	/*color:#65E157;*/
+}
+
+.text{
+	font-size: 0.65rem;
+	line-height: 1.05rem;
+	margin-top:0.5rem;
+}
+
+.area3{
+	display: flex;
+	display: flex;
+	justify-content:space-around;
+	text-align: center;
+}
+.area3 .area3-img{
+	width:2.3rem;
+	margin:0 auto;
+}
+.area3 .area3-title{
+	color:#fff;
+	font-size: 0.7rem;
+	line-height: 1rem;
+	margin:0.475rem 0 0.25rem 0;
+}
+.area3 .area3-msg{
+	color:rgba(255,255,255,0.5);
+	font-size: 0.55rem;
+	line-height: 0.75rem;
+}
+
+.area10 .echarts{
+	height:15rem;
+	margin-top: 0.575rem;
+}
+.area10 .echarts div{
+	width:50%;
+	float:left;
+	height:15rem;
+}
+
+.area5 .table{
+	margin-top:0.5rem;
+}
+.area5 .table tr td{
+	font-size: 0.6rem;
+	line-height: 1.75rem;
+}
+.area5 .table tr td:first-child{
+	width:4.5rem;
+	text-align: center;
+}
+.area5 .table tr td:last-child{
+	width:12.5rem;
+	text-indent: 0.5rem;
+}
+.area5 .table .tr_bg1 td{
+	background:rgba(49,195,239,0.1);
+}
+.area5 .table .tr_bg2 td{
+	background:rgba(49,195,239,0.05);
+}
+
+.area6 .area6_img{
+	width:100%;
+	margin-top: 0.5rem;
+}
+.atext{
+	margin-top: -1.5rem;
+}
+
+.area7 .inReport{
+	display: flex;
+	justify-content:space-between;
+	border-bottom:0.05rem solid rgba(255,255,255,0.1);
+	padding:0.5rem 0 0.365rem 0;
+}
+.area7 .inReport .right{
+	border-top:0.05rem solid rgba(255,255,255,0.5);
+	border-right:0.05rem solid rgba(255,255,255,0.5);
+	transform: rotate(45deg);
+	width:0.75rem;
+	height:0.75rem;
+	margin-top: 0.4rem;
+	margin-right: 0.2rem;
+}
+.area7 .inReport .left span{
+	font-size: 0.65rem;
+	color:#FF894C;
+	line-height: 0.75rem;
+}
+.area7 .inReport .left .inReportTime{
+	font-size: 0.5rem;
+	color:rgba(255,255,255,0.8);
+}
+
+.area8 .area8_img{
+	margin-top: 0.7rem;
+}
+
+.area9{
+	/*margin-bottom: 2.25rem;*/
+}
+.area9 .text{
+	margin:0;
+}
+
+.shengyubox{
+	width:65%;
+	height:2.75rem;
+	position: fixed;
+	bottom:0;
+	left:0;
+	font-size: 0.75rem;
+	line-height: 1.05rem;
+	background:#FF6A20;
+	color:#fff;
+	font-weight: 700;
+	text-align: center;
+}
+.shengyup{
+	margin-top:0.4rem;
+}
+.nowDate{
+	font-size: 0.6rem;
+	line-height: 0.825rem;
+}
+.btn_bottom{
+	position: fixed;
+	bottom:0;
+	right:0;
+	width:34.8%;
+	background:#FF6A20;
+	color:#fff;
+	font-weight: 700;
+	line-height: 2.75rem;
+	height:2.75rem;
+}
+
+.area11 .explain_text{
+	font-size: 0.55rem;
+	line-height: 0.75rem;
+	margin: 0.5rem 0;
+}
+.advantage{
+	display: flex;
+	flex-wrap: wrap;
+}
+.advantage div{
+	border:0.05rem solid #FC5400;
+	border-radius: 0.25rem;
+	font-size: 0.6rem;
+	line-height: 1.25rem;
+	padding:0 0.25rem;
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+.advantage div:last-child{
+	margin-right:0;
+}
+
+.text{
+	font-size: 0.65rem;
+	line-height: 1.05rem;
+	/*margin-top:0.5rem;*/
+}

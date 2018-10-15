@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		form p{
+			padding: 0;
+			font-size: 0.5rem;
+		}
+		.send{
+			position: absolute;
+			right: 0;
+			top: 0.45rem;
+			border: 0.025rem solid rgba(49,195,239,1);
+			border-radius: 0.125rem;
+		}
+		.send span{
+			line-height: 1.2rem;
+			font-size: 0.55rem;
+			color: rgba(49,195,239,0.8);
+			margin: 0.25rem 0.45rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="bgbox">
+		<div class="back-title-box">
+			<div class="back-title">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">重置登录密码</p>
+			</div>
+		</div>
+		<form action="#">
+			<span class="icon_phone"></span>
+			<span class="icon_seccode"></span>
+			<a href="#" class="send"><span>发送</span></a>
+			<input type="text" placeholder="请输入手机号" class="phoneNumber">
+			<input type="text" placeholder="请输入验证码" class="writeCode">
+			<p>
+				系统已为手机号158****0987发送了一个6位数验证码，请注意查收
+			</p>
+			<a href="#" class="btn"><span>提交</span></a>
+		</form>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+</body>
+</html>

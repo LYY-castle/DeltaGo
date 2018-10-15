@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/outMoneyMethod.css">
+	<style>
+	.detail{
+		position: absolute;
+		left:15rem;
+		top: 0rem;
+		font-size: 0.7rem;
+		color: rgba(49,195,239,1);
+	}
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">提现<span class="detail">提现记录</span></p>
+				<!-- <img class="icon_server" src="../images/account_icon_customer@2x.png" alt=""> -->
+			</div>
+		</div>
+		<p class="account_change">当前美元汇率: <span class="ExchangeRate">6.6168</span></p>
+		<div class="msg_sort">	
+			<a href="outMoneyToZhiFuBao.html">
+				<div class="msg_sort_single bg2">
+					<img class="account_icon_left" src="../images/withdraw_icon_alipay@2x.png" alt="">
+					<span class="methed">提现到支付宝</span>
+				</div>
+			</a>
+			<a href="outMoneyToHongKong.html">
+				<div class="msg_sort_single bg1">
+					<img class="account_icon_left" src="../images/withdraw_icon_hongkong@2x.png" alt="">
+					<span class="methed">提现到香港银行卡</span>
+				</div>
+			</a>
+			<a href="outMoneyToChina.html">
+				<div class="msg_sort_single bg2">
+					<img class="account_icon_left" src="../images/withdraw_icon_china@2x.png" alt="">
+					<span class="methed">提现到中国内地银行卡</span>
+				</div>
+			</a>
+			<a href="outMoneyToAbroad.html">
+				<div class="msg_sort_single bg1">
+					<img class="account_icon_left" src="../images/withdraw_icon_country@2x.png" alt="">
+					<span class="methed">提现到其他国家/地区银行卡</span>
+				</div>
+			</a>
+			<p class="remind">DeltaGo仅支持美元提现<br>为账户安全考虑，您只能提现到本人银行卡账户。</p>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var outType = Request['type'];
+			var outMoney = Request['money'];
+			var a = $('.msg_sort a');
+			$.each(a,function(k,val){
+				$(val).attr('href',$(val).attr('href')+'?type='+outType+'&money='+outMoney);
+			})
+
+			deltaGoAjax('app/asset/getExchangeRate',{},getExchangeRate); 
+			function getExchangeRate(data){ //汇率
+				var rate = (data.data.sellingEarn/100).toFixed(4); 
+				$('.ExchangeRate').text(rate);
+			}
+
+			$('.detail').click(function(){
+				window.location.href = 'dynamicDetail.html?type=2';
+			})
+
+		})
+	</script>
+</body>
+</html>

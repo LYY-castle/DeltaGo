@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/agent.css">
+	<style>
+		.title table{
+			width: 100%;
+			font-size: 0.7rem;
+			color: rgba(255,255,255,0.8);
+		}
+		.title table tr{
+			display: flex;
+			line-height: 2.5rem;
+		}
+		.title table tr td{
+			width: 33.3333%;
+		}
+		.title table tr:nth-child(1){
+			color: rgba(255,255,255,1);
+		}
+		.tdColor{
+			color: rgba(255,137,76,1);
+		}
+		.tdFontSize{
+			font-size: 0.8rem;
+		}
+		.tdBorder{
+			border-bottom: 0.025rem solid rgba(255,255,255,0.1);
+		}
+		.marginLeftAndRight{
+			margin: 0 1rem; 
+		}
+		.paddingLeftAndRight{
+			padding: 0 1rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="bg3">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">代理商</p>
+			</div>
+		</div>
+		<div class="agents">
+			<div class="single_agent bg2">
+				<div class="img_border">
+					<img class="userImg" src="../images/account_icon_user@2x.png" alt="">
+				</div>
+				<p class="my_name"></p>
+				<p class="my_nk_name">昵称：<span class="userNickname"></span></p>
+				<p class="my_phone">手机号：<span class="userPhone"></span></p>
+				<div class="dollar"></div>
+			</div>
+		</div>
+		<div class="title">
+			<table cellspacing="0" cellpadding="0" class="table">
+				<tr class="bg1 paddingLeftAndRight">
+					<td>购买基金</td>
+					<td align="center">投资金额</td>
+					<td align="right" class="tdColor">获取佣金</td>
+				</tr>
+				
+			</table>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var agentDetail=decodeURI(Request["agentDetail"]); 
+			agentDetail = JSON.parse(agentDetail);
+			$('.userImg').attr('src',(agentDetail.userPortrait || '../images/account_icon_user@2x.png'));
+			$('.my_name').text((agentDetail.notes || '设置备注'));
+			$('.userNickname').text((agentDetail.userNickname || 'EGG'));
+			$('.userPhone').text(agentDetail.userPhone);
+			$('.dollar').text('$'+moneyToFloat(agentDetail.allBrokerage));
+
+			deltaGoAjax('app/agent/getAgentInfo',{agentUuid:agentDetail.userUuid},getAgentInfo);
+			function getAgentInfo(data){
+				var str = '';
+				$.each(data.data,function(k,val){
+					str += '<tr class="tdBorder marginLeftAndRight">'+
+								'<td>'+val.product_name+'</td>'+
+								'<td align="center">$'+moneyToFloat(val.product_buy_money)+'</td>'+
+								'<td align="right" class="tdColor tdFontSize">$'+moneyToFloat(val.brokerage_money)+'</td>'+
+							'</tr>';
+				})
+				$('.table').append(str);
+			}
+
+			$('.agents').on( 'click','.my_name',function(e){
+				e.stopPropagation();
+				window.location.href = 'setName.html?userUuid='+$(this).attr('data-id');
+			})
+		})
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	.seccode{
+		margin-left: 5rem;
+	}
+	.time{
+		position: absolute;
+		right: 0;
+		top: 0.45rem;
+		font-size: 0.7rem;
+		color: rgba(255,255,255,0.3);
+	}
+	</style>
+</head>
+<body>
+	<div class="bgbox">
+		<div class="back-title-box">
+			<div class="back-title">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">验证码登录</p>
+			</div>
+		</div>
+		<form action="#">
+			<span class="icon_phone"></span>
+			<input type="text" placeholder="请输入验证码" class="writeCode">
+			<span class="time">60秒</span>
+			<p>
+				<a href="#" class="seccode">没收到？重新发送</a>
+			</p>
+			<a href="#" class="btn"><span>登录</span></a>
+		</form>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var phone = Request["phone"];
+			time();
+			function time(){
+				var time = 60;
+				$(".seccode").off('click');
+				var timerId = setInterval(function(){
+					$(".time").text(time + "秒");
+					time --;
+					if(time == -1){
+						clearInterval(timerId);
+						flag = true;
+						seccode();
+					};
+				},1000);
+			}
+			function seccode(){
+				$('.seccode').click(function(){
+					var url = 'app/login/checkPhone';
+					var data = {
+						phone:phone,
+						operate:"login"
+					};
+					deltaGoAjax(url,data,time);
+				})
+			}
+
+			$('.btn').click(function(){
+				var url = 'app/login/login';
+				var data = {
+					phone:phone,
+					validateCode:$(".writeCode").val(),
+				};
+				deltaGoAjax(url,data,loginOk);
+			})
+			function loginOk(result){			
+				localStorage.removeItem('password');
+				localStorage.setItem('phone',phone);
+				localStorage.setItem('tokenId',result.data.tokenId);
+				window.location.href = '../index.html?act=2';
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<style>
+	.back-title-box{
+		height:3.5rem;
+	}
+	.back-title{
+		width:100%;
+		height:3.5rem;
+		position: fixed;
+		top:0;
+		z-index: 9999;
+		line-height:3.5rem; 
+		text-align: center;
+		color:rgba(255,255,255,0.8);
+		font-size: 2rem;
+	}
+	.back-title .back-title-img{
+		width:0.9rem;
+		height:1.8rem;
+		position: absolute;
+		top:50%;
+		left:1.7rem;
+		transform: translate(0,-50%);
+	}
+	.box{
+		width:92%;
+		margin:1rem 4%;
+		background:#4C97FF;
+		border:1px solid rgba(255,255,255,0.2);
+		position:relative;
+		border-radius: 1.56rem ;
+		padding-bottom: 1.5rem;
+	}
+	.logo{
+		width:22.9%;
+		margin-left:1.88rem;
+		margin-top: 1.8rem;
+	}
+	.typeMsg{
+		position:absolute;
+		right:3.5rem;
+		top:2.5rem;
+		color:rgba(255,255,255,1);
+		opacity: 0.5;
+	}
+	.pri{
+		font-size:3rem;
+		line-height: 4.19rem;
+		text-align: center;
+		margin:1rem 0 0.5rem 0;
+		color:#fff;
+	}
+	.card{
+		font-size: 2.25rem;
+		line-height: 3.13rem;
+		opacity: 0.8;
+		color:#fff;
+		text-align: center;
+	}
+	.line{
+		border:0.06rem solid #fff;
+		opacity: 0.2;
+	}
+	.itemT{
+		font-size: 1.38rem;
+		line-height: 1.88rem;
+		color:rgba(255,255,255,0.5);
+		/*opacity: 0.5;*/
+		margin-top: 1.5rem;
+	}
+	.itemC{
+		font-size: 1.63rem;
+		line-height: 2.31rem;
+		color:#fff;
+	}
+	.item1,.item2{
+		padding:0 4.3%;
+		display: flex;
+		justify-content:space-between;
+	}
+	.item1 p:first-child{
+		width:7.5rem;
+	}
+	.item1 p:last-child{
+		width:8.5rem;
+		text-align: right;
+	}
+	.bottom{
+		display: flex;
+	}
+	.card_btn{
+		width:92%;
+		padding:0;
+		line-height: 5rem;
+		margin:2rem auto;
+		overflow: hidden;
+		height:auto;
+		display: none;
+	}
+	.card_btn div{
+		width:48%;
+		background:none;
+		border:0.05rem solid #FF894C;
+		font-size: 1.88rem;
+		border-radius: 0.5rem;
+		float:left;
+		text-align: center;
+		color:#FF894C;
+	}
+	.card_btn .continue{
+		float:right;
+		background:#FF894C;
+		color:#fff;
+	}
+	.Buymsg{
+		color:#fff;
+		text-align: center;
+		font-size: 1.5rem;
+		line-height: 4rem;
+	}
+	.autoContinueBox{
+		text-align: center;
+		position: absolute;
+		bottom:0;
+		width:100%;
+		display: none;
+	}
+	.btn_bottom{
+		margin-top:1rem;
+		line-height: 4rem;
+		font-size: 1.88rem;
+	}
+	.todayEarnText{
+		font-size: 1.63rem;
+		line-height: 2.31rem;
+		color:rgba(255,255,255,1);
+	}
+	.continueBtn{
+		position: absolute;
+		right:1.5rem;
+		top:0rem;
+	}
+
+	.msgzz{
+		width:100%;
+		height:100%;
+		position:fixed;
+		top:0;
+		left:0;
+		background:rgba(0,0,0,0.5);
+		display: none;
+		z-index: 10000;
+	}
+	.msgBox{
+		background:#1D2C36;
+		width:70%;
+		padding-top: 1.5rem;
+		color:rgba(255,255,255,0.8);
+		text-align: center;
+		border-radius: 1rem;
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
+	.msgBox .title{
+		font-size: 1.8rem;
+		line-height: 2.6rem;
+	}
+	.msgBox .msg{
+		font-size: 1.8rem;
+		line-height: 2.06rem;
+		margin-top:0.88rem;
+		padding-bottom:1.9rem;
+		border-bottom:0.06rem solid rgba(45,179,219,0.1);
+	}
+	.msgBox .preMsg{
+		font-size: 0.6rem;
+		line-height: 0.825rem;
+		margin-top:0.35rem;
+		padding-bottom:0.75rem;
+		border-bottom:0.05rem solid rgba(45,179,219,0.1);
+		display: none;
+	}
+	.msgBtn div{
+		width:49.5%;
+		float:left;
+		line-height:4rem;
+		font-size: 1.8rem;
+	}
+	.cancel{
+		border-right:0.06rem solid rgba(45,179,219,0.1);
+	}
+	.msgzz .dealP{
+		width:80%;
+		line-height: 3rem;
+		letter-spacing: 2rem;
+		font-size: 1.5rem;
+		background:none;
+		border:0.06rem solid rgba(45,179,219,0.1);
+		border-radius: 0.5rem;
+		text-indent: 2rem;
+	}
+</style>
+<body>
+	<div class="back-title-box bg2">
+		<div class="back-title">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">预定</p>
+			<!-- <span class="continueBtn xinshoubiao"></span> -->
+		</div>
+	</div>
+<!-- 	<div class="Buymsg">
+		<span>您已成功获得</span><span class="cardname"></span><span>本金卡！</span>
+	</div> -->
+	<div class="box">
+		<div class="logo">
+			<img src="../images/share_logo_deltago@2x.png" alt="">
+		</div>
+		<div class="typeMsg">
+			<span class="type1">PREDETERMINED </span>
+			<span class="type2"> 预定</span>
+		</div>
+		<p class="pri">$<span class="productBuyMoney">0</span></p>
+		<p class="card"><span class="cardNumF">1</span>***&nbsp;&nbsp;&nbsp; ****&nbsp;&nbsp;&nbsp; ****&nbsp;&nbsp;&nbsp; <span class="cardNumL">0000</span></p>
+		<div class="line"></div>
+		<div class="item1 itemT">
+			<p class="Left">产品名称</p>
+			<p class="Center">周期</p>
+			<p class="Right">预定时间</p>
+		</div>
+		<div class="item1 itemC">
+			<p class="Left pname"></p>
+			<p class="Center cycle"></p>
+			<p class="Right itime"></p>
+		</div>
+		<div class="item2 itemT">
+			<p class="Left">投资金额</p>
+			<p class="Left">预定金额</p>
+		</div>
+		<div class="item2 itemC">
+			<p class="Right prevenue">$<span class="productBuyMoney"></span></p>
+			<p class="Right getMoney"></p>
+		</div>
+	</div>
+	<div class="autoContinueBox">
+		<div class="btn_bottom autoContinueBtn">补全剩余$<span class="preMoney"></span>定金</div>
+	</div>
+
+	<div class="msgzz">
+		<div class="msgBox">
+			<div class="title">请输入交易密码</div>
+			<div class="msg">
+				<input type="password" class="dealP" oninput="if(value.length>6) value=value.slice(0,6)">
+			</div>
+			<div class="preMsg">
+				产品剩余配额不足，是否退回预定金？
+			</div>
+			<div class="msgBtn">
+				<div class="cancel">取消</div>
+				<div class="ok">确认</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+<script>	
+    $(function(){
+    	var fontSize = $(window).width()/46.875;//屏幕的宽
+    	$("html").css("font-size",fontSize +"px");
+
+        var Request = new Object();
+        Request = GetRequest();
+        var productBuyId=decodeURI(Request["productBuyId"]); 
+        var mine = Request['mine'];
+        if(mine == 1){
+        	$('.back-title-img').addClass('mine');
+        }
+        var cteInveStatus;
+        var preMoney; //需补全金额
+        var ReserveMoney;
+        deltaGoAjax('app/asset/getCorpusCardDetail',{productBuyId:productBuyId},getCardDetail);   
+
+        function getCardDetail(data){
+        	cardDetail = data.data;
+        	var CNumber = cardDetail.productCardNumber;  //卡号
+        	ReserveMoney = cardDetail.productBuyMoney;
+        	$('.productBuyMoney').text(moneyToFloat(cardDetail.productBuyMoney));
+        	$('.cardNumF').text(CNumber.substr(0,1));
+        	$('.cardNumL').text(CNumber.substr(CNumber.length-4));
+        	$('.pname').text(cardDetail.productName);
+        	$('.cycle').text(cardDetail.productCycleName);
+        	$('.itime').text(cardDetail.productBuyTime);
+        	$('.getMoney').text(moneyToFloat(cardDetail.productReserveMoney || 0));
+        	$('.box').css('background-color','#'+cardDetail.productColor.substr(1,6));     	
+        	if(cardDetail.isCompReserveMoney == 1){
+        		$('.autoContinueBox').show();
+        		preMoney = cardDetail.productBuyMoney - cardDetail.productReserveMoney;
+        		$('.preMoney').text(moneyToFloat(preMoney));
+        	}
+        }  
+    	
+    	$('.autoContinueBox').click(function(){
+    		$('.msgzz').show();
+    		  
+    	})
+
+    	$('.cancel').click(function(){
+    		$('.msgzz').hide();
+    		$('.dealP').val('');
+    	})
+
+    	var clickNum = 0; //判断点击操作 0为输入密码  1为退回预定金
+    	$('.ok').click(function(){
+    		if(clickNum == 0){
+    			var data = {
+    				operation:'verify',
+    				dealPwd: $('.dealP').val()
+    			};
+    			deltaGoAjax('app/user/deal',data,buyGlodCard);
+    		}else if(clickNum >= 1){
+    			deltaGoAjax('app/asset/backReserveMoney',{productBuyId: productBuyId},backReserveMoney);
+    		}
+    	})
+
+    	function buyGlodCard(data){
+    		clickNum = 1;
+    		var data = {
+    			productBuyId: productBuyId,
+    			money: preMoney
+    		}
+    		deltaGoAjax('app/asset/compReserveMoney',data,compReserveMoney); 
+    	}
+    	function compReserveMoney(data){
+    		errorMsg('定金补全成功');
+    		$('.msgzz').hide();
+    		$('.dealP').val('');
+    		$('.autoContinueBox').hide();
+    		$('.getMoney').text(ReserveMoney);
+    	}
+
+    	function backReserveMoney(data){
+    		errorMsg(data.msg);
+    		setTimeout(function(){
+    			window.location.href = '../index.html?act=2';
+    		},2000)
+    	}
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.ok{
+			position: absolute;
+			right: 1rem;
+			top: 0;
+			font-size: 0.7rem;
+			color: rgba(49,195,239,1);
+		}
+		.title{
+			justify-content: center;
+			display: flex;
+			margin-top: 1rem;
+		}
+		.title img{
+			display: inline;
+		}
+	    .title>h2{
+	    	margin-left: 0.5rem;
+	    	font-size: 0.8rem;
+	    	line-height: 1.5rem;
+	    	color: rgba(255,255,255,1);
+
+	    }
+		.title>span{
+			font-size: 0.6rem;
+			line-height: 0.825rem;
+			color: rgba(255,255,255,0.8);
+
+		}
+		.content{
+			margin: 1rem;
+			font-size: 0.6rem;
+
+		}
+		.content>span{
+
+		}
+		.icon_yes{
+			width: 1.5rem;
+			height: 1.5rem;
+			background-size: 100% 1005；
+		}
+		.during{
+			display: flex;
+			justify-content: center;
+			padding: 1rem 1rem 2rem 1rem; 
+			font-size: 0.6rem;
+			color: rgba(255,255,255,1);
+		}
+		.during .left{
+			width: 20%;
+			position: relative;
+		}
+		.during .left>span{
+			position: absolute;
+		}
+		.during .left>span:nth-child(1),.during .left>span:nth-child(4){
+			width: 1rem;
+			height: 1rem;
+			border-radius: 2rem;
+			/*background-color: rgba(153,153,153,1);*/
+			text-align: center;
+			line-height: 1rem;
+			padding: 0.25rem;
+			left: 1rem;
+			top: 0rem;
+		}
+		.during .left>span:nth-child(4){
+			left: 1rem;
+			top: 4rem;
+		}
+		.color_active{
+			background-color: rgba(49,195,239,1);
+		}
+		.color_deactive{
+			background-color: rgba(153,153,153,1);
+		}
+		.second{
+			/*background-color:rgba(153,153,153,1);*/
+			width: 0.125rem;
+			height: 1.5rem;
+			left: 1.65rem;
+			top: 1.5rem;
+			z-index: 1000;
+		}
+		.third{
+			/*background-color:rgba(153,153,153,1);*/
+			width: 0.125rem;
+			height: 1.5rem;
+			left: 1.65rem;
+			top: 2.7rem;
+			z-index: 1001;
+		}
+		.during .right{
+			color: rgba(255,255,255,0.5);
+		}
+		.during .right>div{
+			font-size: 0.7rem;
+			line-height: 1rem;
+		}
+		/*.during .right>div:nth-child(1){
+			color: rgba(49,195,239,1);
+		}*/
+		.during .right>div:nth-child(3){
+			margin-top: 1.5rem;
+			/*padding-top: 1rem;*/
+		}
+		.during .right>p{
+			font-size: 0.6rem;
+		}
+		.next{
+			display: block;
+			width: 80%;
+			background-color: rgba(45,179,220,1);
+			border-radius: 0.5rem;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			margin: 2rem auto;
+		}
+		.next span{
+			color: rgba(255,255,255,1);
+			font-size: 0.85rem;
+			line-height: 2rem;
+		}
+		.font_color_active{
+			color:#31c3ef;
+		}
+	</style>
+</head>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img mine" src="../images/back.png" alt="">
+			<p class="back-title-text">提现<span class="ok">完成</span></p>
+		</div>
+	</div>
+	<div class="title">
+		<img src="../images/mastersuccess_icon_success@2x.png" alt="" class="icon_yes">
+		<h2>您已成功提交提现申请</h2>
+	</div>
+	<div class="content">
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;感谢您提交提现申请，我们将对您的申请进行审核。后续审核结果将以短信形式通知您。
+		</span>
+	</div>
+	<div class="during bg2">
+		<!-- <div class="left">
+			<span class="first color_active">1</span>
+			<span class="second color_active"></span>
+			<span class="third color_deactive"></span>
+			<span class="four color_deactive">2</span>
+		</div>
+		<div class="right">
+			<div class="font_color_active">申请提交成功，等待审核</div>
+			<p>审核一般1-3个工作日内完成。审核结果通过短信发送。</p>
+			<div>审核成功，银行/支付宝处理中</div>
+			<p>审核及提现结果以短信通知您，请注意查收。</p>
+		</div> -->
+	</div>
+	<a href="#" class="next"><span>取消提现</span></a>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var type = Request["type"];
+			var money = Request["money"];
+			var status = 1;
+			var orderNumber;
+			deltaGoAjax('app/withdraw/getLatestWithdrawRecord',{},withdrawGuring);
+			function withdrawGuring(data){
+				status = data.data.withdrawStatus;
+				orderNumber = data.data.orderNumber;
+				var str = '';
+				if(data.data.withdrawStatus == 1){
+					$.each(data.data,function(k,val){
+						str = '<div class="left">'+
+						'<span class="first color_active">1</span>'+
+						'<span class="second color_active"></span>'+
+						'<span class="third color_deactive"></span>'+
+						'<span class="four color_deactive">2</span>'+
+						'</div>'+
+						'<div class="right">'+
+						'<div class="font_color_active">申请提交成功，等待审核</div>'+
+						'<p>审核一般1-3个工作日内完成。审核结果通过短信发送。</p>'+
+						'<div>审核成功，银行/支付宝处理中</div>'+
+						'<p>审核及提现结果以短信通知您，请注意查收。</p>'+
+						'</div>';
+					})
+					$('.during').append(str);
+				}else if(data.data.withdrawStatus == 3){
+					$.each(data.data,function(k,val){
+						str = '<div class="left">'+
+						'<span class="first color_deactive">1</span>'+
+						'<span class="second color_deactive"></span>'+
+						'<span class="third color_active"></span>'+
+						'<span class="four color_active">2</span>'+
+						'</div>'+
+						'<div class="right">'+
+						'<div>申请提交成功，等待审核</div>'+
+						'<p>审核一般1-3个工作日内完成。审核结果通过短信发送。</p>'+
+						'<div  class="font_color_active">审核失败</div>'+
+						'<p>'+data.data.reason+'</p>'+
+						'</div>';
+					})
+					$('.during').append(str);
+					$('.next span').text('重新申请');
+				}
+			}
+
+			$('.next').click(function(){
+				if(status == 1){
+					deltaGoAjax('app/withdraw/cancelWithdraw',{orderNumber:orderNumber},cancelWithdraw);
+				}else{
+					window.top.location = 'outMoneyMethod.html?type='+outType+'&money='+outMoney;
+				}
+			})
+
+			function cancelWithdraw(data){
+				errorMsg('成功取消提现申请');
+				setTimeout(function(){
+					window.location.href = '../index.html?act=2';
+				},2000)
+			}
+
+			$('.ok').click(function(){
+				window.location.href = '../index.html?act=2';
+			})
+		})
+	</script>
+</body>
+</html>

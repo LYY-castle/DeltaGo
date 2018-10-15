@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.act{
+			margin-top: 1rem;
+		}
+		.inReport{
+			display: flex;
+			justify-content:space-between;
+			/*border-bottom:0.05rem solid rgba(255,255,255,0.1);*/
+			padding:0.4rem 4%;
+		}
+		.inReport .right{
+			border-top:0.05rem solid rgba(255,255,255,0.5);
+			border-right:0.05rem solid rgba(255,255,255,0.5);
+			transform: rotate(45deg);
+			width:0.75rem;
+			height:0.75rem;
+			margin-top: 0.4rem;
+			margin-right: 0.2rem;
+		}
+		.inReport .left span{
+			font-size: 0.65rem;
+			color:rgba(255,255,255,0.8);
+			line-height: 0.75rem;
+		}
+		.inReport .left .inReportTime{
+			font-size: 0.05rem;
+			color:rgba(255,255,255,0.8);
+		}
+		.cardsBox{
+			width:92%;
+			margin:0 auto;
+		}
+		.bankCard{
+			width:92%;
+			border-radius: 0.25rem;
+			background:#31ccef;
+			padding:1rem 4%;
+			margin-top: 0.5rem;
+			position: relative;
+			/*margin-left: -3rem;*/
+		}
+		.top{
+			display: flex;
+			flex-wrap: nowrap;
+		}
+		.logo{
+			width:1.4rem;
+			height:1.4rem;
+		}
+		.cardType{
+			font-size: 0.5rem;
+			line-height: 0.7rem;
+			color:rgba(255,255,255,0.5);
+			margin-left: 0.25rem;
+		}
+		.cardNum{
+			margin-top: 0.5rem;
+			font-size: 1.05rem;
+			line-height: 1.475rem;
+			color:#fff;
+			text-align: center;
+			display: flex;
+			justify-content:space-around;
+		}
+		.delete{
+			position:absolute;
+			top:0;
+			right:-3rem;
+			width:2.75rem;
+			height:100%;
+			background:#FF894C;
+			border-radius: 0.25rem;
+			color:#fff;
+			text-align: center;
+			line-height: 4.5rem;
+			display: none;
+		}
+		.delete div{
+			height:0.1rem;
+			width:50%;
+			background:#fff;
+			margin:2.75rem auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">我的银行卡</p>
+			</div>
+		</div>
+		<div class="cardsBox">
+			
+		</div>
+		<div class="act">
+			<div class="inReport dealP bg2">
+				<div class="left">
+					<span>添加银行卡</span>
+				</div>
+				<div class="right"></div>
+			</div>
+			<div class="inReport loginP bg1">
+				<div class="left">
+					<span>免费领取万事达联名卡</span>
+				</div>
+				<div class="right"></div>
+			</div>
+		</div>
+
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var act = Request["act"];
+
+			var url = 'app/user/bankCard';
+			var data = {
+				operation: 'query',
+			};
+			var cardData;
+			deltaGoAjax(url,data,addCard);
+			function addCard(data){
+				cardData = data.data;
+				var str = '';
+				$.each(cardData,function(k,val){
+					str += '<div class="bankCard" data-userPhone="'+val.phone+'" style="background:url('+val.bgImg+') no-repeat;background-size:100% 100%;">'+
+								'<div class="top">'+
+									'<div class="logo">'+
+										'<img class="cardLogo" src="'+val.logoImg+'" alt="">'+
+									'</div>'+
+									'<div class="cardType">'+
+										'<p class="bankName">'+val.bankName+'</p>'+
+										'<p class="bankCardType">'+(val.bankCardType == 1 ? '储蓄卡' : '佣金卡')+'</p>'+
+									'</div>'+
+								'</div>'+
+								'<div class="cardNum">'+
+									'<span>****</span>'+
+									'<span>****</span>'+
+									'<span>****</span>'+
+									'<span class="cardNumLast">'+val.bankCardNumber.substr(val.bankCardNumber.length - 4)+'</span>'+
+								'</div>'+
+								'<div class="delete" data-cardNum="'+val.bankCardNumber+'"><div></div></div>'+
+							'</div>';
+				})
+				$('.cardsBox').append(str);
+			}
+
+
+			$('.cardsBox').on('click', '.bankCard', function() {
+				if(act){
+					return;
+				}
+				sessionStorage.setItem('cardInfo',JSON.stringify(cardData[$(this).index()]));
+				window.location.href = 'in_code.html?random='+random()+'&phone='+$(this).attr('data-userPhone');
+			});
+
+			var deleteShow = true;
+			var startX;
+			$('.cardsBox').on('touchstart', '.bankCard', function(even) {
+				var touch = even.originalEvent;
+				startX = touch.changedTouches[0].pageX;
+				
+			});
+
+			$('.cardsBox').on('touchend', '.bankCard', function(e) {
+				var touch = e.originalEvent;
+				endX = touch.changedTouches[0].pageX;
+				var moveX = endX - startX;
+				if(moveX < -50 && deleteShow){
+					deleteShow = !deleteShow;
+					$('.delete').show();
+					$('.bankCard').css('margin-left','-3rem');
+				}
+				if(moveX > 50 && !deleteShow){
+					deleteShow = !deleteShow;
+					$('.delete').hide();
+					$('.bankCard').css('margin-left','0rem');
+				}
+			});
+			
+			$('.cardsBox').on('click', '.delete', function(e){
+				e.stopPropagation();
+				var url = 'app/user/bankCard';
+				var data = {
+					operation: 'del',
+					bankCardNumber: $(this).attr('data-cardNum')
+				};
+				deltaGoAjax(url,data,deleteOk);
+			});
+
+			function deleteOk(data){
+				errorMsg(data.msg);
+				setTimeout(function(){
+					window.history.go(0);
+				},1000)
+			}
+
+			$('.dealP').click(function(){
+				window.location.href = 'addBankCard.html?act=add&random='+random();
+			})
+
+			var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+			$('.loginP').click(function(){
+				if(userInfo.applicationStatus == 0 || userInfo.applicationStatus == 3){
+					window.location.href = 'lianmingkashenqing1.html';
+				}else{
+					window.location.href = 'lianmingkashenqing3.html?type='+userInfo.applicationStatus;
+				}
+				
+			})
+
+     })
+	</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initail-scale=1.0, user-scalable=0, minWidt">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/productDetail_3.css">
+	<style>
+		.capacity{
+			width: 100%;
+		}
+		.shengyubox,.btn_bottom{
+			background:#FF6A20;
+			color:#fff;
+			font-weight: 500;
+		}
+	</style>
+</head>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img home" src="../images/back.png" alt="">
+			<p class="back-title-text home">智能轮计划</p>
+		</div>
+	</div>
+	<img src="../images/capacity01.jpg" alt="" class="capacity">
+	<img src="../images/capacity02.jpg" alt="" class="capacity">
+	<img src="../images/capacity03.jpg" alt="" class="capacity">
+	<img src="../images/capacity04.jpg" alt="" class="capacity">
+	<img src="../images/capacity05.jpg" alt="" class="capacity">
+	<img src="../images/capacity06.jpg" alt="" class="capacity">
+	<div style="height:2.75rem;">
+		<div class="shengyubox">
+			<p class="shengyup">剩余额度 <span class="shengyu"></span>美元</p>
+			<p class="nowDate"></p>
+		</div>
+		<div class="btn_bottom">立即购买</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+		Request = GetRequest();
+		var pid = Request["productId"];
+		var shengyu;
+		var nowDate;
+		var marketStatus;
+		$('.btn_bottom').click(function(){
+			window.location.href = '../template/buyGlodCard.html?productId='+pid+'&marketStatus='+marketStatus;
+		})
+		var url = 'app/product/getProductDetail';
+		var data = {
+			productId: pid,
+		};
+		deltaGoAjax(url,data,getProductDetail,'get');
+		function getProductDetail(data){
+			data = data.data.productInfo;
+			shengyu = data.productSurplusQuota;
+			nowDate = data.time;
+			marketStatus = data.marketStatus;
+			$('.shengyu').text(moneyToFloat(data.productSurplusQuota));
+			if(data.marketStatus == 0){
+				$('.btn_bottom').text('已售完').off('click');
+				$('.shengyu').text('0');
+			}else if(data.marketStatus == -1){
+				$('.btn_bottom').text('已兑付').off('click');
+				$('.shengyu').text('0');
+			}
+			$('.nowDate').text(data.time);
+			$('.shengyubox').click(function(){
+				window.location.href = 'capacityDetail.html?productId='+pid+'&shengyu='+shengyu+'&time='+nowDate+'&marketStatus='+marketStatus;
+			})
+		}
+	</script>
+</body>
+</html>

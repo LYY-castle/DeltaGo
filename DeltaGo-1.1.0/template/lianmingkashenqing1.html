@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<title></title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<style>
+	.box{
+		width:100%;
+		/*height:100%;*/
+		background:#11181E;
+	}
+	.box .box1{
+		width:92%;
+		margin:0 auto 0.75rem;
+		margin-top: 20px;
+	}
+	h4{
+		text-align: center;
+		font-size: 0.9rem;
+		line-height: 1.25rem;
+		color:#fff;
+		font-weight:500;
+	}
+	.title1{
+		margin-top: 0.75rem;
+	}
+	.title2{
+		margin-bottom:0.525rem;
+	}
+	.title-msg{
+		font-size: 1.5em;
+		line-height: 2.06rem;
+		text-align: center;
+	}
+	.imgBOx{
+		overflow: hidden;
+		height:auto;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-align-items: center;
+		align-items: center;
+	}
+	.imgBOx .img{
+		float:left;
+	}
+	.img img{
+		width:100%;
+		height:100%;
+	}
+	.img1{
+		width:20.8%;
+		margin-left:24%;
+	}
+	.imgLine{
+		width:1px;
+		background:#6a8790;
+		opacity: 0.5;
+		margin:0 5.6%;
+	}
+	.img2{
+		width:22.5%;
+	}
+	.img3{
+		width:83.7%;
+		margin:0.625rem auto 0;
+	}
+	.text1{
+		font-size:0.6rem;
+		line-height: 0.825rem;
+		color:#fff;
+		opacity: 0.5;
+		text-align: center;
+	}
+	.textBox{
+		width:100%;
+		background:#1D2C36;
+	}
+	.text2{
+		font-size:0.625rem;
+		color:rgba(255,255,255,1);
+		line-height:0.925rem;
+		opacity:0.8;
+		padding:0.825rem 6.666%;
+	}
+	.next{
+		width:84%;
+		height:2.25rem;
+		background:#31c3ef;
+		border-radius: 1rem;
+		text-align: center;
+		line-height: 2.25rem;
+		color:#fff;
+		font-size: 0.85rem;
+		margin:0.75rem auto 1.05rem;
+	}
+	.text3{
+		font-size: 0.5rem;
+		line-height: 0.7rem;
+		color:#fff;
+		opacity: 0.5;
+		text-align: center;
+		margin-bottom: 0.75rem;
+	}
+</style>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">万事达联名卡申请</p>
+		</div>
+	</div>
+	<div class="box">
+		<div class="box1">
+			<h4 class="title1">富民环球集团与万事达集团联袂推出</h4>
+			<h4 class="title2">「全球美元联名卡」</h4>
+			<div class="imgBOx">
+				<div class="img img1">
+					<img src="../images/master_logo_enrichglobal@2x.png" alt="">
+				</div>
+				<div class="imgLine"></div>
+				<div class="img img2">
+					<img src="../images/master_logo_master@2x.png" alt="">
+				</div>
+			</div>
+			<div class="img img3">
+				<img src="../images/master_img_card@2x.png" alt="">
+			</div>
+			<p class="text1">全球取现 | 全球支付 | 全球消费 | 全球资产</p>
+		</div>
+		<div class="textBox">
+			<p class="text2">客户通过富民环球旗下DeltaGo等系列产品的认购，所获得的收益以及赎回本金均可在DeltaGo APP 中自由选择进入富民环球联名卡，以实现资产全球化布局，并且方便您在境外的消费与支取。同时极大方便满足于子女或家人在海外的教育、生活等需求。</p>
+		</div>
+		<div class="next">立即办卡</div>
+		<p class="text3">*本活动最终解释权归DeltaGo所有</p>
+	</div>
+
+
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var imgline = $('.img1').height()*0.8;
+		$('.imgLine').height(imgline);
+
+		$('.next').click(function(){
+			window.location.href = 'lianmingkashenqing2.html';
+		})
+	</script>
+</body>
+</html>

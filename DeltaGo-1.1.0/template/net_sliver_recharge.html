@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<!-- <link rel="stylesheet" href="../css/recharge_quick.css"> -->
+	<style>
+	.remind{
+		font-size: 0.55rem;
+		color: rgba(255,255,255,0.3);
+		padding: 1rem;
+	}
+	.remind p:nth-child(2){
+		color: rgba(255,255,255,0.8);
+		margin-top: 0.5rem;
+	}
+	.recharge{
+
+		font-size: 0.65rem;
+		color: rgba(49,195,239,1);
+		margin-bottom: 1rem;
+	}
+	.rechargeTitle{
+		padding: 1rem;
+		line-height: 1rem;
+	}
+	.mbt{
+		line-height: 0;
+	}
+	.seclectBank{
+		position: relative;
+		border: 0.025rem solid rgba(49,195,239,0.51);
+		border-radius: 0.5rem;
+		width: 80%;
+		margin: 0 1rem;
+		padding: 0 0.8rem;
+	}
+	.seclectBank p{
+		line-height: 2rem;
+	}
+	.icon_pullDown,.select_pullDown{
+		position: absolute;
+		left: 15rem;
+		top: 0.85rem;
+	}
+	
+	input{
+		width: 80%;
+		background-color: rgba(255,255,255,0);
+		border: 0.025rem solid rgba(49,195,239,0.5);
+		border-radius: 0.5rem;
+		padding:0 0 0 1.7rem;  
+		line-height: 2.2rem;
+		margin: 0 0 1rem 1rem;
+		font-size: 0.75rem;
+	}
+	.mbt{
+		position: relative;
+	}
+	.dollar{
+		position: absolute;
+		left: 1.9rem;
+		top: 2.98rem;
+		line-height: 2.25rem;
+		font-size: 0.75rem;
+		color: rgba(49,195,239,1);
+	}
+
+
+	.next{
+		width: 80%;
+		display: block;
+		margin: 4rem 1.925rem 3.9rem 1.925rem;
+		text-align: center; 
+		background-color: rgba(49,195,239,1);
+		border-radius: 0.5rem;
+
+	}
+	.next span{
+		font-size: 0.85rem;
+		color: rgba(255,255,255,1);
+		text-align: center;
+		line-height: 2rem;
+	}
+	.enterPri{
+		margin-top: 0;
+		font-size: 0.55rem;
+	}
+	.bg>.recharge_box>p{
+		font-size: 0.55rem;
+		color: rgba(255,255,255,0.3);
+		line-height: 0.75rem;
+		text-align: center;
+	}
+	.seclectBankT{
+		display: none;
+	}
+	.clickz{
+		width:100%;
+		height:2rem;
+		position: absolute;
+		top:0;
+		left:0rem;
+		/*display: none;*/
+	}
+	.actImg{
+		transform: rotate(180deg);
+	}
+	.rnb{
+		font-size: 0.5rem;
+		color:rgba(255,255,255,0.5);
+		float: right;
+	}
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">网银充值</p>
+			</div>
+		</div>
+		<div class="recharge_box">
+
+
+			<div class="remind bg2">
+				<p>完成转账充值后，请您耐心等待系统消息提醒<br>网银或支付宝转账一般需要1-2个工作日</p>
+				<!-- <p>您可以在线通知客服您已汇款，请回打以下两个问题</p> -->
+			</div>
+			<div class="recharge bg">	
+				<div class="rechargeTitle">请选择银行:</div>
+				<div class="seclectBank seclectBankF">
+					<p data-type="YLBILL-NET-B2C">中国银联</p>
+					<img src="../images/notice_icon_down@2x.png" alt="" class="icon_pullDown selectF_pullDown">
+					<div class="clickz clickF"></div>
+				</div>
+				<br>
+				<div class="seclectBank seclectBankT">
+					<img src="../images/notice_icon_down@2x.png" alt="" class="icon_pullDown selectT_pullDown">
+					<div class="clickz clickT"></div>
+				</div>
+			</div>
+			<div class="recharge bg1 mbt">	
+				<div class="rechargeTitle">请输入汇款金额:<span class="rnb">当前美元汇率换算人民币为：￥<span class="rmbNum"></span></span></div>
+				<input type="number" class="enterPri" placeholder="请输入您的汇款金额">
+				<span class="dollar">$</span>
+			</div>
+			<p>* 相同信息提交一次即可，请勿重复提交。</p>
+			<a href="#" class="next">
+				<span>提交汇款信息</span>
+			</a>
+		</div>
+		<div class="recgargeOk">
+
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			/*******汇率******/
+			var rate;
+			deltaGoAjax('app/asset/getExchangeRate',{},getExchangeRate);
+			function getExchangeRate(data){ 
+				rate = (data.data.sellingEarn/100).toFixed(4); 
+			}
+
+			var icon_flag = true;
+			var select_flag = true;
+			// var data;
+			// deltaGoAjax('app/recharge/getname', {}, getBankType);
+			// function getBankType(result){
+			// 	data = result.data;
+			// 	selectbanks();
+			// }
+			// function selectbanks(){
+			// 	$.each(bankData,function(k,val){
+			// 		if(val.name == $('.seclectBankF p').eq(0).text()){
+			// 			if(!val.childrens){
+			// 				$('.seclectBankT').hide().find('p').remove();
+			// 				return;
+			// 			}
+			// 			$('.seclectBankT').show();
+			// 			$('.selectT_pullDown').addClass('actImg');
+			// 			var str = '';
+			// 			$.each(val.childrens,function(i,value){
+			// 				str += '<p data-type="'+value.type+'">'+value.name+'</p>';
+			// 			})
+			// 			$('.seclectBankT p').remove();
+			// 			$('.seclectBankT').append(str);
+			// 		}
+			// 	})
+			// }
+
+			$('.selectF_pullDown').click(function(){
+				$('.clickF').show();
+				// if(icon_flag){
+					
+				// }else{
+				// 	icon_flag = !icon_flag;
+					var str = '<p data-type="'+$('.seclectBankF p').eq(0).attr('data-type')+'">'+$('.seclectBankF p').eq(0).text()+'</p>';
+					$('.seclectBankF p').remove();
+					$('.seclectBankF').prepend(str);
+				// }
+			})
+
+			// $('.selectT_pullDown').click(function(){
+			// 	$('.clickT').show();
+			// 	// if(select_flag){
+			// 	// 	select_flag = !select_flag;
+					
+			// 	// }else{
+			// 	// 	select_flag = !select_flag;
+			// 		var str = '<p>'+$('.seclectBankT p').eq(0).text()+'</p>';
+			// 		$('.seclectBankT p').remove();
+			// 		$('.seclectBankT').prepend(str);
+			// 	// }
+			// })
+			
+			$('.clickz').click(function(){
+				$(this).hide();
+				$(this).siblings('img').addClass('actImg');
+				if($(this).hasClass('clickF')){
+
+					// icon_flag = !icon_flag;
+					var str = '';
+					$.each(bankData,function(k,val){
+						if(val.name == $('.seclectBankF p').eq(0).text()){
+							return true;
+						}
+						str += '<p data-type="'+val.type+'">'+val.name+'</p>';				
+					})
+					$('.seclectBankF').append(str);
+				}else{
+					selectbanks();
+				}
+			})
+
+			$('.seclectBankF').on('click','p',function(){
+				$(this).siblings('img').removeClass('actImg');
+				// icon_flag = !icon_flag;
+				$('.clickF').show();
+				var str = '<p data-type="'+$(this).attr('data-type')+'">'+$(this).text()+'</p>';
+				$('.seclectBankF p').remove();
+				$('.seclectBankF').prepend(str);
+				// selectbanks();
+			})
+
+			// $('.seclectBankT').on('click','p',function(){
+			// 	$(this).siblings('img').removeClass('actImg');
+			// 	$('.clickT').show();
+			// 	// select_flag = !select_flag;
+			// 	var str = '<p data-type="'+$(this).attr('data-type')+'">'+$(this).text()+'</p>';
+			// 	// var str = '<p>'+$(this).text()+'</p>';
+			// 	$('.seclectBankT p').remove();
+			// 	$('.seclectBankT').prepend(str);
+				
+			// })
+
+			var rmbNum;
+			$('.enterPri').keyup(function(){
+				rmbNum = rate*$('.enterPri').val();
+				rmbNum = rmbNum.toFixed(2);
+				$('.rmbNum').text(moneyToFloat(rmbNum)); //人民币
+			})
+
+			$('.next').click(function(){
+				if($('.enterPri').val() == ''){
+					errorMsg('请输入汇款金额');
+					return;
+				}
+				var type = $('.seclectBankF p').eq(0).attr('data-type');
+				var url = 'app/eCurrPay/doPay';
+				var data = {
+					payMoney: rmbNum,
+					payDollar: $('.enterPri').val(),
+					payChannel: type
+				};
+				// console.log(data)
+				deltaGoAjax(url,data,ok);
+			})
+			function ok(data){
+				var str = data.data.slice(1,7); 
+				if(str == 'script'){
+					var url = data.data.split("\"")[1];
+					window.location.href = url;
+				}else{
+					$('.recharge_box').hide();
+					$('.recgargeOk').html(data.data);
+				}
+				
+				// errorMsg(data.msg);
+				// setTimeout(function(){
+				// var dataMsg = encodeURI(encodeURI(data.data));
+				// window.location.href = 'net_sliver_recharge_ok.html?html='+dataMsg;
+				// },2000)
+			}
+
+
+			var bankData = [
+				{
+					id: 1,
+					type: 'YLBILL-NET-B2C',
+					name: '中国银联'
+				},{
+					id: 2,
+					type: 'ICBC-NET-B2C',
+					name: '工商银行'
+				},{
+					id: 3,
+					type: 'CMBCHINA-NET-B2C',
+					name: '招商银行'
+				},{
+					id: 4,
+					type: 'ABC-NET-B2C',
+					name: '中国农业银行'
+				},{
+					id: 5,
+					type: 'CCB-NET-B2C',
+					name: '建设银行'
+				},{
+					id: 6,
+					type: 'BCCB-NET-B2C',
+					name: '北京银行'
+				},{
+					id: 7,
+					type: 'BOCO-NET-B2C',
+					name: '交通银行'
+				},{
+					id: 8,
+					type: 'CIB-NET-B2C',
+					name: '兴业银行'
+				},{
+					id: 9,
+					type: 'CMBC-NET-B2C',
+					name: '中国民生银行'
+				},{
+					id: 10,
+					type: 'CEB-NET-B2C',
+					name: '光大银行'
+				},{
+					id: 11,
+					type: 'BOC-NET-B2C',
+					name: '中国银行'
+				},{
+					id: 12,
+					type: 'PINGANBANK-NET-B2C',
+					name: '平安银行'
+				},{
+					id: 13,
+					type: 'ECITIC-NET-B2C',
+					name: '中信银行'
+				},{
+					id: 14,
+					type: 'SDB-NET-B2C',
+					name: '深圳发展银行'
+				},{
+					id: 15,
+					type: 'GDB-NET-B2C',
+					name: '广发银行'
+				},{
+					id: 16,
+					type: 'SHB-NET-B2C',
+					name: '上海银行'
+				},{
+					id: 17,
+					type: 'SPDB-NET-B2C',
+					name: '上海浦东发展银行'
+				},{
+					id: 18,
+					type: 'POST-NET-B2C',
+					name: '中国邮政'
+				},{
+					id: 19,
+					type: 'BJRCB-NET-B2C',
+					name: '北京农村商业银行'
+				},{
+					id: 20,
+					type: 'HXB-NET-B2C',
+					name: '华夏银行'
+				}
+			]
+		})
+	</script>
+</body>
+</html>

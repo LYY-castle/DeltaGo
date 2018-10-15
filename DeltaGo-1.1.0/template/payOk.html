@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.ok{
+			position: absolute;
+			right: 1rem;
+			top: 0;
+			font-size: 0.7rem;
+			color: rgba(49,195,239,1);
+		}
+		.icon_paySuccess{
+			width: 4rem;
+			height: 4rem;
+			margin: 10rem auto 0.75rem;
+		}
+		.text{
+			text-align: center;
+			font-size: 0.65rem;
+			line-height: 1.625rem;
+			color: rgba(255,255,255,0.8);
+		}
+		.money{
+			font-size: 1.15rem;
+			color: rgba(255,255,255,1);
+			margin-bottom: 0.75rem;
+			text-align: center;
+		}
+		.color1{
+			color: rgba(49,195,239,1);
+		}
+		.color2{
+			color: rgba(255,137,76,1);
+		}
+		.color3{
+			color: rgba(255,255,255,0.5);
+		}
+		
+		
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg2">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">充值成功</p>
+			</div>
+		</div>
+		<img class="icon_paySuccess" src="../images/payok_icon_success@2x.png" alt="">
+		<p class="text">充值成功<span class="productName"></span>！</p>
+		<p class="text"><span class="color2 time">5</span><span>秒后跳转到首页</span></p>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var time = 5;		
+		var timerId = setInterval(function(){
+			$(".time").text(time);
+			time --;
+			if(time == -1){
+				window.location.href = '../index.html?act=2'
+			}
+		},1000);
+	</script> 
+</body>
+</html>

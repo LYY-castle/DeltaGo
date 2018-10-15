@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.money,.money>span{
+			font-size: 1.8rem;
+			color: rgba(255,137,76,1);
+			margin: 2rem auto;
+			text-align: center; 
+		}
+		.code_text{
+			font-size: 0.6rem;
+			color: rgba(255,255,255,0.5);
+			text-align: center;
+		}
+		.in_code{
+			padding: 0 1rem;
+			margin: 1rem auto;
+			text-align: center; 
+		}
+		input{
+			border: 0.025rem solid rgba(49,195,239,0.5);
+			border-radius: 0.5rem;
+			text-indent: 0.5rem;
+			font-size: 0.85rem;
+			line-height: 2.5rem;
+			background: 0;
+			width:55%;
+		}
+		.in_code .time{
+			background-color: rgba(49,195,239,1);
+			border-radius: 0.5rem;
+			padding:0.6rem 0.9rem;
+			line-height: 1rem;
+		}
+		.in_code .time>span{
+			/*text-align: center;*/
+			font-size: 0.7rem;
+			color: rgba(255,255,255,1);
+			line-height: 2rem;
+		}
+		.in_code .time .resend{
+			width: 2rem;
+			text-align: center;
+		}
+		.next{
+			width: 80%;
+			display: block;
+			margin: 3.75rem auto;
+			text-align: center; 
+			background-color: rgba(49,195,239,1);
+			border-radius: 0.5rem;
+
+		}
+		.next span{
+			font-size: 0.85rem;
+			color: rgba(255,255,255,1);
+			text-align: center;
+			line-height: 3rem;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg2">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">输入短信验证码</p>
+			</div>
+		</div>
+		<div class="money">¥<span>0.00</span>
+		</div>
+		<div class="code_text">验证码已发送至手机号<span class="phoneF">156</span>****<span class="phoneL">2878</span>
+		</div>
+		<div class="in_code">
+			<input type="number" class="codeNum">
+			<span class="time">
+				<span class="s">60<span class="resend">秒后重发</span></span>
+			</span>
+		</div>
+		<a href="#" class="next"><span>确认支付</span></a>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var phone = Request["phone"];
+			var cardInfo = JSON.parse(sessionStorage.getItem('cardInfo'));
+			var rmb = sessionStorage.getItem('rmb');
+			var rechargeMoney = sessionStorage.getItem('rechargeMoney');
+			$('.money').text('￥'+rmb);
+			$('.phoneF').text(phone.substr(0,3));
+			$('.phoneL').text(phone.substr(7,10));
+			seccode();
+			var listId;
+			var orderNo;
+			function time(data){
+				listId = data.data.listId;
+				orderNo = data.data.orderNumber;
+				var time = 60;
+				$(".time").off('click');
+				var timerId = setInterval(function(){
+					$(".s").text(time + "秒后重发");
+					time --;
+					if(time == -1){
+						clearInterval(timerId);
+						flag = true;
+						secCodeClick();
+					};
+				},1000);
+
+			}
+			function secCodeClick(){
+				$('.time').click(function(){
+					seccode();
+				})
+			}
+			function seccode(){
+				var url = 'app/quickPay/doPay';
+				var data = {
+					bankCardNumber: cardInfo.bankCardNumber,
+					bankCardType: cardInfo.bankCardType,
+					cardholderName: cardInfo.cardholderName,
+					bank: cardInfo.bank,
+					phone: phone,
+					idNo: cardInfo.idNo,
+					payMoney: rmb,
+					payDollar: rechargeMoney,
+				};
+				deltaGoAjax(url,data,time);
+			}
+
+			// $('.next').click(function(){
+			// 	nextClick();
+			// })
+			$('.codeNum').change(function(){
+				$('.next').click(function(){
+					nextClick();
+				})
+			})
+			function nextClick(){
+				$(".next").off('click');
+				if($('.codeNum').val() == ''){
+					errorMsg('请输入验证码');
+					return;
+				}
+				var url2 = 'app/quickPay/payConfirm';
+				var data2 = {
+					listId: listId,
+					code: $('.codeNum').val(),
+				};
+				deltaGoAjax(url2,data2,payOk);
+			}
+			function payOk(data){
+				var url3 = 'app/quickPay/queryWxPay';
+				var data3 = {
+					orderNo: orderNo,
+					code: $('.codeNum').val(),
+				};
+				deltaGoAjax(url3,data3,payEndOk);							
+			}
+			function payEndOk(data){
+				errorMsg(data.msg);
+				setTimeout(function(){
+					window.location.href = '../index.html?act=2';
+				},2000)	
+			}
+		})
+	</script>
+</body>
+</html>

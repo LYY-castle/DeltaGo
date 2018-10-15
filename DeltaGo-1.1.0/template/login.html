@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.icon_choice{
+			left: 0;
+			top: 7rem;
+		}
+		.icon_choice2{
+			left: 0;
+			top: 7rem;
+		}	
+		.r_choice{
+			display: inline-block;
+			width:0.6rem;
+			height:0.6rem;
+			line-height: 0.6rem;
+			font-size: 0.6rem;
+			text-align: center;
+			border:1px solid #31C3EF;
+			color:#31C3EF;
+			/*border-radius: 0.4rem;*/
+			/*color:rgba(49,195,239,0);*/
+		}	
+		.agreeAct{
+			color:rgba(49,195,239,0);
+		}
+		.icon_psw{
+			top:4rem;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="bgbox">
+		<div class="back-title-box">
+			<div class="back-title">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">登录</p>
+			</div>
+		</div>
+		<form action="#">
+			<span class="icon_phone"></span>
+			<span class="icon_psw"></span>
+			<input type="text" placeholder="手机号码" class="phoneNumber"><br/>
+			<input type="password" placeholder="密码" class="password">
+			<p class="choice">
+				<span class="r_choice">√</span> <span>记住密码</span>
+				<a href="loginPhone.html" class="seccode">验证码登录</a>
+			</p>
+			<a href="#" class="btn login"><span>登录</span></a>
+		</form>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/login.js"></script>
+</body>
+</html>

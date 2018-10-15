@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<style>
+	html,body{
+		width:100%;
+		height:100%;
+		margin:0;
+		padding:0;
+		/*font-size: 16px;*/
+		color:#fff;
+	}
+	body{
+		background:#11181E;
+	}
+	span,p,h4{
+		margin:0;
+		padding:0;
+	}
+	img{
+		display: block;
+		width:100%;
+	}
+	.title{
+		font-size: 1.4rem;
+		line-height:1.95rem;
+		letter-spacing: 0.125rem;
+		color:#B79D52;
+		text-align: center;
+		margin-top: 1.4rem;
+	}
+	.msg{
+		font-size: 0.9rem;
+		line-height: 2.5rem;
+		padding-left: 47.3%;
+		color: #fff;
+		margin:0.9rem 0 0.625rem 0;
+	}
+	.inBg{
+		width:80%;
+		margin:0 auto;
+		text-align: center;
+		color:#fff;
+		position:relative;
+	}
+	.inBtn{
+		position: absolute;
+		width:33.333%;
+		height:41.666%;
+		left:50%;
+		top:50%;
+		transform: translate(-50%,-57%);
+		border-radius: 200px;
+	}
+	.text{
+		width:76%;
+		font-size: 0.6rem;
+		line-height:0.9rem;
+		color:#fff;
+		opacity: 0.5;
+		margin:0.425rem auto 2.225rem;
+	}
+	.bottom{
+		text-align: center;
+		color: #fff;
+		opacity: 0.3;
+		font-size: 0.55rem;
+		line-height:0.75rem;
+	}
+	.zz{
+		width:100%;
+		height:100%;
+		background: rgba(0,0,0,0.5);
+		position: absolute;
+		top:0;
+		left:0;
+		z-index: 10000;
+		display: none;
+	}
+	.shareBox{
+		position: fixed;
+		bottom:0;
+		width:100%;
+		height:7rem;
+		display: none;
+		justify-content:space-around;
+		align-items: center;
+		font-size: 0.6rem;
+		line-height: 0.825rem;
+		color:rgba(255,255,255,0.5);
+		z-index: 10000;
+	}
+	.shareBox img{
+		width:2.5rem;
+		margin:0 auto 0.75rem;
+	}
+
+</style>
+
+<body class="SpecialShare">
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img home" src="../images/back.png" alt="">
+			<p class="back-title-text">邀请有礼</p>
+		</div>
+	</div>
+	<div class="title">
+		<p>自古深情留不住</p>
+		<p>总有财富得人心</p>
+	</div>
+	<div class="msg">一言不合就领钱！</div>
+	<div class="inBg">
+		<img src="../images/invite_img_send@2x.png" alt="">
+		<div class="inBtn" ></div>
+	</div>
+	<div class="text">
+		邂逅「得够」，发现惊喜。每成功邀请一位好友注册DeltaGo，即可获得随机不等的美元现金奖励，直接进入会员个人账户！连接MasterCard联名账户还可实现全球消费与取现。同时邀请的好友完成入金后，还可获得现金奖励及各类奖券。智能嘉年华、财富自由行！立刻开启智能财富体验之旅。
+	</div>
+	<div class="bottom" >
+		*本活动最终解释权归DeltaGo所有
+	</div>
+
+	<!-- <div class="zz"></div>
+	<div class="shareBox bg2">
+		<div class="qq">
+			<img src="../images/share_icon_qq@2x.png" alt="">
+			<span>分享到QQ</span>
+		</div>
+		<div class="wx-pengyouquan">
+			<img src="../images/share_icon_circle@2x.png" alt="">
+			<span>分享到朋友圈</span>
+		</div>
+		<div class="wx-friends">
+			<img src="../images/share_icon_wechat@2x.png" alt="">
+			<span>分享到微信</span>
+		</div>
+	</div> -->
+<script src="../lib/jquery-1.12.2.js"></script>
+<script src="../js/common.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+$(function(){
+	// $('.inBtn').click(function(){
+	// 	$('.zz').show();
+	// 	$('.shareBox').css('display','flex');
+	// })
+	// $('.zz').click(function(){
+	// 	$('.zz,.shareBox').hide();
+	// })
+	/********分享*********/
+	var invitCode = localStorage.getItem('invitCode');
+	var url = 'app/wxShare/getShare';
+	var data = {
+		url: location.href.split('#')[0],
+	};
+
+
+	deltaGoAjax(url,data,getShare);
+	function getShare(data){
+		wx.config({
+            debug: false,
+            appId: 'wx9fdc8490ac670613',
+            timestamp:data.data.timestamp,
+            nonceStr: data.data.nonceStr,
+            signature: data.data.signature,
+            jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ'
+            ]
+        });
+
+        /*定义分享内容*/
+		var title  = 'DeltaGo';    //标题
+		var desc   = '人是铁，钱是钢，一天不赚憋得慌。';    //内容
+		var link   = 'http://game.enrich-global.com?invitCode='+invitCode;  //链接
+		var imgUrl = 'http://game.enrich-global.com/img/share_logo.jpg'; //图片地址
+
+		wx.ready(function(){
+			//QQ
+			wx.onMenuShareQQ({
+	            title: title,   //标题
+	            link: link,     //链接
+	            desc: desc,
+	            shareUrl: link,
+	            imgUrl: imgUrl, //图片地址
+	            success: function (res) {
+
+	            },
+	            cancel: function (res) {
+
+	            }
+	        });
+
+	        //朋友圈
+	        wx.onMenuShareTimeline({
+	            title: title,   //标题
+	            link: link,     //链接
+	            imgUrl: imgUrl, //图片地址
+	            success: function (res) {
+
+	            },
+	            cancel: function (res) {
+
+	            }
+	        });
+
+	        //发给好友
+	        wx.onMenuShareAppMessage({
+	            title: title,   //标题
+	            desc: desc,     //内容
+	            link: link,     //链接
+	            imgUrl: imgUrl, //图片地址
+	            success: function (res) {
+
+	            },
+	            cancel: function (res) {
+
+	            }
+	        });
+		})
+	}
+
+})
+	
+</script>
+</body>
+</html>

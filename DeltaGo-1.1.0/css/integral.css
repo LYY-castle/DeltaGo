@@ -1,0 +1,42 @@
+body{
+	background:#132028;
+}
+.nav{
+	width:92%;
+	height:1.25rem;
+	margin:0.25rem auto 0.5rem;
+	/*display: flex;
+	flex-wrap:nowrap;*/
+	border:0.05rem solid rgba(255,255,255,0.5);
+	border-radius: 0.5rem;
+	position: relative;
+}
+.nav div{
+	width:33%;
+	/*border:0.05rem solid #132028;*/
+	border-radius: 0.5rem;
+	font-size:0.6rem;
+	line-height: 1.25rem;
+	color:rgba(255,255,255,0.5);
+	text-align: center;
+	position:absolute;
+}
+.two-nav{
+	left:33%;
+}
+.nav .last-nav{
+	left:66.5%;
+}
+.nav div:last-child{
+	float:right;
+}
+.nav .active{
+	color:#31C3EF;
+	border:0.05rem solid #31C3EF;
+	margin-top: -0.05rem;
+	margin-left: -0.05rem;
+	/*padding:0.05rem 0;*/
+}
+.nav .last-nav.active{
+	margin-left: 0.01rem;
+}

@@ -1,0 +1,272 @@
+html,body{
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	/*font-size: 16px;*/
+	color:#fff;
+	text-align: center;
+}
+body{
+	background:#1D2C36;
+}
+span,p,h4,tr,td{
+	margin:0;
+	padding:0;
+}
+img{
+	display: block;
+	width:100%;
+}
+a{
+	text-decoration: none;
+}
+.bg1{
+	background:rgba(19,32,40,1);
+}
+.area{
+	width:100%;
+}
+.padding-15{
+	padding:0 4%;
+}
+
+.dashed{
+	/*height:1px;*/
+	border:none;
+	border-top:0.05rem dashed #fff;
+	opacity: 0.5;
+}
+.solid{
+	/*height:1px;*/
+	border:none;
+	border-top:0.05rem solid #fff;
+	opacity: 0.3;
+}
+
+.green{
+	color:#65E157;
+}
+.FF894C{
+	color:#FF894C;
+}
+.blue{
+	color:#31C3EF;
+}
+table{
+	text-align: left;
+	font-size: 0.625rem;
+	width:100%;
+}
+.area{
+	padding:0 0 0.7rem 0;
+}
+
+
+.area1 .logo{
+	width:4.2rem;
+	margin:0.7rem auto 0.625rem;
+}
+.area1 .name{
+	font-size: 0.9rem;
+	line-height: 1.25rem;
+}
+.area1 .name_ch{
+	font-size: 0.8rem;
+	line-height: 1.125rem;
+	margin-bottom: 0.5rem;
+}
+.area1 .type_name{
+	font-size: 0.6rem;
+	line-height: 0.825rem;
+}
+.area1 table td:first-child{
+	color:#65E157;
+}
+.area1 table td{
+	line-height: 1.145rem;
+}
+.area1 table td:last-child{
+	opacity: 0.8;
+}
+
+.title{
+	font-size: 0.8rem;
+	line-height: 1.125rem;
+	color:#31C3EF;
+	padding:0.5rem 0;
+	text-align: left;
+}
+.echarts1{
+	width:92%;
+	/*height:13rem;*/
+	padding-bottom: 0.5rem;
+}
+
+.ec-title{
+	text-align: left;
+	font-size: 0.6rem;
+	margin-bottom:0.5rem;
+}
+
+
+.table2,.data-title{
+	margin:1rem 0 0 0;
+}
+.table2 tr,.table3 tr{
+	line-height: 1.375rem;
+}
+
+.table2 tr td,.table4 tr td{
+	border-bottom:0.05rem solid rgba(101,225,87,0.5);
+}
+.top-border td{
+	border-top:0.05rem solid rgba(101,225,87,0.5);
+}
+
+.table3{
+	margin:0.3rem 0 1rem 0;
+}
+
+.table3 tr td,.table5 tr td,.area5-table tr td{
+	border-bottom:0.05rem solid rgba(255,255,255,0.1);
+}
+table .bottom-border td{
+	border-bottom:0.05rem solid rgba(101,225,87,0.5);
+}
+.table3 tr td:last-child{
+	text-align: right;
+}
+
+.table3 td,.table4 td{
+	font-size: 0.6rem;
+	line-height: 1.325rem;
+}
+
+.text-title{
+	float: left;
+	font-size: 0.7rem;
+	line-height: 2rem;
+}
+.time{
+	float: right;
+	font-size: 0.6rem;
+	line-height: 2rem;
+}
+.table4{
+	margin:0 0 1rem 0;
+}
+
+
+.bili{
+	width:100%;
+	overflow: hidden;
+	height:auto;
+}
+.yinli{
+	width:70%;
+	height:1.75rem;
+	background:#00A7FF;
+}
+.kuishun{
+	width:30%;
+	height:1.75rem;
+	background:#E60013;
+}
+.left{
+	float:left;
+	color:#00A7FF;
+}
+.right{
+	float:right;
+	color:#E60013;
+}
+.bili .text{
+	font-size: 0.6rem;
+	line-height: 1rem;
+}
+.zongjiaoyi{
+	text-align: left;
+	font-size: 0.7rem;
+	line-height: 1rem;
+}
+.msgtext{
+	text-align: left;
+	color:#fff;
+	opacity: 0.8;
+	font-size: 0.6rem;
+	line-height: 0.825rem;
+}
+
+
+.fenggexiangtitle{
+	color:#fff;
+	font-size:0.7rem;
+	line-height: 1rem;
+	text-align: left;
+	margin-bottom: 0.5rem;
+}
+.femggexiangbox{
+	overflow: hidden;
+	height:auto;
+}
+.femggexiangL{
+	width:9.7rem;
+	float:left;
+}
+.jiugongge div{
+	float:left;
+	width:2.5rem;
+	height:2.5rem;
+	border:0.05px solid #31C3EF;
+	color:rgba(255,255,255,0.8);
+	font-size: 0.6rem;
+}
+.jiugongge div:last-child{
+	width:1.8rem;
+	border:none;
+	line-height:2.5rem; 
+}
+.femggexiangL .jiugongge-msg div{
+	float:left;
+	border:none;
+	line-height: 1.325rem;
+	height:1.5rem;
+}
+.jiugongge .activeB{
+	background:#31C3EF;
+}
+.jiugongge .activeT{
+	color:#31C3EF;
+}
+.femggexiangR{
+	width:7.55rem;
+	float:right;
+	color:rgba(255,255,255,0.8);
+	font-size: 0.6rem;
+	line-height: 0.95rem;
+}
+
+.area5-table table{
+	font-size: 0.7rem;
+	line-height: 1.5rem;
+	color:rgba(255,255,255,0.8);
+	border-top: 0.05rem solid rgba(101,225,87,0.5);
+}
+.area5-table table tr td:first-child{
+	text-align: left;
+}
+.area5-table table tr td:last-child{
+	text-align: right;
+}
+.tipMsg{
+	font-size: 0.6rem;
+	line-height: 1.075rem;
+	color:rgba(255,255,255,0.8);
+	text-align: left;
+}
+.tipMsg>.green{
+	font-size: 0.7rem;
+	line-height: 1.5rem;
+	margin-top: 0.25rem;
+}

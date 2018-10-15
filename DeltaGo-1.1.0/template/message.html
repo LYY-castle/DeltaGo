@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/message.css">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="bg3">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">消息</p>
+			</div>
+		</div>
+		<div class="message">
+			<div class="single_message bg2">
+				<div class="img_border">
+					<img src="../images/news_icon_deal1@2x.png" alt="">
+				</div>
+				<p class="msg_title">交易动态</p>
+				<!-- <p class="msg_content">暂无交易动态</p> -->
+			</div>
+			<div class="single_message">
+				<div class="img_border">
+					<img src="../images/news_icon_recharge@2x.png" alt="">
+				</div>
+				<p class="msg_title">充值通知</p>
+				<!-- <p class="msg_content">暂无交易动态</p> -->
+			</div>
+			<div class="single_message bg2">
+				<div class="img_border">
+					<img src="../images/news_icon_withdraw@2x.png" alt="">
+				</div>
+				<p class="msg_title">提现通知</p>
+				<!-- <p class="msg_content">暂无提现通知</p> -->
+			</div>
+			<div class="single_message">
+				<div class="img_border">
+					<img src="../images/news_icon_commission@2x.png" alt="">
+				</div>
+				<p class="msg_title">佣金收入</p>
+				<!-- <p class="msg_content">暂无佣金收入通知</p> -->
+			</div>
+			<div class="single_message bg2">
+				<div class="img_border">
+					<img src="../images/news_icon_transfer@2x.png" alt="">
+				</div>
+				<p class="msg_title">转入余额</p>
+				<!-- <p class="msg_content">暂无转入余额通知</p> -->
+			</div>
+			<div class="single_message">
+				<div class="img_border">
+					<img src="../images/news_icon_announce@2x.png" alt="">
+				</div>
+				<p class="msg_title">系统公告</p>
+				<!-- <p class="msg_content">暂无系统公告</p> -->
+			</div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			$('.single_message').click(function(){
+				window.location.href ='dynamicDetail.html?type='+$(this).index();
+				
+			})
+		})
+	</script>
+</body>
+</html>

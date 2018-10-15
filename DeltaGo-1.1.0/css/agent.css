@@ -1,0 +1,69 @@
+.agents .single_agent{
+	position: relative;
+	padding: 1rem 0.75rem;
+}
+.single_agent .img_border{
+	position: absolute;
+	left: 0.8rem;
+	top: 0.55rem;
+	border: 0.1rem solid rgba(153,153,153,1);
+	border-radius: 3.5rem;
+	overflow: hidden;
+}
+.single_agent .img_border img{
+	width: 3.3rem;
+	height: 3.3rem;
+	background-size: 100% 100%;
+}
+.single_agent p{
+	margin-left: 4rem;
+	font-size: 0.55rem;
+	color: rgba(255,255,255,0.5);
+}
+.single_agent .my_name{
+	font-size: 0.8rem;
+	color: rgba(49,195,239,1);
+}
+
+.add_agent{
+	position: relative;
+	padding: 1.5rem 0.75rem;
+	margin-top: 0.45rem;
+}
+
+ .add_agent .img_border{
+	position: absolute;
+	left: 0.8rem;
+	top: 0.65rem;
+	border: 0.025rem solid #2EB5DF;
+	border-radius: 3.5rem;
+}
+.add_agent img{
+	width: 1.6rem;
+	height: 1.6rem;
+	background-size: 100% 100%;
+	margin: 0.85rem;
+}
+.add_agent p{
+	margin-left: 4rem;
+}
+.add_agent .more{
+	font-size: 0.7rem;
+	color: #FFFFFF;
+}
+.add_agent .click{
+	font-size: 0.6rem;
+	color: rgba(255,255,255,0.5);
+}
+.dollar{
+	position: absolute;
+	top: 1.8rem;
+	right: 1rem;
+	font-size: 0.8rem;
+	color: rgba(255,137,76,1);
+}
+
+
+
+
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel=stylesheet href="../css/common.css">
+	<style>
+	.save{
+		position: absolute;
+		left: 16.35rem;
+		top: 0.55rem;
+		color: rgba(49,195,239,1);
+		font-size: 0.7rem;
+		line-height: 1rem;
+	}
+	input::-webkit-input-placeholder{
+		color: rgba(255,255,255,0.5);
+	}
+	input{
+		width: 80%;
+		height: 2rem;
+		background: none;
+		text-indent: 0.5rem;
+	}
+	.card_number{
+		display: inline-block;
+		font-size: 0.75rem;
+	}
+	.c1,.c2{
+		padding-left: 1rem;
+		line-height: 2rem;
+		font-size: 0.5rem;
+		color: rgba(49,195,239,1);
+	}
+	.c2{
+		position: relative;
+	}
+
+	.icon_into{
+		width: 0.5rem;
+		height: 1.2rem;
+		background: url('../images/icon_seedetail@2x.png');
+		background-size: 100% 100%;
+		position: absolute;
+		left: 16.8rem;
+		top: 8.8rem;
+	}
+	.male{
+		margin-right: 12rem;
+	}
+	.radio{
+		display: inline-block;
+		width:0.6rem;
+		height:0.6rem;
+		border:0.05rem solid rgba(255,255,255,0.5);
+		border-radius: 0.6rem;
+	}
+	.activeS{
+		background:#31C3EF;
+		border:none;
+		border:0.05rem solid #31C3EF;
+	}
+	.sex{
+		display: inline-block;
+	}
+</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title" bg1>
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">完善资料</p>
+				<span class="save">保存</span>
+			</div>
+		</div>
+		<div class="bg2 c1">
+			<span class="card_number">昵称</span>
+			<input type="text" class="bankType" placeholder="英文不超过14个字母或中文不超过7个汉字"/>
+		</div>
+		<div class="bg1 c1">
+			<span class="card_number">年龄</span>
+			<input type="text" class="age"/>
+		</div>
+		<div class="bg2 c1">
+			<span class="card_number male">性别</span>
+			<span class="radio activeS select1" data-id="1"></span>&nbsp;<span class="sex select1">男</span>&nbsp;&nbsp;
+			<span class="radio select2" data-id="2"></span>&nbsp;<span class="sex select2">女</span>
+		</div>
+		<a href="#" class="idInsure">
+			<div class="bg1 c1">
+				<span class="card_number">身份认证</span>
+				<input type="text" disabled placeholder="使用身份证或护照进行认证" />
+				<span class="icon_into"></span>
+			</div>
+		</a>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$('.select1').click(function(){
+			$('.radio').removeClass('activeS');
+			$('.radio').eq(0).addClass('activeS');
+		})
+		$('.select2').click(function(){
+			$('.radio').removeClass('activeS');
+			$('.radio').eq(1).addClass('activeS');
+		})
+		var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		$('.bankType').val(userInfo.userNickname || '');
+		$('.age').val(userInfo.userAge || '');
+		if(userInfo.userGender == 2){
+			$('.radio').removeClass('activeS');
+			$('.radio').eq(1).addClass('activeS');
+		}
+		$('.save').click(function(){
+			if($('.bankType').val() == '' || $('.age').val() == ''){
+				errorMsg('请完善所有信息');
+				return;
+			}
+			var url = 'app/user/updateUserInfo';
+			var data = {
+				userNickname: $('.bankType').val(),
+				userAge: $('.age').val(),
+				userGender: $('.activeS').attr('data-id')
+			};
+			deltaGoAjax(url,data,ok);
+		})
+		function ok(data){
+			errorMsg('保存成功');
+			setTimeout(function(){
+				window.location.href = '../index.html?act=2'; 
+			},2000)
+		}
+
+		$('.idInsure').click(function(){
+			if(userInfo.auditStatus == 0){
+				window.top.location = '../template/idInsure.html?act=1';
+			}else if(userInfo.auditStatus == 1 || userInfo.auditStatus == 3 || userInfo.auditStatus == 2){
+				window.top.location = '../template/idInsureDuring.html?status='+userInfo.auditStatus+'&auditReason='+userInfo.auditReason;
+			}
+		})
+	</script>
+</body>
+</html>

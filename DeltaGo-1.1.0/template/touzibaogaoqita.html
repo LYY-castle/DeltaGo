@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<title></title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/touzibaogao.css">
+</head>
+<style>
+	
+</style>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">投资报告</p>
+		</div>
+	</div>
+	<div class="area area1">
+		<div class="logo">
+			<img src="../images/investmentreport_logo_deltago@2x.png" alt="">
+		</div>
+		<div class="name_en name">Investment Report</div>
+		<div class="name_ch name">投资报告</div>
+		<div class="type_name green">爱智选</div>
+		<hr class="dashed">
+		<div class="table1 padding-15">
+			<table>
+				<tr>
+					<td>产品组别：</td>
+					<td class="table1_class">
+						<span>债券型智能投资组合</span>
+					</td>
+				</tr>
+				<!-- <tr>
+					<td>指数：</td>
+					<td class="table1_zhishu">
+						<span>US Dollar Index & Reg</span>
+					</td>
+				</tr> -->
+				<tr>
+					<td>市场：</td>
+					<td class="table1_shichang">
+						<span>全球</span>
+					</td>
+				</tr>
+				<tr>
+					<td>产品名称：</td>
+					<td class="table1_name">
+						<span>爱智选（AI Gifted Choice）</span>
+					</td>
+				</tr>
+				<tr>
+					<td>产品成立日期：</td>
+					<td class="table1_date">
+						<span>2014-9-15</span>
+					</td>
+				</tr>
+				<tr>
+					<td>经理人：</td>
+					<td class="table1_people">
+						<span>Geoff Hitchin / Richard Hallett</span>
+					</td>
+				</tr>
+				<tr>
+					<td>操作系统：</td>
+					<td class="table1_xitong">
+						<span>DeltaGo AI</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="area area2 bg1">
+		<div class="padding-15">
+			<div class="title">产品表现</div>
+			<div class="ec-title">
+				<span class="year">2017</span> 
+				<span class="quarter">一</span><span>季度年化</span>
+				<span class="FF894C averageQuarterEarn">8.7195%</span>
+			</div>
+			<div class="echarts1" id="echarts1">
+				<div class="myChart1" id="myChart1" style="height:200px"></div>
+			</div>
+		</div>
+		<!-- <hr class="dashed"> -->
+		<div class="padding-15" style="padding-top:1px">
+			<div class="table2">
+				<table cellspacing="0">
+					<tr class="top-border">
+						<td>月即时平均年化</td>
+						<td align="center">1月</td>
+						<td align="center">2月</td>
+						<td align="center">3月</td>
+					</tr>
+					<tr class="quarterEarns">
+						<td class="green">AI Gifted Choice</td>
+						<td align="center" class="FF894C">20.89%</td>
+						<td align="center" class="FF894C">20.23%</td>
+						<td align="center" class="FF894C">21.77%</td>
+					</tr>
+				</table>
+			</div>
+			<div class="table3">
+				<table cellspacing="0" class="formerYearEarn">
+					<tr>
+						<td>过往收益(年度化 %)</td>
+						<td class="nowDate">2017-03-31</td>
+					</tr>
+					<tr>
+						<td>产品成立迄今</td>
+						<td class="FF894C">21.43%</td>
+					</tr>
+					<tr>
+						<td>一年收益率</td>
+						<td class="FF894C">20.63%</td>
+					</tr>
+					<tr>
+						<td>两年收益率</td>
+						<td class="FF894C">20.39%</td>
+					</tr>
+					<tr class="bottom-border">
+						<td>三年收益率</td>
+						<td class="FF894C">-</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr class="dashed">
+		<div class="padding-15">
+			<div class="data-title">
+				<div class="text-title green">历史业绩（%）</div>
+				<div class="time nowDate">2017-03-31</div>
+			</div>
+			<div class="table4">
+				<table cellspacing="0" class="totalRepays">
+					<tr align="center" class="top-border">
+						<td></td>
+						<!-- <td>今年以来</td> -->
+						<!-- <td>2016</td>
+						<td>2015</td>
+						<td>2014</td>
+						<td>2013</td>
+						<td>2012</td> -->
+					</tr>
+					<tr align="center">
+						<td>总回报</td>
+						<!-- <td class="FF894C">4.74</td>
+						<td class="FF894C">21.19</td>
+						<td class="FF894C">19.58</td>
+						<td class="FF894C">5.57</td>
+						<td class="FF894C"> - </td>
+						<td class="FF894C"> - </td> -->
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr class="dashed">
+		<div class="padding-15">
+			<div class="data-title">
+				<div class="text-title green">季度回报（%）</div>
+				<div class="time nowDate">2017-03-31</div>
+			</div>
+			<div class="table5 table4">
+				<table cellspacing="0"  class="repays">
+					<tr align="center" class="top-border">
+						<td align="left"></td>
+						<td>一季度</td>
+						<td>二季度</td>
+						<td>三季度</td>
+						<td>四季度</td>
+					</tr>
+					<tr align="center">
+						<td align="left">2017总回报</td>
+						<td class="FF894C">4.75</td>
+						<td class="FF894C">-</td>
+						<td class="FF894C">-</td>
+						<td class="FF894C">-</td>
+					</tr>
+					<tr align="center">
+						<td align="left">2016总回报</td>
+						<td class="FF894C">5.22</td>
+						<td class="FF894C">4.98</td>
+						<td class="FF894C">5.44</td>
+						<td class="FF894C">4.05</td>
+					</tr>
+					<tr align="center">
+						<td align="left">2015总回报</td>
+						<td class="FF894C">4.73</td>
+						<td class="FF894C">5.88</td>
+						<td class="FF894C">3.89</td>
+						<td class="FF894C">3.80</td>
+					</tr>
+					<tr align="center" class="bottom-border">
+						<td align="left">2014总回报</td>
+						<td class="FF894C">-</td>
+						<td class="FF894C">-</td>
+						<td class="FF894C">-</td>
+						<td class="FF894C">5.57</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="area area3">
+		<div class="padding-15">
+			<div class="title">资产分布</div>
+			<div class="myChart2" id="myChart2" style="height:200px"></div>
+		</div>
+	</div>
+	<div class="area area6 bg1">
+		<div class="padding-15" style="padding-bottom:0.5rem">
+			<div class="title">持仓分析</div>
+			<div class="text-title green">五大基金持仓</div>
+			<div class="area5-table">
+				<table cellspacing="0" class="fund" style="margin-top:1rem">
+					<tr>
+						<td>基金名称</td>
+						<td>占净资产（%）</td>
+					</tr>
+					<tr>
+						<td>贝莱德全球基金</td>
+						<td class="FF894C">4.38</td>
+					</tr>
+					<tr>
+						<td>富达环球科技</td>
+						<td class="FF894C">4.05</td>
+					</tr>
+					<tr>
+						<td>施罗德中国进取型基金</td>
+						<td class="FF894C">3.39</td>
+					</tr>
+					<tr>
+						<td>景顺新兴市场股票基金</td>
+						<td class="FF894C">2.14</td>
+					</tr>
+					<tr class="bottom-border">
+						<td>天利欧洲选择基金</td>
+						<td class="FF894C">1.05</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr class="dashed">
+		<div class="padding-15" style="margin-bottom:0.5rem">
+			<div class="text-title green">五大债券持仓</div>
+			<div class="area5-table">
+				<table cellspacing="0"  class="bond" style="margin-top:1rem">
+					<tr>
+						<td>债券名称</td>
+						<td style="width:4.2rem">占净资产（%）</td>
+					</tr>
+					<tr>
+						<td>Citigroup Inc, 8.5% (US172967EV98)</td>
+						<td class="FF894C">16.83</td>
+					</tr>
+					<tr>
+						<td>Aviva, 8.25% perp. (XS0778476340)</td>
+						<td class="FF894C">13.66</td>
+					</tr>
+					<tr>
+						<td>Barclays, 6.75% (US06739FFS56)</td>
+						<td class="FF894C">11.95</td>
+					</tr>
+					<tr>
+						<td>National Australia Bank 7.25% (AU3CB0171726)</td>
+						<td class="FF894C">10.35</td>
+					</tr>
+					<tr class="bottom-border">
+						<td>HSBC, 6.676% (US40429CGD83)</td>
+						<td class="FF894C">7.04</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="area area4">
+		<div class="padding-15">
+			<div class="title">操作风格箱</div>
+			<div class="fenggexiangtitle">DeltaGo风格箱</div>
+			<div class="femggexiangbox">
+				<div class="femggexiangL">
+					<div class="jiugongge">
+						<div class=""></div>
+						<div></div>
+						<div></div>
+						<div class="">长期</div>
+					</div>
+					<div class="jiugongge">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div>中期</div>
+					</div>
+					<div class="jiugongge">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div>短期</div>
+					</div>
+					<div class="jiugongge jiugongge-msg">
+						<div class="">稳健性</div>
+						<div>均衡性</div>
+						<div>增长性</div>
+					</div>
+				</div>
+				<div class="femggexiangR">
+					DeltaGo风格箱是指在针对此产品进行投资与交易的操作策略风格与方法。长期、中期与短期指交易周期与频率；稳健型、均衡型与增长型指交易时采取保守、平衡与激进的不同态度，以达到交易风险与收益的平衡比以及达成此产品的投资目标。
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="area area5 bg1">
+		<div class="padding-15">
+			<div class="title">交易方向</div>
+			<div class="area5-table">
+				<table cellspacing="0" class="region">
+					<tr class="green">
+						<td>投资地区</td>
+						<td>%</td>
+					</tr>
+					<tr>
+						<td>美洲</td>
+						<td class="FF894C">56</td>
+					</tr>
+					<tr>
+						<td>欧洲</td>
+						<td class="FF894C">35</td>
+					</tr>
+					<tr>
+						<td>大洋洲</td>
+						<td class="FF894C">0</td>
+					</tr>
+					<tr>
+						<td>非洲</td>
+						<td class="FF894C">5</td>
+					</tr>
+					<tr class="bottom-border">
+						<td>亚洲</td>
+						<td class="FF894C">5</td>
+					</tr>
+				</table>
+
+				<table cellspacing="0" style="margin-top:1rem">
+					<tr class="green">
+						<td>投资属性配比</td>
+						<td>%</td>
+					</tr>
+					<tr>
+						<td>指数</td>
+						<td class="FF894C">0</td>
+					</tr>
+					<tr>
+						<td>外汇</td>
+						<td class="FF894C">10</td>
+					</tr>
+					<tr>
+						<td>证券</td>
+						<td class="FF894C">0</td>
+					</tr>
+					<tr>
+						<td>基金/ETF</td>
+						<td class="FF894C">15</td>
+					</tr>
+					<tr>
+						<td>债券</td>
+						<td class="FF894C">60</td>
+					</tr>
+					<tr class="bottom-border">
+						<td>现金</td>
+						<td class="FF894C">15</td>
+					</tr>
+				</table>
+
+				<table cellspacing="0" style="margin-top:1rem">
+					<tr class="green">
+						<td>投资行业配比</td>
+						<td>%</td>
+					</tr>
+					<tr>
+						<td>金融</td>
+						<td class="FF894C">85</td>
+					</tr>
+					<tr>
+						<td>科技</td>
+						<td class="FF894C">5</td>
+					</tr>
+					<tr>
+						<td>消费</td>
+						<td class="FF894C">5</td>
+					</tr>
+					<tr>
+						<td>地产</td>
+						<td class="FF894C">0</td>
+					</tr>
+					<tr>
+						<td>健康</td>
+						<td class="FF894C">5</td>
+					</tr>
+					<tr class="bottom-border">
+						<td>企业</td>
+						<td class="FF894C">0</td>
+					</tr>
+				</table>
+			</div>
+			<div class="tipMsg">
+				<div class="green">注：</div>
+				<div>
+					<span>1. 本投资报告由</span>
+					<b>富民环球集团有限公司</b>
+					<span>保留所有权利。</span>
+				</div>
+				<div>
+					<span>2. 了解如何使用此报告，请参阅</span>
+					<a href="../template/shiyongtiaokuan.html" class="green">使用条款</a>
+					<span>与</span>
+					<a href="../template/yinsizhengce.html" class="green">隐私政策</a>
+					<span>。</span>
+				</div>
+				<div>
+					3. 如对此产品有兴趣，请咨询EGG理财顾问、或咨询向您提供服务的DeltaGo代理机构及咨询顾问，或点击下方“立即购买”按钮。
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="height:2.25rem;">
+		<div class="btn_bottom">立即购买</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../lib/echarts.js"></script>
+	<script src="../js/touzibaogaoqita.js"></script>
+</body>
+</html>

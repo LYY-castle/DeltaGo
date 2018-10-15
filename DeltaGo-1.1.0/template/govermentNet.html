@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<link rel="stylesheet" href="../css/common.css">
+	<title>DeltaGo</title>
+</head>
+<style>
+	html,body{
+		width:100%;
+		height:100%;
+		margin:0;
+		padding:0;
+		/*font-size: 16px;*/
+		color:#fff;
+		background-color:rgba(243,243,247,1);
+	}
+	body{
+		background-color:rgba(243,243,247,1);
+	}
+	p,h4{
+		margin:0;
+		padding:0;
+	}
+	img{
+		display: block;
+		width:100%;
+	}
+	.box{
+		width:92%;
+		margin:0 auto;
+	}
+	.address{
+		font-size: 0.875rem;
+		line-height:1.25rem;
+		color: rgba(39,39,39,1);
+		text-align: center;
+		margin:1.6rem 0 1.6rem 0;
+	}
+	.img{
+		width:100%;
+		margin-bottom: 0.28rem;
+	}
+	.imgS1{
+		width:81.46%;
+	}
+	.imgS2{
+		width:64.8%;
+	}
+	.imgS3{
+		width:54%;
+	}
+	.imgS4{
+		width:84%;
+	}
+	.imgS5{
+		width:60%;
+	}
+	h4{
+		width:69.1%;
+		font-size: 1rem;
+		line-height:1.4rem;
+		color: rgba(39,39,39,1);
+		text-align: center;
+		margin:0 auto;
+	}
+	.title{
+		font-size: 0.875rem;
+		line-height:1.25rem;
+		color: rgba(39,39,39,1);
+	}
+	.msg{
+		font-size:0.75rem;
+		line-height:1.25rem;
+		color:#000;
+		text-indent: 1.25rem;
+	}
+	.stepmsg{
+		font-size:0.875rem;
+		line-height:1.25rem;
+		color:#000;
+	}
+</style>
+<script src="js/jquery-3.0.0.js"></script>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">官网汇款充值</p>
+			<!-- <img class="icon_server" src="../images/account_icon_customer@2x.png" alt=""> -->
+		</div>
+	</div>
+	<div class="box">
+		<p class="address">官网地址：http://www.enrich-global.com</p>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<h4>您可选择短信支付，u盾／密码器／口令卡支付，手机扫码支付</h4>
+		<p class="title">一、短信支付</p>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<p class="title">二、u盾／密码器／口令卡支付</p>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<div class="step img"></div>
+		<p class="title">三、扫码支付</p>
+		<p class="msg">转账金额小于2000人民币可直接扫码支付，大于2000人民币需使用手机U盾／密码器／口令卡支付</p>
+		<div class="step img"></div>
+		<p class="stepmsg">1.小于2000人民币直接扫码支付</p>
+		<div class="step img imgS1"></div>
+		<div class="step img imgS2"></div>
+		<div class="step img imgS3"></div>
+		<p class="stepmsg">2.大于2000人民币使用手机U盾／密码器／口令卡支付</p>
+		<div class="step img imgS4"></div>
+		<div class="step img imgS4"></div>
+		<div class="step img imgS4"></div>
+		<div class="step img imgS4"></div>
+		<div class="step img imgS4"></div>
+		<div class="step img imgS5"></div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+<script>
+	$(function(){
+
+		for(var i=1;i<=$('.img').length;i++){
+			var str = '<img class="lazy" alt="" src="../images/web_course_img'+i+'.png" />';
+			$('.img').eq(i-1).append(str);
+		}
+	})
+
+</script>
+</body>
+</html>

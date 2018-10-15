@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	.out_title{
+		font-size: 0.75rem;
+		color: rgba(49,195,239,1);
+		line-height: 2rem;
+		text-align: center;
+	}
+	.msg_single{
+		font-size: 0.8rem;
+		line-height: 3rem;
+		padding-left: 1rem;
+		color: rgba(49,195,239,1);
+	}
+	/*.msg_single p{
+		
+	}*/
+	.msg_single input{
+		width: 80%;
+		background: none;
+		font-size: 0.6rem;
+		padding-left: 0.8rem; 
+		line-height: 2.2rem;
+		border: 0.025rem solid rgba(49,195,239,0.5);
+		border-radius: 0.5rem;
+		margin-bottom: 1rem;
+		text-indent: 0.5rem;
+	}
+
+	.msg_single input::-webkit-input-placeholder{
+		color: rgba(255,255,255,0.5)
+	}
+
+	.remind{
+		font-size: 0.55rem;
+		color: rgba(255,255,255,0.5);
+		margin-top: 1rem;
+		margin-bottom: 3rem;
+		text-align: center;
+	}
+	.sure{
+		display: block;
+		background-color: rgba(49,195,239,1);
+		border-radius: 0.5rem;
+		width: 80%;
+		text-align: center;
+		color: rgba(255,255,255,1);
+		margin: 1rem auto;
+	}
+	.sure span{
+		/*text-align: center;*/
+		font-size: 0.85rem;
+		line-height: 2.5rem;
+	}
+	.dollar{
+		position: absolute;
+		left:0.5rem;
+		top: 0rem;
+		line-height: 2.3rem;
+		height:2.2rem;
+	}
+	.msgzz{
+		width:100%;
+		height:100%;
+		position:fixed;
+		top:0;
+		left:0;
+		background:rgba(0,0,0,0.5);
+		display: none;
+		z-index: 10000;
+	}
+	.msgBox{
+		background:#1D2C36;
+		width:13.5rem;
+		padding-top: 0.775rem;
+		color:rgba(255,255,255,0.8);
+		text-align: center;
+
+		border-radius: 0.5rem;
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
+	.msgBox .title{
+		font-size: 0.75rem;
+		line-height: 1.05rem;
+	}
+	.msgBox .msg{
+		font-size: 0.6rem;
+		line-height: 0.825rem;
+		margin-top:0.35rem;
+		padding-bottom:0.75rem;
+		border-bottom:0.05rem solid rgba(45,179,219,0.1);
+	}
+	.msgBtn div{
+		width:6.5rem;
+		float:left;
+		line-height: 2.4rem;
+	}
+	.cancel{
+		border-right:0.05rem solid rgba(45,179,219,0.1);
+	}
+	.msgzz .dealP{
+		width:80%;
+		line-height: 1.75rem;
+		letter-spacing: 1rem;
+		font-size: 1rem;
+		outline: none;
+		border:0.05rem solid rgba(49,195,239,0.5);
+		border-radius: 0.5rem;
+		margin:0.5rem 0;
+		font-size: 0.65rem;
+		background:none;
+		text-indent: 1.65rem;
+	}
+</style>
+	<style>
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">转入余额</p>
+			</div>
+		</div>
+		<div class="msg_sort">	
+			<div class="msg_single bg2">
+				<p class="msg_title">转入金额</p>
+				<div style="position:relative;line-height: 0;">
+					<input type="text" class="reMainMoney" placeholder="可提现金额">
+					<div class="dollar">$</div>
+				</div>
+				
+			</div>
+			<p class="remind">佣金提款需扣除5%手续费，用于国际资金跨境转款的相关<br>支付成本。提款到账金额是已经扣除手续费后的最终金额。</p>
+		</div>
+		<a href="#" class="sure"><span>确定</span></a>
+	</div>
+	<div class="msgzz">
+		<div class="msgBox">
+			<div class="title">请输入交易密码</div>
+			<div class="msg">
+				<input type="password" class="dealP" oninput="if(value.length>6) value=value.slice(0,6)">
+			</div>
+			<div class="msgBtn">
+				<div class="cancel">取消</div>
+				<div class="ok">确认</div>
+			</div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+		Request = GetRequest();
+		var reMainMoney = Request['reMainMoney'];
+		$('.reMainMoney').attr('placeholder','可提现金额 '+moneyToFloat(reMainMoney));
+
+		$('.sure').click(function(){
+			if(parseFloat($('.reMainMoney').val())>parseFloat(reMainMoney)){
+				errorMsg('最大转入金额为'+reMainMoney+'美元');
+				return;
+			}
+			if($('.reMainMoney').val() == ''){
+				errorMsg('请输入转入金额');
+				return;
+			}
+			var deal = localStorage.getItem('deal');
+			if(deal == 0){
+				window.location.href = 'setDeal.html?isdeal=1&isFirst=1';
+			}
+			$('.msgzz').show();
+		})
+
+		$('.ok').click(function(){
+			var data = {
+				operation:'verify',
+				dealPwd: $('.dealP').val()
+			};
+			deltaGoAjax('app/user/deal',data,outMoneySure);
+
+				
+		})
+		$('.cancel').click(function(){
+			$('.msgzz').hide();
+			$('.dealP').val('');
+		})
+		function outMoneySure(){
+			var data = {
+				money: $('.reMainMoney').val()
+			};
+			var url = 'app/asset/brokerageToEarn';
+			deltaGoAjax(url,data,outMoneyOk);
+		}
+		function outMoneyOk(data){
+			errorMsg('转入成功');
+			setTimeout(function(){
+				window.location.href = '../index.html?act=2';
+			},2000)
+		}
+	</script>
+</body>
+</html>

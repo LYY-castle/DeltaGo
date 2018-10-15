@@ -1,0 +1,80 @@
+.account_change{
+	font-size: 0.6rem;
+	color: rgba(49,195,239,1);
+	padding-left: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+/*.card_number{
+	font-size: 0.8rem;
+	color: rgba(49,195,239,1);
+}*/
+input::-webkit-input-placeholder{
+	color: rgba(255,255,255,0.5);
+}
+input{
+	width: 80%;
+	height: 2rem;
+ 	background: none;
+ 	text-indent: 0.5rem;
+}
+.c1,.c2{
+	padding-left: 1rem;
+	line-height: 2rem;
+	font-size: 0.5rem;
+	color: rgba(49,195,239,1);
+}
+.c2{
+	position: relative;
+}
+.agree{
+	display: inline-block;
+	width:0.8rem;
+	height:0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.4rem;
+	text-align: center;
+	border:1px solid #31C3EF;
+	border-radius: 0.4rem;
+	color:rgba(49,195,239,0)
+}
+.icon_into{
+	width: 1rem;
+	height: 1rem;
+	background: url('../images/icon_seedetail@2x.png');
+	background-size: 100% 100%;
+	position: absolute;
+	left: 16.8rem;
+	top: 6.5rem;
+}
+
+.protocol{
+	text-align: center;
+	font-size: 0.5rem;
+	color: rgba(49,195,239,1);
+	margin-top: 4rem;
+}
+
+
+.next{
+	width: 80%;
+	display: block;
+	margin: 4rem 1.925rem 3.9rem 1.925rem;
+	text-align: center; 
+	background-color: rgba(49,195,239,1);
+	border-radius: 0.5rem;
+	
+}
+.next span{
+	font-size: 0.85rem;
+	color: rgba(255,255,255,1);
+	text-align: center;
+	line-height: 2rem;
+}
+
+
+
+
+
+
+

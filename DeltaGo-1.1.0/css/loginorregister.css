@@ -1,0 +1,61 @@
+*{
+	margin:0;
+	padding:0;
+}
+.bgbox{
+	width: 100%;
+	height: 100%;
+	background: url('../images/alert_login_bg@2x.jpg') no-repeat;
+	background-size: 100% 100%;
+	/*position: fixed;
+	top: 0;
+	left: 0;*/
+	/*margin-bottom:2.45rem;*/
+}
+.top_box{
+	background-color: rgba(43,167,205,0.2);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.top_box .text{
+	font-size: 0.75rem;
+	color: rgba(255,255,255,1);
+	line-height: 1.05rem;
+	margin: 1rem 0;
+	text-align: center;
+}
+
+.top_box .login_register_btn{
+	margin: 0 1.25rem 4rem 1.25rem;
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.top_box .login_register_btn span{
+	/*flex:left;*/
+	border: 0.025rem solid rgba(43,167,205,1);
+	border-radius: 0.25rem;
+}
+.top_box .login_register_btn .reginster{
+	/*flex: right;*/
+	margin-left: 0.5rem;
+	background-color: rgba(45,179,220,1);	
+}
+
+.top_box .login_register_btn span a{
+	display: block;
+	margin: 0.525rem 3.025rem;
+	text-decoration: none;
+	font-size: 0.85rem;
+	color: rgba(43,167,205,1);
+
+}
+
+.top_box .login_register_btn .reginster a{
+	color: rgba(255,255,255,1);
+}
+
+
+
+

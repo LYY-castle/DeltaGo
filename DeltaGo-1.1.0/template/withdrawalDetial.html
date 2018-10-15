@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	.msg_sort_single{
+		display: flex;
+		padding: 0.5rem 1rem; 
+	}
+	.msg_sort_single img{
+		width: 3rem;
+		height: 3rem;
+		background-size: 100% 100%;
+	}
+	.account_change{
+		font-size: 0.6rem;
+		color: rgba(101,225,87,1);
+		line-height: 2rem;
+		margin-left:1rem; 
+	}
+	.msg{
+		margin-left: 0.5rem;
+		margin-top: 0.25rem;
+	}
+
+	.msg .methed{
+		font-size: 0.7rem;
+		color: rgba(49,195,239,1);
+	}
+	.time{
+		font-size: 0.6rem;
+		color: rgba(255,255,255,0.5);
+	}
+	.dollar{
+		flex: 40%;
+		margin-top: 0.5rem;
+		text-align: right;
+		font-size: 0.9;
+		color: rgba(255,137,76,1);
+	}
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">提现记录</p>
+			</div>
+		</div>
+		<p class="account_change">当前美元汇率 <span class="ExchangeRate">6.6168</span></p>
+		<div class="msg_sort">
+			<div class="msg_sort_single bg2 quickRecharge">
+				<img class="account_icon_left" src="../images/withdraw_history_icon_commission@2x.png" alt="">
+				<div class="msg">
+					<span class="methed">佣金提现</span><br><span class="time">2017-12-30 08:30</span>
+				</div>				
+				<div class="dollar"><span>$</span><span>100,000</span></div>
+			</div>
+			<div class="msg_sort_single bg1 govementRecharge">
+				<img class="account_icon_left" src="../images/withdraw_history_icon_income@2x.png" alt="">
+				<div class="msg">
+					<span class="methed">收益提现</span><br><span class="time">2017-12-30 08:30</span>
+				</div>				
+				<div class="dollar"><span>$</span><span>100,000</span></div>
+			</div>			
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<!-- <script>
+		$(function(){
+			deltaGoAjax('app/asset/getExchangeRate',{},getExchangeRate); 
+			function getExchangeRate(data){ //汇率
+				var rate = (data.data.sellingEarn/100).toFixed(4); 
+				$('.ExchangeRate').text(rate);
+			}
+
+			$('.quickRecharge').click(function(){
+				window.location.href = 'recharge_quick.html';
+			})
+			$('.govementRecharge').click(function() {
+				window.location.href = 'govermentNet.html';
+			})
+			$('.transferRecharge').click(function(){
+
+				window.location.href = 'transferRecharge.html';
+			})
+		})
+	</script> -->
+</body>
+</html>

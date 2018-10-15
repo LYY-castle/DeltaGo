@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/recharge_quick.css">
+	<style>
+		.detail{
+		position: absolute;
+		right: 1rem;
+		top: 0rem;
+		font-size: 0.7rem;
+		color: rgba(49,195,239,1);
+	}
+	.name{
+		font-size: 0.8rem;
+		color: rgba(49,195,239,1);
+		padding: 0.75rem; 
+	}
+	input{
+		font-size: 0.6rem;
+		color: rgba(255,255,255,1);
+		border: none;
+		padding-left: 0.5rem;
+		margin: 0;
+	}
+	input::-webkit-input-placeholder{
+		color: rgba(255,255,255,0.5);
+	}
+	.delete{
+		display: block;
+		width: 1.06rem;
+		height: 1.06rem;
+		font-size: 0.025rem;
+		color:rgba(255,137,76,1);
+		position: absolute;
+		left: 0;
+		top: 0;
+		transform: rotateX(90deg);
+	}
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">设置备注名<span class="detail">完成</span></p>
+			</div>
+		</div>
+		<div class="name bg2">
+		备注名
+		<input type="text" placeholder="请设置备注名" class="inName">
+
+		<span class="delete">+</span>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var userUuid = Request["userUuid"];
+			$('.detail').click(function(){
+				deltaGoAjax('app/agent/updInviUserNotes',{'userUuid':userUuid,'notes':$('.inName').val()},getName);
+			})
+			function getName(data){
+				errorMsg('修改成功');
+				setTimeout(function(){
+					window.history.back(-1);
+				},2000)	
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/share.css">
+	<style>
+	.box{
+		height: 100%;
+		background-color: #c3cdd4;
+		border:0.025rem solid rgba(49,195,239,0.1);
+		border-radius: 0.5rem;
+		margin: 2rem;
+		color:#000;
+	}
+	.nk_name{
+		color:#000;
+	}
+	/*html,body{
+		background-color: rgba(29,44,54,1);
+	}*/
+	</style>
+</head>
+<body class="SpecialShare">
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">充值</p>
+				<!-- <img src="../images/account_icon_customer@2x.png" alt="" class="icon_server"> -->
+			</div>
+		</div>
+		<div class="box">
+			<img src="../images/share_icon_logo@2x.png" alt="" class="logo_img">
+			<!-- <div class="person_img_border">
+				<img src="../images/account_icon_user@2x.png" alt="" class="person_img">
+			</div> -->
+			<p class="nk_name">请使用各大银行手机银行APP <br>扫描二维码进行支付</p>
+			<div class="qrcode" id="qrcode"></div>
+			<p class="slogan">智能财富 无限连接</p>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../lib/qrcode.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+		Request = GetRequest();
+		var url = Request["url"];
+		var type = Request["type"];
+		if(type == 2){
+			$('.nk_name').text('请使用QQ扫码进行支付').css('color','#31C3EF');
+			$('.box').css('background','rgba(29,44,54,1)');
+		}else if(type == 4){
+			$('.nk_name').text('请使用支付宝扫码进行支付').css('color','#31C3EF');
+			$('.box').css('background','rgba(29,44,54,1)');
+		}
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			text: url,
+			width: 200,
+			height: 200,
+			colorDark : '#000',
+			colorLight : '#fff',
+			correctLevel : QRCode.CorrectLevel.H,
+			// src: 'http://game.enrich-global.com/img/share_logo.jpg'
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<title></title>
+	<link rel="stylesheet" href="../css/common.css">
+</head>
+<style>
+	.box{
+		width:100%;
+		height:2.5rem;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-align-items: center;
+		align-items: center;
+	}
+	span{
+		color:#31c3ef;
+		font-size: 0.8rem;
+		line-height:2.5rem;
+		padding-left: 0.75rem;
+	}
+	input{
+		width:73%;
+		font-size: 0.6rem;
+		line-height: 2.5rem;
+		position:absolute;
+		right:0;
+		background:none;
+		outline: none;
+		border:0px;
+		color:#fff;
+		margin-top: 1px;
+	}
+	.next{
+		width:84%;
+		height:2.25rem;
+		background:#31c3ef;
+		border-radius: 1rem;
+		text-align: center;
+		line-height: 2.25rem;
+		color:#fff;
+		font-size: 0.85rem;
+		margin:0.75rem auto 1.05rem;
+	}
+	.item1{
+		background:#1D2C36;
+	}
+	form{
+		margin:0;
+	}
+</style>
+<body>
+<div class="back-title-box">
+	<div class="back-title bg1">
+		<img class="back-title-img" src="../images/back.png" alt="">
+		<p class="back-title-text">万事达联名卡申请</p>
+	</div>
+</div>
+ <form name="myfrom" id="myform" action="">
+    <input type="hidden" class="tokenId" name="tokenId" value="">
+	<div class="box item2 enName">
+		<span>英文姓名</span>
+		<input type="text" name="userEnglishName" placeholder="请输入您的英文姓名" title="请输入您的英文姓名">
+	</div>
+	<div class="box item1 chName">
+		<span>姓名</span>
+		<input type="text" name="userRealName" placeholder="请输入您的姓名" >
+	</div>
+	<div class="box item2 phone">
+		<span>手机号码</span>
+		<input type="text" name="userPhone" placeholder="请输入您的手机号码" title="请输入正确的手机号码">
+	</div>
+	<div class="box item1 adress">
+		<span>详细地址</span>
+		<input type="text" name="userDetailAddress" placeholder="卡片寄送地址，请准确填写">
+	</div>
+	<div class="box item2 papersType">
+		<span>证件类型</span>
+		<input type="text" name="userCardType" placeholder="请输入您的证件类型" value="身份证">
+	</div>
+	<div class="box item1 papersNum">
+		<span>证件号码</span>
+		<input type="text" name="userCardNumber" placeholder="请输入您的证件号码">
+	</div>
+	<div class="box item2 email">
+		<span>邮箱</span>
+		<input type="text" name="userMail" placeholder="请输入您的电子邮箱">
+	</div>
+	<!-- <div class="box item2 referee">
+		<span>推荐人</span>
+		<input type="text" name="userReferrer" placeholder="请输入您的推荐人">
+	</div> -->
+	<div class="box item1 postalcode">
+		<span>邮政编码</span>
+		<input type="text" name="postcode" placeholder="请输入您详细地址的邮政编码">
+	</div>
+	 <!--<input class="btn" type="submit" value="立即办卡">-->
+	<div class="next" onclick="onFormSubmit()">立即办卡</div>
+ </form>
+
+<script src="../lib/jquery-1.12.2.js"></script>
+<script src="../js/common.js"></script>
+<script>
+	$('.tokenId').val(localStorage.getItem('tokenId'));
+	function onFormSubmit(data){
+        var formdata = $('form').serializeArray();
+        for(var i=0;i<formdata.length;i++){
+            if(formdata[i].value == ''){
+                errorMsg("请确认所有信息填写完整");
+                return true;
+            }
+        }
+        console.log(formdata)
+        formdata[5].value = '1';
+        var url = 'app/asset/applyMasterCard';
+        deltaGoAjax(url,formdata,ok);
+	}
+
+	function ok(data){
+		window.location.href = 'lianmingkashenqing3.html?type=0';
+	}
+
+</script>
+</body>
+</html>

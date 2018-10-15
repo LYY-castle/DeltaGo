@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">提现记录</p>
+			</div>
+		</div>
+		<p class="account_change">当前美元汇率 <span class="ExchangeRate">6.6168</span></p>
+		
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			deltaGoAjax('app/asset/getExchangeRate',{},getExchangeRate); 
+			function getExchangeRate(data){ //汇率
+				var rate = (data.data.sellingEarn/100).toFixed(4); 
+				$('.ExchangeRate').text(rate);
+			}
+
+			$('.quickRecharge').click(function(){
+				window.location.href = 'recharge_quick.html';
+			})
+			$('.govementRecharge').click(function() {
+				window.location.href = 'govermentNet.html';
+			})
+			$('.transferRecharge').click(function(){
+
+				window.location.href = 'transferRecharge.html';
+			})
+		})
+	</script>
+</body>
+</html>

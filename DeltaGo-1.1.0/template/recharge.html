@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/recharge.css">
+	<style>
+	.detail{
+		position: absolute;
+		left: 15rem;
+		top: 0rem;
+		font-size: 0.7rem;
+		color: rgba(49,195,239,1);
+	}
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">充值<span class="detail">充值记录</span></p>
+				<!-- <img class="icon_server" src="../images/account_icon_customer@2x.png" alt=""> -->
+			</div>
+		</div>
+		<p class="account_change">当前美元汇率 <span class="ExchangeRate">6.6168</span></p>
+		<div class="msg_sort">
+			<div class="msg_sort_single bg2 walletRecharge"> 
+				<img class="account_icon_left" src="../images/history_icon_quick@2x.png" alt="">
+				<span class="methed">银联钱包充值</span>
+				<div class="msg">
+					<p class="msg_content">限额：无&nbsp;&nbsp;次数不限<br>手续费：无</p>
+				</div>
+			</div>
+			<div class="msg_sort_single bg1 qqRecharge">
+				<img class="account_icon_left" src="../images/history_icon_bankcard@2x.png" alt="">
+				<span class="methed">QQ钱包充值</span>
+				<div class="msg">
+					<p class="msg_content">限额：无&nbsp;&nbsp;次数不限<br>手续费：无</p>
+				</div>
+			</div>
+			<div class="msg_sort_single bg2 aliRecharge">
+				<img class="account_icon_left" src="../images/withdraw_icon_alipay@2x.png" alt="">
+				<span class="methed">支付宝充值</span>
+				<div class="msg">
+					<p class="msg_content">限额：无&nbsp;&nbsp;次数不限<br>手续费：无</p>
+				</div>
+			</div>
+			<div class="msg_sort_single bg1 govementRecharge">
+				<img class="account_icon_left" src="../images/recharge_icon_enrich@2x.png" alt="">
+				<span class="methed">官网汇款充值</span>
+				<div class="msg">
+					<p class="msg_content">限额：无&nbsp;&nbsp;次数不限<br>手续费：无</p>
+				</div>
+			</div>		
+			<!-- <div class="msg_sort_single background quickRecharge">
+				<img class="account_icon_left" src="../images/history_icon_wechat@2x.png" alt="">
+				<span class="methed">微信充值</span>
+				<div class="msg">
+					<span class="msg_content">限额：无&nbsp;&nbsp;次数不限<br>手续费：无</span>
+				</div>
+			</div> -->
+			<!-- <div class="msg_sort_single bg2 transferRecharge">
+				<img class="account_icon_left" src="../images/history_icon_bankcard@2x.png" alt="">
+				<span class="methed">网银转账充值</span>
+				<div class="msg">
+					<p class="msg_content">限额：5万美元/笔&nbsp;&nbsp;次数取决于银行<br>手续费：约20-50美元/每笔（银行收取）</p>
+				</div>
+			</div>	 -->	
+			<p class="remind">由于需要外汇入金，请您在网上银行去换汇/购汇再进行汇款充值</p>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			deltaGoAjax('app/asset/getExchangeRate',{},getExchangeRate); 
+			function getExchangeRate(data){ //汇率
+				var rate = (data.data.sellingEarn/100).toFixed(4); 
+				$('.ExchangeRate').text(rate);
+			}
+			$('.walletRecharge').click(function(){
+				window.location.href = 'recharge_quick.html?type=1&random='+random();
+			})
+			$('.qqRecharge').click(function(){
+				window.location.href = 'recharge_quick.html?type=2&random='+random();
+			})
+			$('.quickRecharge').click(function(){
+				window.location.href = 'recharge_quick.html?type=3&random='+random();
+			})
+			$('.govementRecharge').click(function() {
+				window.location.href = 'govermentNet.html?random='+random();
+			})
+			$('.aliRecharge').click(function(){
+
+				window.location.href = 'recharge_quick.html?type=4&random='+random();
+			})
+			$('.detail').click(function(){
+				window.location.href = 'dynamicDetail.html?type=1';
+			})
+		})
+	</script>
+</body>
+</html>

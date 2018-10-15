@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="bgbox">
+		<div class="back-title-box">
+			<div class="back-title">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">验证码登录</p>
+			</div>
+		</div>
+		<form action="#">
+			<span class="icon_phone"></span>
+			<input type="text" placeholder="请输入手机号码" class="writeCode">
+			<a href="#" class="btn"><span>下一步</span></a>
+		</form>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			$('.btn').click(function(){
+				checkMobile($(".writeCode").val());
+				if(!flag){
+					return false;
+				}else{
+					var url = '/app/login/checkPhone';
+					var data = {
+							phone:$(".writeCode").val(),
+							operate:"login"
+						};
+					deltaGoAjax(url,data,sendCode);
+				}
+			})
+
+			function sendCode(data){
+				window.location.href = 'sec_login.html?phone='+$(".writeCode").val()+'&fcode='+data.data;
+			}
+
+			function checkMobile(str) {
+				var re = /^1[3|4|5|7|8][0-9]\d{8}$/;
+				if (re.test(str)) {
+					flag = true;
+				} else{
+					errorMsg('请输入正确的手机号码！');
+					flag = false;
+				}
+			};
+		})
+	</script>
+</body>
+</html>

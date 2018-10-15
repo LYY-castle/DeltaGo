@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/home.css">
+	<link rel="stylesheet" href="../css/mine.css">
+	<style>
+		.car_top{
+			padding-top: 0.5rem;
+		}
+		.detail{
+			margin: 0.5rem 2rem;
+			font-size: 0.65rem;
+			color: rgba(255,255,255,1);
+
+		}
+		.detail>div{
+			line-height: 2rem;
+		}
+		.detail>div>span:nth-child(2){
+			float: right;
+		}
+		.p1{
+			border-bottom: 0.025rem solid rgba(49,195,239,0.5);
+
+		}
+		.p1>span:nth-child(2){
+			color: rgba(255,137,76,1);
+			font-size: 0.85rem;
+		}
+		.p2>span:nth-child(2){
+			color: rgba(49,195,239,1);
+			font-size: 0.85rem;
+		}
+		.p2{
+			margin-bottom: 1rem;
+		}
+		.p1 span.blue{
+			color: rgba(49,195,239,1);
+		}
+		.p3{
+			border-bottom: 0.025rem solid rgba(255,255,255,0.1);
+		}
+		.income_card{
+			background:#31c3ef;
+			width:87.5%;
+			margin:0 auto;
+			border-radius: 0.625rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="back-title-box">
+			<div class="back-title bg2">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">收益卡</p>
+			</div>
+		</div>
+		<div class="income_card">
+			<div class="car_top">
+				<img class="car_logo" src="../images/mine_card_logo@2x.png">
+				<span class="car_income">IMCOME&nbsp;&nbsp;收益</span>
+			</div>
+			<div class="car_center">
+				<div class="car_money">请充值购买后获取收益</div>
+				<div class="car_id"><span class="card-first">3</span>***&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;<span class="card-last">5863</span></div>
+			</div>
+			<div class="car_bottom">
+				<span class="en">DeltaGo</span>
+				<span class="date">11/22</span>
+			</div>
+		</div>	
+		<div class="detail">
+			<div class="p1">
+				<span>充值剩余金额</span>
+				<span class="assetCorpusBalance">$00.00</span>
+			</div>
+			<!-- <hr> -->
+			<div class="p1">
+				<span>总收益</span>
+				<span class="assetEarnTotal blue">$00.00</span>
+			</div>
+			<div class="p2">
+				<span>已兑付金额</span>
+				<span class="assetCompCycle">$00.00</span>
+			</div>
+			<div class="p3">
+				<span>基金名称</span>
+				<span>收益</span>
+			</div>
+			<!-- <hr> -->
+			<!-- <div class="p4">
+				<span>美元指数7D</span>
+				<span>$00.00</span>
+			</div> -->
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+        Request = GetRequest();
+        // var pname = Request["pname"];
+    	var cardDetail=decodeURI(Request["cardDetail"]); 
+    	cardDetail = JSON.parse(cardDetail);
+    	var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    	var pname = userInfo.userNickname;
+    	var CNumber = cardDetail.assetCardNumber;  //卡号
+    	$('.car_money').text(moneyToFloat(cardDetail.assetBalance));
+    	$('.income_card .card-first').text(CNumber.substr(0,1));
+		$('.income_card .card-last').text(CNumber.substr(CNumber.length-4));
+    	$('.en').text(pname);
+    	$('.date').text(cardDetail.assetExpireTime);
+    	$('.assetCorpusBalance').text('$'+moneyToFloat(cardDetail.assetCorpusBalance));
+    	$('.assetEarnTotal').text('$'+moneyToFloat(cardDetail.assetEarnTotal));
+    	$('.assetCompCycle').text('$'+moneyToFloat(cardDetail.assetCompCycle))
+    	$.each(cardDetail.earnDetails,function(k,val){
+    		var str = '<div class="p4" data-productBuyId="'+val.productBuyId+'">'+
+							'<span>'+val.productName+'</span>'+
+							'<span>$'+moneyToFloat(val.productEarnTotal)+'</span>'+
+						'</div>';
+			$('.detail').append(str);
+    	})
+    	$('.p4').click(function(){
+    		window.top.location = '../template/corpusCardDetail.html?productBuyId='+$(this).attr('data-productBuyId');
+    	})
+	</script>
+</body>
+</html>

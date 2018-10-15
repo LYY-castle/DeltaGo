@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/buyGlodCard.css">
+</head>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img home" src="../images/back.png" alt="">
+			<p class="back-title-text">欧美通</p>
+		</div>
+	</div>
+	
+	<div class="current_exchange_box">
+		<span>当前美元汇率：</span>
+		<span class="current_exchange"></span>
+	</div>
+	<div class="productInfos bg2">
+		<div class="minPri">
+			<p class="blue minPriNum">$10,000</p>
+			<p>起投金额</p>
+		</div>
+		<div class="line"></div>
+		<div class="yChange">
+			<span class="FF894C annual">12%</span>
+			<!-- <span class="dsp FF894C">+1%</span> -->
+			<p>预期年化</p>
+		</div>
+		<div class="line"></div>
+		<div class="cycle">
+			<p class="blue cardCycle">12月</p>
+			<p>投资周期</p>
+		</div>
+	</div>
+	<div class="selectMethod bg1 dsp">
+		<div><span class="circle circleColor" data-money=1></span>&nbsp;<span class="text">全额投资</span>
+			<p class="explain">年化收益+2%</p>
+		</div>
+		<div>
+			<span class="circle" data-money=2></span>&nbsp;
+			<span class="text">预购投资</span>
+			<span class="remind">（投资金额10%）</span>
+			<p class="explain">年化收益+1%</p>
+		</div>
+	</div>
+	<div class="payPri bg2">
+		<div class="priMsg">
+			<span class="blue payPri_title">总投资金额</span>
+			<span class="rmbMsg">
+				<span>当前美元汇率换算人民币为：￥</span>
+				<span class="rmb perBox">0</span>
+			</span>
+		</div>
+		<div class="inPri">
+			<input class="blue enterPri perInput" p 0laceholder="10,000美元起投" type="number" oninput="if(value.length>10) value=value.slice(0,10)">
+			<span class="priImg blue">$</span>
+		</div>
+		<div class="balance f-8">
+			<span>当前可用现金余额 $</span><span class="current_pri">1.00</span>
+		</div>
+	</div>
+	<div class="income bg1 dsp preM">
+		<div>
+			<span class="blue incomeMsg">预购需付金额</span>
+			<span class="predetemineRmb predetemine">当前美元换算人民币为：¥<span class="predetemineNum perBox">0</span></span>
+		</div>
+		<div>
+			<!-- <span class="f-8 endTbox">预定需付投资金额10%的预定金。</span> -->
+			<span class="predetemineDollar predetemine">$<span class="DollarNum perBox">0</span></span>
+		</div>
+	</div>
+	<div class="income bg1 bgColor">
+		<div class="income_left">
+			<p class="blue incomeMsg">预计收益</p>
+			<p class="f-8 endTbox">
+				<span class="endTime preCnm">2018-12-20</span>
+				<span class="preCnm">到期</span>
+				<span class="preT">剩余需付金额最后付款时间:2018-02-25</span>
+			</p>
+		</div>
+		<div class="income_right income_pri">$<span class="income_money perBox">0</span></div>
+	</div>
+	<div class="floatIncome bg1">
+		<div class="float_title blue">浮动分红收益</div>
+		<p class="floatMsg"></p>
+	</div>
+	<div class="ps">*投资申请当天受理，T+1后开始计息，可到“我的”页面查看详情。</div>
+	<div class="buyOk">
+		<div class="Agreement">
+			<span class="agree">√</span>
+			<span class="agreeBtn">已知悉投资风险，同意</span>
+			<a href="userAgreement.html">《用户协议》</a>
+		</div>
+		<div class="btn_bottom">确认购买</div>
+	</div>
+	
+	<div class="msgzz">
+		<div class="msgBox">
+			<div class="title">请输入交易密码</div>
+			<div class="msg">
+				<input type="password" class="dealP" oninput="if(value.length>6) value=value.slice(0,6)">
+			</div>
+			<div class="msgBtn">
+				<div class="cancel">取消</div>
+				<div class="ok">确认</div>
+			</div>
+		</div>
+	</div>
+		
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/buyGlodCard.js"></script>
+</body>
+</html>

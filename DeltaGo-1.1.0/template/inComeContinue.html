@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.single{
+			padding: 0.65rem 0.75rem;
+			display: flex;
+		}
+		.left {
+			width: 50%;
+		}
+		.right {
+			width: 50%;
+		}
+		.left span:nth-child(1){
+			font-size: 0.7rem;
+			color: rgba(49,195,239,1);
+		}
+		.left span:nth-child(3){
+			font-size: 0.6rem;
+			color: rgba(255,255,255,0.5);
+		}
+		.right span:nth-child(1){
+			font-size: 0.8rem;
+			color: rgba(255,137,76,1);
+		}
+		.right span:nth-child(3){
+			font-size: 0.6rem;
+			color: rgba(255,255,255,0.8);
+		}
+		.msg{
+			font-size: 0.69rem;
+			line-height: 1.57rem;
+			text-align: center;
+		}
+		.btn_bottom{
+			position: fixed;
+			bottom:0;
+			width:100%;
+		}
+		.btn_box{
+			height:2.25rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">收益续投</p>
+			</div>
+		</div>
+		<div class="msg">*查看<a href="incomeContinueExplain.html">《收益自动续投说明》</a></div>
+		<div class="detail">
+			
+		</div>
+		<div class="btn_box">
+			<div class="btn_bottom btn_continue">收益自动续投</div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+        Request = GetRequest();
+        var productBuyId=decodeURI(Request["productBuyId"]); 
+        var cteInveStatus=decodeURI(Request["cteInveStatus"]); 
+        if(cteInveStatus == 1){
+        	$('.btn_bottom').text('取消收益自动续投').css('background','#999').addClass('cancel').removeClass('btn_continue');
+        }
+        var data = {
+        	productBuyId: productBuyId
+        };
+		deltaGoAjax('app/asset/getCteInveDetail',data,getCteInveDetail);
+		function getCteInveDetail(data){
+			data = data.data;
+			var str = '';
+			var bg = 'bg2';
+			$.each(data,function(k,val){
+				bg = (k%2 == 0) ? 'bg2' : 'bg1';
+				str += '<div class="single '+bg+'">'+
+							'<div class="left" align="left">'+
+								'<span>收益自动续投</span><br>'+
+								'<span>'+val.productEarnTime+'</span>'+
+							'</div>'+
+							'<div class="right" align="right">'+
+								'<span>+$'+val.productEarn+'</span><br>'+
+								'<span>$'+val.totalCorpus+'</span>'+
+							'</div>'+
+						'</div>';
+			})
+			$('.detail').append(str);
+		}
+
+		$('.btn_continue').click(function(){
+			var data = {
+    			operation:'addition',
+    			productBuyId:productBuyId
+    		}
+    		deltaGoAjax('app/asset/updateCorpusCteInveStatus',data,continueOk);
+		})
+
+		function continueOk(data){
+    		errorMsg('自动续投成功');
+    		$('.btn_bottom').text('取消收益自动续投').css('background','#999').addClass('cancel').removeClass('btn_continue');
+    		setTimeout(function(){
+    			window.history.back(-1);
+    		},2000)
+    	}
+
+		$('.cancel').click(function(){
+			var data = {
+    			operation:'remove',
+    			productBuyId:productBuyId
+    		}
+    		deltaGoAjax('app/asset/updateCorpusCteInveStatus',data,cancelOk);
+		})
+		function cancelOk(data){
+    		errorMsg('取消续投成功');
+    		$('.btn_bottom').text('一键自动续投收益').css('background','#FF894C').addClass('btn_continue').removeClass('cancel');
+    		setTimeout(function(){
+    			window.history.back(-1);
+    		},2000)
+    	}
+	</script>
+</body>
+</html>

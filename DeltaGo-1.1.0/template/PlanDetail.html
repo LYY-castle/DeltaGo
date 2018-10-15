@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		table{
+			width: 90%;
+			margin: 1rem auto;
+			border-top: 0.025rem solid rgba(255,255,255,0.5);
+			border-bottom: 0.025rem solid rgba(255,255,255,0.5);
+		}
+		table tr{
+			display: flex;
+			line-height: 2rem;
+			font-size: 0.6rem;
+			color: rgba(255,255,255,0.8);
+
+		}
+		table tr td:nth-child(1){
+			width: 20%;
+		}
+		table tr td:nth-child(2){
+			width: 60%;
+		}
+		table tr td:nth-child(3){
+			width: 20%;
+		}
+		table tr td:nth-child(1),table tr td:nth-child(3){
+			color: rgba(252,84,0,0.8);
+		}
+		.title td{
+			/*display: flex;*/
+			border-bottom: 0.025rem solid rgba(255,255,255,0.3);
+			font-size: 0.7rem;
+			color: rgba(241,193,49,1)!important;
+		}
+		.borderTop{
+			border-top: 0.025rem solid rgba(255,255,255,0.1);
+		}
+
+		.shengyubox{
+			width:65%;
+			height:2.75rem;
+			position: fixed;
+			bottom:0;
+			left:0;
+			font-size: 0.75rem;
+			line-height: 1.05rem;
+			background:#EBAF30;
+			color:#11181E;
+			font-weight: 700;
+			text-align: center;
+		}
+		.shengyup{
+			margin-top:0.4rem;
+		}
+		.nowDate{
+			font-size: 0.6rem;
+			line-height: 0.825rem;
+		}
+		.btn_bottom{
+			position: fixed;
+			bottom:0;
+			right:0;
+			width:34.8%;
+			background:#EBAF30;
+			color:#11181E;
+			font-weight: 700;
+			line-height: 2.75rem;
+			height:2.75rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">智能FX计划</p>
+			</div>
+		</div>
+		<div class="detail">
+			<table class="table">
+				<tr class="title">
+					<td align="left">购买人</td>
+					<td align="center">购买时间</td>
+					<td align="right">购买金额</td>
+				</tr>
+			</table>
+		</div>
+		<div style="height:2.75rem;">
+			<div class="shengyubox">
+				<p class="shengyup">剩余额度 <span class="shengyu"></span>美元</p>
+				<p class="nowDate">2018</p>
+			</div>
+			<div class="btn_bottom">立即购买</div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			$('.btn_bottom').click(function(){
+				window.location.href = '../template/buyGlodCard.html?productId='+pid;
+			})
+			var Request = new Object();
+			Request = GetRequest();
+			var pid = Request["productId"];
+			var shengyu = Request["shengyu"];
+			var time = Request["time"];
+			var marketStatus = Request["marketStatus"];
+			if(pid == '0021'){
+				$('.back-title-text').text('智能FX计划');
+			}else if(pid == '0023'){
+				$('.back-title-text').text('智能VN计划');
+			}
+			$('.shengyu').text(moneyToFloat(shengyu));
+			$('.nowDate').text(time);
+			if(marketStatus == 0){
+				$('.btn_bottom').text('已售完').off('click');
+				$('.shengyu').text('0');
+			}else if(marketStatus == -1){
+				$('.btn_bottom').text('已兑付').off('click');
+				$('.shengyu').text('0');
+			}
+
+			deltaGoAjax('app/product/getProductBuyNotes',{'productId':pid},getFXPlan);
+			function getFXPlan(data){
+				var str = '';
+				var num = 0;
+				$.each(data.data,function(k,val){
+					var id1 = val.user_id.substr(0,2);
+					var id2 = val.user_id.substr(val.user_id.length-2,2);
+					var time = formDate(val.product_buy_time);
+					var borderTop = (num > 0) ? 'borderTop' : '';
+					str += '<tr class="'+borderTop+'">'+
+					'<td>'+
+					'<span>'+id1+'</span>'+
+					'<span>***</span>'+
+					'<span>'+id2+'</span>'+
+					'</td>'+
+					'<td align="center">'+time+'</td>'+
+					'<td align="right">$'+moneyToFloat(val.product_buy_money)+'</td>'+
+					'</tr>';
+					num++;
+				})
+				$('.table').append(str);
+				
+			}
+		})
+	</script>
+</body>
+</html>
+			

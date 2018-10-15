@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.bg{
+			padding:4%;
+		}
+		.msg{
+			color:rgba(255,255,255,0.8);
+			font-size: 0.55rem;
+			text-align: center;
+			line-height: 3rem;
+		}
+		input{
+			width:100%;
+			outline: none;
+			border-style: none;
+			color: rgba(49,195,239,0.8);
+			background:none;
+			border-bottom:0.05rem solid rgba(255,255,255,0.5);
+			line-height: 1.2rem;
+			letter-spacing: 10px;
+		}
+		.textM{
+			font-size: 0.7rem;
+			color:#31C3EF;
+			line-height: 2rem;
+		}
+		.oldPass{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="back-title-box bg1">
+		<div class="back-title">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">设置交易密码</p>
+		</div>
+	</div>
+	<div class="bg">
+		
+		<p class="msg">为了确保资金安全，首次交易时需要设置交易密码</p>
+		<div class="oldPass inputBox">
+			<p class="textM">请输入旧密码</p>
+			<input type="password" class="enterOldPass" maxlength="6">
+		</div>
+		<div class="setDeal inputBox">
+			<p class="textM">设置新密码</p>
+			<input type="password" class="dealP">
+		</div>
+		<div class="affirmDeal inputBox">
+			<p class="textM">确认新密码</p>
+			<input type="password" class="affirmP">
+		</div>
+		<div class="btn">确认</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+		Request = GetRequest();
+		var isdeal = Request["isdeal"];
+		var isFirst = Request["isFirst"];
+		if(!isFirst){
+			$('.msg').hide();
+			$('.oldPass').show();
+		}
+		if(isdeal == 1){
+			if(!isFirst){
+				$('.back-title-text').text('通过旧密码重置交易密码');
+			}
+			
+			$('.btn').click(function(){
+				var isY = yanzhengPass();
+				if(isY == 1){
+					var url="app/user/deal";
+					var data = {
+						dealPwd: $('.dealP').val(),
+						operation: 'set'
+					};
+					if(!isFirst){
+						data.operation = 'update';
+						data.originalDealPwd = $('.enterOldPass').val() 
+					}
+					deltaGoAjax(url,data,setDealOk);
+				}
+			})
+		}else{
+			$('input').attr('maxlength',20);
+			if(!isFirst){
+				$('.back-title-text').text('通过旧密码重置登录密码');
+			}
+			$('.btn').click(function(){
+				var isY = yanzhengPass();
+				if(isY == 1){
+					var url="app/login/resetPwd";
+					var data = {
+						password: $('.dealP').val(),
+						originalPassword: $('.enterOldPass').val()
+					};
+					deltaGoAjax(url,data,setDealOk);
+				}
+			})
+		}
+		
+		function setDealOk(data){
+			if(isFirst){
+				localStorage.setItem('deal','1');
+			}
+			errorMsg('设置成功');
+			setTimeout(function(){
+				window.history.back(-1);
+			},1000)
+		}
+
+		function yanzhengPass(){
+			if(!isFirst){
+				if($('.enterOldPass').val() == ''){
+					errorMsg('请输入旧密码');
+					return 0;
+				}
+			}
+			if($('.dealP').val() == ''){
+				errorMsg('请输入新密码');
+				return 0;
+			}else if($('.dealP').val() != $('.affirmP').val()){
+				errorMsg('两次输入密码不一致');
+				return 0;
+			}else{
+				return 1;
+			}
+		}
+	</script>
+</body>
+</html>

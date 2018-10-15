@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.inReport{
+			display: flex;
+			justify-content:space-between;
+			/*border-bottom:0.05rem solid rgba(255,255,255,0.1);*/
+			padding:0.5rem 4% 0.365rem;
+		}
+		.inReport .right{
+			/*display: block;*/
+			border-top:0.05rem solid rgba(255,255,255,0.5);
+			border-right:0.05rem solid rgba(255,255,255,0.5);
+			transform: rotate(45deg);
+			width:0.75rem;
+			height:0.75rem;
+			margin-top: 0.4rem;
+			margin-right: 0.2rem;
+		}
+		.inReport .left span{
+			font-size: 0.65rem;
+			color:rgba(255,255,255,0.8);
+			line-height: 0.75rem;
+		}
+		.inReport .left .inReportTime{
+			font-size: 0.05rem;
+			color:rgba(255,255,255,0.8);
+		}
+	</style>
+</head>
+<body>
+	<div class="background">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">公司资料</p>
+			</div>
+		</div>
+		
+		<div class="inReportBox">
+			<a href="commonQuestion.html">
+				<div class="inReport dealP bg2">
+					<div class="left">
+						<span>常见问题</span>
+					</div>
+					<div class="right"></div>
+				</div>
+			</a>
+			<a href="downloadCourse.html">
+				<div class="inReport loginP bg1">
+					<div class="left">
+						<span>下载教程</span>
+					</div>
+					<div class="right"></div>
+				</div>
+			</a>
+		</div>
+		
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+</body>
+</html>

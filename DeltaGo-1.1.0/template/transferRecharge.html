@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta name = "format-detection" content = "telephone=no">
+	<link rel="stylesheet" href="../css/common.css">
+	<title>DeltaGo</title>
+</head>
+<style>
+	html,body{
+		width:100%;
+		height:100%;
+		margin:0;
+		padding:0;
+		/*font-size: 16px;*/
+		color:#fff;
+	}
+	body{
+		background:#11181E;
+		font-size: 0.65rem;
+		line-height: 0.825rem;
+	}
+	p,h4{
+		margin:0;
+		padding:0;
+	}
+	img{
+		display: block;
+		width:100%;
+		height:100%;
+	}
+	.msg1{
+		width:100%;
+		background:rgba(29,44,54,1);
+		padding:0.85rem 0 1.125rem 0;
+	}
+	.msg1 p{
+		width:92%;
+		font-size:0.6rem;
+		color:rgba(101,225,87,1);
+		line-height:0.65rem;
+		margin:0 auto;
+	}
+	.box1{
+		background:rgba(19,32,40,1);
+		padding:0.94rem 0 0.78rem 0;
+	}
+	.box1 table{
+		padding-left: 0.94rem;
+	}
+	.tab div{
+		height:1.97rem;
+	}
+	td:first-child{
+		width:2.6rem;
+		color:rgba(49,195,239,1);
+		/*padding-left:1.88rem;*/
+		vertical-align:top;
+	}
+	td:last-child{
+		width:77%;
+		padding-left: 0.4rem;
+		opacity: 0.8;
+		color:#fff;
+
+	}
+	.box1 td:first-child{
+		width:3.5rem;
+	}
+	.box1 td:last-child{
+		width:80%;
+	}
+	.msg2{
+		padding: 0.8rem;
+		background:rgba(29,44,54,1);
+	}
+	.msg2 .title{
+		color:rgba(255,137,76,1);
+	}
+	.msg2 .msgT{
+		opacity: 0.8;
+		color:#fff;
+	}
+	.cardAct{
+		width:100%;
+		height:3.44rem;
+		text-align:center;
+		line-height: 6.3.44;
+		margin:0.94rem 0;
+		background:rgba(255,137,76,1);
+		border-radius: 0.315rem ; 
+		position:relative;
+	}
+	.cardAct .cardType{
+		opacity: 0.5;
+		color:#fff;
+		font-size: 0.75rem;
+		line-height: 1.03rem;
+		position: absolute;
+		top:0.475rem;
+		left:0.625rem;
+	}
+	.box2{
+		background:rgba(19,32,40,1);
+		padding:0.625rem 0.94rem 0.94rem 0.94rem;
+	}
+	.box2 .title{
+		color:rgba(49,195,239,1);
+		margin-bottom: 0.625rem;
+	}
+	.box2 table{
+		width:100%;
+		border:1px solid rgba(49,195,239,0.3);
+		border-radius: 0.625rem;
+		padding:0.94rem;
+		/*margin-bottom: 1.875rem;*/
+		background: rgba(29,44,54,1);
+	}
+	.item{
+		padding:0.9375rem;
+	}
+	.item1{
+		background:rgba(29,44,54,1);
+	}
+	.item2{
+		background:rgba(19,32,40,1);
+	}
+	.text1{
+		color:rgba(49,195,239,1);
+		margin-bottom: 0.315rem;
+	}
+	.text2{
+		opacity: 0.8;
+		color:#fff;
+	}
+	.btn1{
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		background:#31c3ef;
+		text-align: center;
+		line-height: 2.3125rem;
+		color:#fff;
+		font-size: 1.05rem;
+	}
+	/*.bac{
+		margin-bottom: 2rem;
+	}*/
+	.margin_bottom{
+		height: 2.3125rem;
+	}
+</style>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">网银转账充值</p>
+			<!-- <img class="icon_server" src="../images/account_icon_customer@2x.png" alt=""> -->
+		</div>
+	</div>
+	<div class="bac">
+	<div class="msg1">
+		<p>网银转账充值通常需要您在网上银行操作，先［换汇／购汇］再进行［汇款充值］。</p>
+	</div>
+	<div class="box1 tab">
+		<table>
+			<tr>
+				<td class="td1">币种:</td>
+				<td>美元</td>
+			</tr>
+			<tr>
+				<td>限额:</td>
+				<td>5万美元／笔（取决于银行）</td>
+			</tr>
+			<tr>
+				<td>手续费:</td>
+				<td>约20-50美元（由银行收取）</td>
+			</tr>
+			<tr>
+				<td>到账时间:</td>
+				<td>预计1-2个工作日</td>
+			</tr>
+			<tr>
+				<td>特点:</td>
+				<td>适合大额转账充值</td>
+			</tr>
+		</table> 
+	</div>
+	<div class="msg2">
+		<p class="title" style="margin-bottom:10px">特别提示:</p>
+		<p class="msgT">选择从中国内地银行汇款的用户，请通过建设银行进行网上银行汇款，并避免到柜台进行操作。</p>
+		<!--<div class="cardAct">-->
+			<!--<p class="cardType">建设银行储蓄卡</p>-->
+			<!--操作指南-->
+		<!--</div>-->
+		<p class="msgT">为保证DeltaGo可以及时确认您的汇款，请您在汇款附言中填写您的姓名拼音和DeltaGo ID：
+			<span class="userId">Kbno00433</span>
+		</p>
+	</div>
+	<div class="box2">
+		<p class="title">从香港银行账户汇款</p>
+		<table>
+			<tr>
+				<td>银行名称:</td>
+				<td>OCBC 华侨银行</td>
+			</tr>
+			<tr>
+				<td>银行号码:</td>
+				<td>7339</td>
+			</tr>
+			<tr>
+				<td>账户名称:</td>
+				<td>ENRICH GLOBAL GROUP PTE LTD</td>
+			</tr>
+			<tr>
+				<td>账户号码:</td>
+				<td><span>501223</span><span>606301</span></td>
+			</tr>
+			<tr>
+				<td>附言:</td>
+				<td>请填写姓名拼音和DeltaGo ID：<span class="userId">Kbno00433</span></td>
+			</tr>
+		</table>
+		<p class="title" style="margin-top:10px">从内地／其他国家银行账户汇款</p>
+		<table>
+			<tr>
+				<td>银行名称:</td>
+				<td>OCBC 华侨银行</td>
+			</tr>
+			<tr>
+				<td>国家/银行:</td>
+				<td>新加坡</td>
+			</tr>
+			<tr>
+				<td>SWIFT码:</td>
+				<td>OCBCSGSG</td>
+			</tr>
+			<tr>
+				<td>账户名称:</td>
+				<td>ENRICH GLOBAL GROUP PTE LTD</td>
+			</tr>
+			<tr>
+				<td>账户号码:</td>
+				<td><span>501223</span><span>606301</span></td>
+			</tr>
+			<tr>
+				<td>账户地址:</td>
+				<td>65 Chulia Street OCBC Centre Singapore 049513</td>
+			</tr>
+			<tr>
+				<td>附言:</td>
+				<td>请填写姓名拼音和DeltaGo ID：<span class="userId">Kbno00433</span></td>
+			</tr>
+		</table>
+	</div>
+	<div class="item item1">
+		<p class="text1">ENRICH GLOBAL GROUP PTE LTD和DeltaGo是什么关系？</p>
+		<p class="text2">ENRICH GLOBAL GROUP PTE LTD是客户在华侨银行的资金集合托管账户。打入ENRICH GLOBAL GROUP PTE LTD的资金为客户资产，与DeltaGo公司的资金严格隔离</p>
+	</div>
+	<div class="item item2">
+		<p class="text1">关于转账费用</p>
+		<p class="text2">DeltaGo不会收取任何转账费用，但银行会收取跨境转账费，一般为20-50美元左右（取决于银行），分为两部分： <br>
+			1)境内银行收取$10-30左右的电报＋汇款费； <br>
+			2)中转银行收取$10-20左右的费用</p>
+	</div>
+	</div>
+	<div class="margin_bottom bac"></div>
+	<div class="btn1">已汇款 通知客服</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+<script>
+	
+    $(function(){
+    	var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    	$('.userId').text(userInfo.userId);
+    	$('.btn1').click(function(){
+    		window.location.href = 'tellServer.html';
+    	})
+    })
+</script>
+</body>
+</html>

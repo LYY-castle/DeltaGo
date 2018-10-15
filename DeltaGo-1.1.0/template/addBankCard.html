@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/addBankCard.css">
+	<style>
+		.icon_into{
+			width: 0.5rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="background2">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">添加银行卡</p>
+			</div>
+		</div>
+		<p class="account_change">请绑定持卡人本人的银行卡</p>
+		<div class="bg2 c1">
+			<span class="card_number">卡号</span>
+			<input type="text" class="bankCard" placeholder="请输入卡号" />
+		</div>
+		<p class="bg1 c2">
+			<span class="select">选择已绑定的银行卡充值</span>
+		</p>
+			<span class="icon_into"></span>
+		<a href="#" class="next">
+			<span>下一步</span>
+		</a>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			var Request = new Object();
+			Request = GetRequest();
+			var act = Request["act"];
+			if(act){
+				$('.c2,.icon_into').hide();
+			}
+			var reg = /^([1-9]{1})(\d{14}|\d{18})$/;
+			$('.next').click(function(){
+				
+				var url = getUrl()+'app/bank/validateCardNum?cardNo='+$('.bankCard').val();
+				$.ajax({
+					url: url,
+					type: 'get',
+					success: function(data){
+						data = JSON.parse(data);
+						if(data.validated){
+							var bankCard = $('.bankCard').val();
+							$('.bankCard').val('');
+							window.location.href = 'perfectBankCardMsg.html?cardType='+data.cardType+'&bank='+data.bank+'&cardNum='+bankCard;
+						}else{
+							errorMsg('请输入正确的卡号');
+						}
+					}
+				})
+			});
+
+			$('.c2').click(function(){
+				window.location.href = 'myBanks.html?random='+random();
+			})
+
+
+		})
+	</script>
+</body>
+</html>

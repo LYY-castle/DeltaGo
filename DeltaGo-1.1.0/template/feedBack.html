@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+		.next{
+			display: block;
+			width: 80%;
+			background-color: rgba(45,179,220,1);
+			border-radius: 0.5rem;
+			text-align: center;
+			margin: 2rem auto;
+		}
+		.next span{
+			color: rgba(255,255,255,1);
+			font-size: 0.85rem;
+			line-height: 2rem;
+		}
+		.welcome{
+			text-align: center;
+			font-size: 0.6rem;
+			color: rgba(255,255,255,0.5);
+			margin-top: 1rem;
+			margin-bottom: 5rem; 
+		}
+		.edite{
+			margin: 1rem auto;
+			text-align: center;
+		}
+		textarea{
+			width: 80%;
+			border: 0.025rem solid rgba(49,195,239,0.3);
+			border-radius: 0.5rem;
+			background-color: rgba(29,44,54,1);
+			color: rgba(255,255,255,0.8);
+			padding: 1rem;
+			font-size: 0.6rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">意见反馈</p>
+		</div>
+	</div>
+	<div class="edite">
+		<textarea name="editeBox" id="editeBox" class="editeBox" cols="30" rows="10" placeholder="请输入您宝贵的意见或建议。（200字以内）"></textarea>
+		<p class="welcome">欢迎您为我们提出宝贵的意见或建议，您留<br>下的任何信息都将用来改善我们的软件。</p>
+	</div>
+	<a href="#" class="next"><span>提交</span></a> 
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$('.next').click(function() {
+			var str = $('.editeBox').val();
+			var url = 'app/feedback/submitFeedback';
+			var data = {
+				feedback: str
+			};
+			deltaGoAjax(url,data,ok);
+		})
+		function ok(data){
+			errorMsg('意见反馈成功!');
+			setTimeout(function(){
+				window.history.go(-2);
+			},2000)
+		}
+	</script> 
+</body>
+</html>

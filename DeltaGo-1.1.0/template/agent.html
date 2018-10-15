@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/agent.css">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="bg3">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">代理商</p>
+			</div>
+		</div>
+		<div class="agents">
+			<!-- <div class="single_agent bg2">
+				<div class="img_border">
+					<img src="../images/agents_icon_add@2x.png" alt="">
+				</div>
+				<p class="my_name">设置备注</p>
+				<p class="my_nk_name">昵称：egg</p>
+				<p class="my_phone">手机号：123 8632 6487</p>
+			</div> -->
+		</div>
+		<div class="add_agent bg2">
+			<div class="img_border">
+				<img src="../images/agents_icon_add@2x.png" alt="">
+			</div>
+			<p class="more">还想要更多代理？</p>
+			<p class="click">点击这里获得二维码分享邀请！</p>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+			deltaGoAjax('app/agent/getMyAllAgent',{},getNextAgent);	
+			// $.ajax({
+			// 	url:'http://120.78.180.226:8280/deltagoServiceWeb/app/agent/getMyAllAgent',
+			// 	type: 'post',
+			// 	success:function(data){
+			// 			// getNextAgent(data.data);
+			// 			alert(1);
+			// 		}
+			// 	})
+			$('.add_agent').click(function(){
+				window.location.href = 'share.html';
+			})
+			function getNextAgent(data){
+				var num = 0;			
+				$.each(data.data,function(k,val){
+					var bg = (num%2 == 0) ? 'bg2' : 'bg1';
+					var str = '';
+					str += '<div class="single_agent '+bg+'" data-detail=\''+JSON.stringify(val)+'\'>'+
+							'<div class="img_border">'+
+							'<img src="'+(val.userPortrait || '../images/account_icon_user@2x.png')+'" alt="">'+
+							'</div>'+
+							'<p class="my_name" data-id="'+val.userUuid+'"><span>'+(val.notes || '设置备注')+'</span></p>'+
+							'<p class="my_nk_name">昵称：<span>'+(val.userNickname || 'EGG')+'</span></p>'+
+							'<p class="my_phone">手机号：<span>'+val.userPhone+'</span></p>'+
+							'<div class="dollar"></div>'+
+							'</div>';
+					$('.agents').append(str);
+					num++;
+				})				
+			}
+			$('.agents').on( 'click','.my_name',function(e){
+				e.stopPropagation();
+				window.location.href = 'setName.html?userUuid='+$(this).attr('data-id');
+			})
+
+			$('.agents').on('click','.single_agent',function(){
+				var agentDetail = $(this).attr('data-detail');
+				window.location.href = 'agentDetail.html?agentDetail='+encodeURI(encodeURI(agentDetail));
+			})
+		})
+	</script>
+</body>
+</html>

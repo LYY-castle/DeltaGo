@@ -1,0 +1,60 @@
+.back-title-box{
+	background-color: rgba(19,32,40,1);
+	z-index: 1000;
+}
+.msg_sort .msg_sort_single{
+	position: relative;
+	line-height: 4rem;
+}
+.account_change{
+	font-size: 0.6rem;
+	color: rgba(101,225,87,1);
+	line-height: 0.825rem;
+	padding-left: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+.msg_sort .msg_sort_single img{
+	width: 2.5rem;
+	height: 2.5rem;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0.8rem;
+	top: 0.75rem;
+}
+.msg_sort .msg_sort_single .methed{
+	font-size: 0.65rem;
+	color: rgba(255,255,255,0.8);
+	/*margin-left: 4rem;*/
+	margin: 2rem 0 2rem 4rem;
+}
+.remind{
+	text-align: center;
+	font-size: 0.55rem;
+	color: rgba(255,255,255,0.5);
+	margin: 2rem auto;
+	width: 80%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

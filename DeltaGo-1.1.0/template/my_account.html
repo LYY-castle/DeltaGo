@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/my_account.css">
+</head>
+<body>
+	<div class="msgzz">
+		<div class="msgBox">
+			<div class="title">提示</div>
+			<div class="msg">
+				您确定要退出吗？
+			</div>
+			<div class="msgBtn">
+				<div class="cancel">取消</div>
+				<div class="ok">确认</div>
+			</div>
+		</div>
+	</div>
+	<div class="background">
+		<div class="back-title-box">
+			<div class="back-title bg">
+				<img class="back-title-img mine" src="../images/back.png" alt="">
+				<p class="back-title-text">我的账户</p>
+			</div>
+		</div>
+		<div class="personal_msg bg2">
+			<form name="myfrom" id="myform" action="" enctype="multipart/form-data" >
+				<div class="p_img ">
+					<img class="personalImg" src="../images/account_icon_user@2x.png" alt="">
+				</div>
+				<input type="hidden" name="tokenId" class="tokenId">
+				<input type="file" name="file" class="uploadImg" value="">
+			</form>
+			<span class="p_name"><span class="pName">JOEL</span></span>
+
+		</div>
+		<div class="msg_sort">
+			<a href="perfectInfomation.html">
+				<div class="msg_sort_single bg1">
+					<img class="account_icon_left" src="../images/account_icon_complete@2x.png" alt="">
+					<p class="account">完善资料</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="myBanks.html?act=1">
+				<div class="msg_sort_single bg2">
+					<img class="account_icon_left" src="../images/account_icon_card@2x.png" alt="">
+					<p class="account">我的银行卡</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="share.html">
+				<div class="msg_sort_single bg1">
+					<img class="account_icon_left" src="../images/account_icon_invite@2x.png" alt="">
+					<p class="account">邀请</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="passwordManage.html">
+				<div class="msg_sort_single bg2">
+					<img class="account_icon_left" src="../images/account_icon_safe@2x.png" alt="">
+					<p class="account">密码管理</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="about_us.html">
+				<div class="msg_sort_single bg1">
+					<img class="account_icon_left" src="../images/account_icon_our@2x.png" alt="">
+					<p class="account">关于我们</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="companyInformation.html">
+				<div class="msg_sort_single bg2">
+					<img class="account_icon_left" src="../images/account_icon_company@2x.png" alt="">
+					<p class="account">公司资料</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="feedBack.html">
+				<div class="msg_sort_single bg1">
+					<img class="account_icon_left" src="../images/account_icon_idea@2x.png" alt="">
+					<p class="account">意见反馈</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+			<a href="#" class="exit">
+				<div class="msg_sort_single bg2">
+					<img class="account_icon_left" src="../images/account_icon_out@2x.png" alt="">
+					<p class="account">退出登录</p>
+					<span class="icon_into"></span>
+				</div>
+			</a>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		var Request = new Object();
+		Request = GetRequest();
+		var pname = Request["pname"];
+		$('.pName').text(pname);
+		var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		$('.p_img img').attr('src',(userInfo.userPortrait || '../images/account_icon_user@2x.png'));
+		$('.exit').click(function(){
+			$('.msgzz').show();
+		})
+		$('.cancel').click(function(){
+			$('.msgzz').hide();
+		})
+		$('.ok').click(function(){
+			localStorage.removeItem('tokenId');
+			localStorage.removeItem('userInfo');
+			localStorage.removeItem('invitCode');
+			localStorage.removeItem('deal');
+			window.location.href = '../index.html?act=2';
+		})
+
+		$('.tokenId').val(localStorage.getItem('tokenId'));
+		$('.uploadImg').change(function(e){
+			 //获取文件  
+			 var file = $(".uploadImg")[0].files[0];  
+		    //创建读取文件的对象  
+		    var reader = new FileReader();  
+
+		    //创建文件读取相关的变量  
+		    var imgFile;  
+		    //为文件读取成功设置事件  
+		    reader.onload=function(e) {  
+		    	imgFile = e.target.result;  
+		    	$.ajax({
+		    		url: getUrl()+'app/user/uploadUserPortrait',
+		    		type: 'POST',
+		    		cache: false,
+		    		data: new FormData($('#myform')[0]),
+		    		processData: false,
+		    		contentType: false,
+		    		success: function(data){
+		    			if(data.status == 0){
+		    				$(".personalImg").attr('src', imgFile);
+		    			}else if(data.status == 202){
+		    				errorMsg(data.msg);
+		    				localStorage.removeItem('tokenId');
+		    				window.location.href = '../index.html?act=2';
+		    			}else if(data.status == 201){
+		    				errorMsg(data.msg);
+		    				setTimeout(function(){
+		    					window.location.href = '../index.html?act=2';
+		    				},2000)
+		    			}else{
+		    				errorMsg('上传失败!');
+		    			}
+		    		}
+		    	});
+		    };  
+
+		    //正式读取文件  
+		    reader.readAsDataURL(file); 
+		})	
+
+		$('.p_img').click(function(){
+			$('.uploadImg').click();
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+.back-title-box{
+	background-color: rgba(19,32,40,1);
+	z-index: 1000;
+}
+.msg_sort{
+	margin-top: 5rem;
+}
+.msg_sort .msg_sort_single{
+	position: relative;
+	padding:0.3rem 0 ;
+}
+.msg_sort .msg_sort_single .icon_into,
+.msg_sort .msg_sort_single img{
+	width: 1.1rem;
+	height: 1.1rem;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0.8rem;
+	top: 0.7rem;
+}
+.msg_sort .msg_sort_single p{
+	padding-left: 2.375rem;
+	font-size: 0.65rem;
+	color: rgba(255,255,255,0.8);
+	line-height: 2rem;
+	
+}
+.msg_sort .msg_sort_single .icon_into{
+	width: 0.6rem;
+	height: 1.15rem;
+	left: 17.4rem;
+	background: url('../images/icon_seedetail@2x.png') no-repeat;
+	background-size: 100% 100%;
+}
+.background1{
+	background-color: rgba(29,44,54,1);
+}
+.background{
+	background-color: rgba(19,32,40,1);
+}
+.personal_msg{
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+	display: flex;
+	flex-wrap: nowrap;
+}
+.personal_msg .p_img{
+	display: inline-block;
+	border: 0.025rem solid rgba(46,181,223,0.5);
+	border-radius: 4rem;
+	/*margin:0.75rem 0.1rem 0.75rem 1.25rem ;*/
+	overflow: hidden;
+	position: relative;
+	background:#1D2C36;
+	overflow: hidden;
+	width:3.4rem;
+	height:3.4rem;
+	/*line-height: 2rem;*/
+}
+.personal_msg .p_img img{
+	display: inline;
+	width:100%;
+	height:100%;
+	background-size:100% 100%;
+	/*margin: 0.6rem 0.725rem;*/ 
+}
+.personal_msg .p_name{
+	color: #31C3EF;
+	font-size: 0.7rem;
+	margin-top: 2rem;
+	margin-left: 0.5rem;
+}
+
+
+.msgzz{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	background:rgba(0,0,0,0.3);
+	display: none;
+	z-index: 2000;
+}
+.msgBox{
+	background:#1D2C36;
+	width:13.5rem;
+	padding-top: 0.775rem;
+	color:rgba(255,255,255,0.8);
+	text-align: center;
+	
+	border-radius: 0.5rem;
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+.msgBox .title{
+	font-size: 0.75rem;
+	line-height: 1.05rem;
+}
+.msgBox .msg{
+	font-size: 0.6rem;
+	line-height: 0.825rem;
+	margin-top:0.35rem;
+	padding-bottom:0.75rem;
+	border-bottom:0.05rem solid rgba(45,179,219,0.1);
+}
+.msgBtn div{
+	width:6.5rem;
+	float:left;
+	line-height: 2.4rem;
+}
+.cancel{
+	border-right:0.05rem solid rgba(45,179,219,0.1);
+}
+.msgzz .dealP{
+	width:80%;
+	line-height: 1.75rem;
+	letter-spacing: 1rem;
+	font-size: 1rem;
+}
+
+form{
+	margin:0;
+	/*position: absolute;*/
+	/*top:0;*/
+	width:3.5rem;
+	height:3.5rem;
+	margin:0.75rem 0.1rem 0.75rem 1.25rem ;
+}
+.uploadImg{
+	background:none;
+	width:100%;
+	height:100%;
+	/*position: absolute;*/
+	opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

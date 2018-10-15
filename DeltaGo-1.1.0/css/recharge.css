@@ -1,0 +1,81 @@
+.back-title-box{
+	background-color: rgba(19,32,40,1);
+	z-index: 1000;
+}
+.msg_sort .msg_sort_single{
+	position: relative;
+	padding: 0.5rem 0;
+}
+.account_change{
+	font-size: 0.6rem;
+	color: rgba(101,225,87,1);
+	line-height: 0.825rem;
+	padding-left: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+.msg_sort .msg_sort_single img{
+	width: 3rem;
+	height: 3rem;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0.8rem;
+	top: 0.65rem;
+}
+.msg_sort .msg_sort_single .methed{
+	font-size: 0.65rem;
+	color: rgba(255,255,255,1);
+	margin-left: 4.5rem;
+}
+.msg_sort .msg_sort_single .methed1{
+	font-size: 0.65rem;
+	color: rgba(255,137,76,1);
+	margin-left: 4.5rem;
+}
+.msg_sort .msg_sort_single .msg{
+	font-size: 0.6rem;
+	color: rgba(255,255,255,0.5);
+	margin-left: 4.5rem;
+}
+.msg_sort .msg_sort_single .msg>p{
+	line-height: 1rem;
+}
+.background2{
+	background-color: rgba(17,24,30,1);
+}
+.background1{
+	background-color: rgba(29,44,54,1);
+}
+.background{
+	background-color: rgba(19,32,40,1);
+}
+.remind{
+	text-align: center;
+	font-size: 0.55rem;
+	color: rgba(255,255,255,0.5);
+	margin: 2rem auto;
+	width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>DeltaGo</title>
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	.icon_next{
+		position: absolute;
+		left: 15.5rem;
+		/*top: 8.3rem;*/
+		bottom:0.5rem;
+		width: 0.6rem;
+		height: 1.15rem;
+		background-size: 100% 100%;
+	}
+	.single_sort{
+		position: relative;
+		border:0.025rem solid rgba(49,195,239,0.3);
+		border-radius: 0.5rem;
+		margin: 1rem;	
+	}
+	.sort p{
+		font-size: 0.7rem;
+		padding-top: 0.6rem;
+		padding-left: 0.75rem;
+		color: rgba(49,195,239,1);
+	}
+	.sort p:nth-child(3){
+		font-size: 0.65rem;
+		padding-bottom: 0.65rem;
+	}
+	.sort table{
+		padding: 0.65rem 0.75rem;
+		font-size: 0.65rem;
+		line-height: 0.925rem;
+		width: 100%;
+		border-bottom: 0.025rem solid rgba(49,195,239,0.3);
+	}
+	td:nth-child(1){
+		color: rgba(255,255,255,0.5);
+	}
+	td:nth-child(2){
+		color: rgba(255,255,255,0.9);
+	}
+	.orange{
+		color: rgba(255,137,76,0.9)!important;
+	}
+	</style>
+</head>
+<body>
+	<div class="bg">
+		<div class="back-title-box">
+			<div class="back-title bg1">
+				<img class="back-title-img" src="../images/back.png" alt="">
+				<p class="back-title-text">交易动态</p>
+				<!-- <img src="../images/account_icon_customer@2x.png" alt="" class="icon_server"> -->
+			</div>
+		</div>
+		<div class="sort">
+			<!-- <div class="single_sort bg2">
+				<p>投资成功通知</p>
+				<div class="detail">
+					<table>
+						<tr>
+							<td class="td1">付款金额:</td>
+							<td class="orange">$100,000,000</td>
+						</tr>
+						<tr>
+							<td>投资产品:</td>
+							<td>爱智鑫</td>
+						</tr>
+						<tr>
+							<td>投资时间:</td>
+							<td>约20-50美元（由银行收取）</td>
+						</tr>
+						<tr>
+							<td>预计收益:</td>
+							<td>$100,000</td>
+						</tr>
+						<tr>
+							<td>周期:</td>
+							<td>12月</td>
+						</tr>
+					</table>
+				</div>
+				<p class="look">查看详情</p>
+				<img src="../images/icon_seedetail@2x.png" alt="" class="icon_next">
+			</div> -->
+		</div>
+
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(function(){
+
+			var Request = new Object();
+			Request = GetRequest();
+			var type = Request["type"];
+			switch(type){
+				case '0': massage_0();break;
+				case '1': $('.back-title-text').text('充值通知');massage_1();break;
+				case '2': $('.back-title-text').text('提现通知');massage_2();break;
+				case '3': $('.back-title-text').text('佣金收入');massage_3();break;
+				case '4': $('.back-title-text').text('转入余额');massage_4();break;
+				case '5': $('.back-title-text').text('系统公告');massage_5();break;
+			}
+
+			function massage_0(){
+				deltaGoAjax('app/asset/productBuyDetail',{},productBuyDetail,'get');
+			}
+			function massage_1(){
+				deltaGoAjax('app/recharge/getRechargeRecord',{},getRechargeRecord,'get');
+			}
+			function massage_2(){
+				deltaGoAjax('app/withdraw/getWithdrawRecord',{},getWithdrawRecord,'get');
+			}
+			function massage_3(){
+				deltaGoAjax('app/asset/brokerageDetail',{},brokerageDetail,'get');
+			}
+			function massage_4(){
+				deltaGoAjax('app/asset/queryBrokerageToEarn',{},queryBrokerageToEarn,'get');
+			}
+			function massage_5(){
+				// deltaGoAjax('app/asset/productBuyDetail',{},productBuyDetail,'get');
+			}
+
+			function productBuyDetail(data){
+				var str = '';
+				$.each(data.data,function(k,val){
+					str += '<div class="single_sort bg2">'+
+					'<p>投资成功通知</p>'+
+					'<div class="detail">'+
+					'<table>'+
+					'<tr>'+
+					'<td class="td1">付款金额:</td>'+
+					'<td class="orange">$<span>'+moneyToFloat(val.productBuyMoney)+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>投资产品:</td>'+
+					'<td>'+val.productName+'</td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>投资时间:</td>'+
+					'<td><span>'+val.time+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>预计收益:</td>'+
+					'<td>$<span>'+moneyToFloat(val.productPredictEarn)+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>周期:</td>'+
+					'<td>'+val.productCycle+'天</td>'+
+					'</tr>'+
+					'</table>'+
+					'</div>'+
+					'<p class="look" data-cardT="'+val.corpusCard.cardType+'" data-card='+val.corpusCard.productBuyId+'>查看详情</p>'+
+					'<img src="../images/icon_seedetail@2x.png" alt="" class="icon_next">'+
+					'</div>';
+					
+				})
+				$('.sort').append(str);
+			}
+
+			function getRechargeRecord(data){
+				
+				var str = '';
+				var recharge_status_arr = ['','提交申请','已到账','驳回申请'];
+				var type = ['官网充值','微信充值','快捷支付','网银转账充值'];
+				$.each(data.data,function(k,val){
+					str += '<div class="single_sort bg2">'+
+					'<p>充值</p>'+
+					'<div class="detail">'+
+					'<table>'+
+					'<tr>'+
+					'<td class="td1">充值金额:</td>'+
+					'<td class="orange">$<span>'+moneyToFloat(val.recharge_money)+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>充值方式:</td>'+
+					'<td>'+type[val.type]+'</td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>充值时间:</td>'+
+					'<td><span>'+(formDate(val.time))+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>交易状态:</td>'+
+					'<td><span>'+recharge_status_arr[val.recharge_status]+'</span></td>'+
+					'</tr>'+
+					
+					'</table>'+
+					'</div>'+
+					'<p class="look" data-card=\''+JSON.stringify(val)+'\'>查看详情</p>'+
+					'<img src="../images/icon_seedetail@2x.png" alt="" class="icon_next">'+
+					'</div>';
+					
+				})
+				$('.sort').append(str);
+			}
+
+			function getWithdrawRecord(data){
+				var str = '';
+				var bankType = ['','香港银行卡','中国内地银行卡','其他国家/地区银行','支付宝'];
+				$.each(data.data,function(k,val){
+					str += '<div class="single_sort bg2">'+
+					'<p>提现</p>'+
+					'<div class="detail">'+
+					'<table>'+
+					'<tr>'+
+					'<td class="td1">提现金额:</td>'+
+					'<td class="orange">$<span>'+moneyToFloat(val.withdrawMoney)+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>提现方式:</td>'+
+					'<td>提现到'+bankType[val.bankType]+'</td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>提现时间:</td>'+
+					'<td><span>'+(formDate(val.time))+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>手续费:</td>'+
+					'<td>$<span>'+moneyToFloat(val.serviceFee)+'</span></td>'+
+					'</tr>'+
+					
+					'</table>'+
+					'</div>'+
+					'<p class="look" data-card=\''+JSON.stringify(val)+'\'>查看详情</p>'+
+					'<img src="../images/icon_seedetail@2x.png" alt="" class="icon_next">'+
+					'</div>';
+					
+				})
+				$('.sort').append(str);
+			}
+
+			function brokerageDetail(data){
+				var str = '';
+				$.each(data.data,function(k,val){
+					str += '<div class="single_sort bg2">'+
+					'<p>佣金收入</p>'+
+					'<div class="detail">'+
+					'<table>'+
+					'<tr>'+
+					'<td class="td1">收入金额:</td>'+
+					'<td class="orange">$<span>'+moneyToFloat(val.brokerageMoney)+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>下级代理:</td>'+
+					'<td>'+val.fromUser+'</td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>收入时间:</td>'+
+					'<td><span>'+(formDate(val.creatTime))+'</span></td>'+
+					'</tr>'+
+					'</table>'+
+					'</div>'+
+					'<p class="look" data-card=\''+JSON.stringify(val)+'\'>查看详情</p>'+
+					'<img src="../images/icon_seedetail@2x.png" alt="" class="icon_next">'+
+					'</div>';
+					
+				})
+				$('.sort').append(str);
+			}
+
+			function queryBrokerageToEarn(data){
+				var str = '';
+				$.each(data.data,function(k,val){
+					str += '<div class="single_sort bg2">'+
+					'<p>佣金转入余额</p>'+
+					'<div class="detail">'+
+					'<table>'+
+					'<tr>'+
+					'<td class="td1">转入金额:</td>'+
+					'<td class="orange">$<span>'+moneyToFloat(val.money)+'</span></td>'+
+					'</tr>'+
+					'<tr>'+
+					'<td>手续费:</td>'+
+					'<td><span>$'+moneyToFloat(val.poundage)+'</span></td>'+
+					'</tr>'+
+					'<td>转入时间:</td>'+
+					'<td><span>'+(formDate(val.time))+'</span></td>'+
+					'</tr>'+
+					'</table>'+
+					'</div>'+
+					'<p class="look" data-card=\''+JSON.stringify(val)+'\'>查看详情</p>'+
+					'<img src="../images/icon_seedetail@2x.png" alt="" class="icon_next">'+
+					'</div>';
+					
+				})
+				$('.sort').append(str);
+			}
+
+
+			$('.sort').on('click','.look',function(){
+				if(type == 0){
+					if($(this).attr('data-cardT') == 2){
+						window.top.location = '../template/predeterminedCardDetail.html?productBuyId='+$(this).attr('data-card');
+					}else{
+						window.location.href = 'corpusCardDetail.html?productBuyId='+$(this).attr('data-card');
+					}
+					
+				}else{
+					window.location.href = 'tradDetail.html?type='+type+'&cardDetail='+encodeURI(encodeURI($(this).attr('data-card')));
+				}
+				
+			})	
+		})
+	</script>
+</body>
+</html>

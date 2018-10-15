@@ -1,0 +1,28 @@
+.message .single_message{
+	position: relative;
+	padding: 1.5rem 0.75rem;
+}
+.single_message .img_border{
+	position: absolute;
+	left: 0.8rem;
+	top: 0.4rem;
+}
+.single_message .img_border img{
+	width: 3.05rem;
+	height: 3.05rem;
+	background-size: 100% 100%;
+}
+.single_message p{
+	padding-left: 4rem;
+	font-size: 0.5rem;
+	color: rgba(255,255,255,0.5);
+}
+.single_message .msg_title{
+	font-size: 0.7rem;
+	color: rgba(49,195,239,1);
+}
+
+
+
+
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<link rel="stylesheet" href="../css/common.css">
+
+	<title></title>
+</head>
+<style>
+	.step{
+		margin-bottom: 10px;
+	}
+</style>
+<body>
+	<div class="back-title-box">
+		<div class="back-title bg1">
+			<img class="back-title-img" src="../images/back.png" alt="">
+			<p class="back-title-text">下载教程</p>
+		</div>
+	</div>
+	<div class="box">
+		<!-- <div class="step img"></div> -->
+	</div>
+	<script src="../lib/jquery-1.12.2.js"></script>
+	<script src="../js/common.js"></script>
+<script>
+	$(function(){
+		var str = '';
+		for(var i=1;i<=35;i++){
+			var num = i<10 ? '0'+i : i;
+			str += '<div class="step"><img class="lazy" alt="" src="../images/00'+num+'.jpg" /></div>';
+		}
+		$('.box').append(str);
+	})
+
+</script>
+</body>
+</html>
